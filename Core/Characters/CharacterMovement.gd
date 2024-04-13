@@ -35,7 +35,7 @@ func _physics_process(delta):
 	#print(velocity)
 	
 	velocity = move_and_slide(move_update_vel)
-	
+
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		if "Character" in collision.collider.name:

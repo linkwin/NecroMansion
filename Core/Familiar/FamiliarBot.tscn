@@ -14,14 +14,13 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" parent="CharacterBody" index="1"]
 modulate = Color( 0.12549, 1, 0, 1 )
 
-[node name="OverlapSphere" type="Area2D" parent="."]
+[node name="DEBUG_state" type="Label" parent="CharacterBody"]
+margin_left = -31.0
+margin_top = 33.0
+margin_right = 29.0
+margin_bottom = 55.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OverlapSphere"]
-shape = SubResource( 1 )
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="InteractIcon" type="Label" parent="."]
+[node name="InteractIcon" type="Label" parent="CharacterBody"]
 visible = false
 anchor_right = 0.012
 margin_left = -26.145
@@ -31,9 +30,21 @@ margin_bottom = -46.0
 text = "[space]"
 align = 1
 
+[node name="OverlapSphere" type="Area2D" parent="CharacterBody"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody/OverlapSphere"]
+shape = SubResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="AttackTimeout" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+
 [connection signal="on_character_collision" from="CharacterBody" to="." method="_on_CharacterBody_on_character_collision"]
 [connection signal="death" from="CharacterBody/Health" to="." method="_on_Health_death"]
-[connection signal="body_entered" from="OverlapSphere" to="." method="_on_OverlapSphere_body_entered"]
-[connection signal="body_exited" from="OverlapSphere" to="." method="_on_OverlapSphere_body_exited"]
+[connection signal="body_entered" from="CharacterBody/OverlapSphere" to="." method="_on_OverlapSphere_body_entered"]
+[connection signal="body_exited" from="CharacterBody/OverlapSphere" to="." method="_on_OverlapSphere_body_exited"]
+[connection signal="timeout" from="AttackTimeout" to="." method="_on_AttackTimeout_timeout"]
 
 [editable path="CharacterBody"]

@@ -19,6 +19,12 @@ modulate = Color( 1, 0, 0, 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody/OverlapSphere"]
 shape = SubResource( 1 )
 
+[node name="DEBUG_state" type="Label" parent="CharacterBody"]
+margin_left = -31.0
+margin_top = 33.0
+margin_right = 29.0
+margin_bottom = 55.0
+
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
