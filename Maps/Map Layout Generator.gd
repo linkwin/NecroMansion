@@ -83,23 +83,25 @@ func room_data_load(map, initial_seed, prob_dists, number_of_rooms):
 		var number_of_enemies = random_sample(prob_dists["Initial Number of Enemies"], init_seed+seed_shift)
 		
 		for enemy in range(number_of_enemies):
-			var Enemy_Difficulty = random_sample(prob_dists["Initial Enemy Difficulty"], init_seed + enemy + 40)
-			room_properties["Enemy Data"]["Enemy Seeds"].append(init_seed + enemy + 20)  
+			var Enemy_Difficulty = random_sample(prob_dists["Initial Enemy Difficulty"], init_seed + seed_shift + enemy + 40)
+			room_properties["Enemy Data"]["Enemy Seeds"].append(init_seed + seed_shift + enemy + 20)  
 			room_properties["Enemy Data"]["Enemy Difficulty"].append(Enemy_Difficulty)
-			room_properties["Enemy Data"]["Enemy Class"].append(random_sample(prob_dists["Initial Enemy Class"], init_seed + enemy + 60))
-			room_properties["Enemy Data"]["Enemy Speed"].append(difficulty_conversions["Enemy Speed"][random_sample(difficulty_dists["Enemy Speed"][Enemy_Difficulty], init_seed + enemy + 80)])
-			room_properties["Enemy Data"]["Enemy Damage"].append(difficulty_conversions["Enemy Damage"][random_sample(difficulty_dists["Enemy Damage"][Enemy_Difficulty], init_seed + enemy + 100)])
-			room_properties["Enemy Data"]["Enemy Recovery"].append(difficulty_conversions["Enemy Recovery"][random_sample(difficulty_dists["Enemy Recovery"][Enemy_Difficulty], init_seed + enemy + 120)])
-			room_properties["Enemy Data"]["Enemy Attack Radius"].append(difficulty_conversions["Enemy Attack Radius"][random_sample(difficulty_dists["Enemy Attack Radius"][Enemy_Difficulty], init_seed + enemy + 140)])
+			room_properties["Enemy Data"]["Enemy Class"].append(random_sample(prob_dists["Initial Enemy Class"], init_seed + seed_shift + enemy + 60))
+			room_properties["Enemy Data"]["Enemy Speed"].append(difficulty_conversions["Enemy Speed"][random_sample(difficulty_dists["Enemy Speed"][Enemy_Difficulty], init_seed + seed_shift + enemy + 80)])
+			room_properties["Enemy Data"]["Enemy Damage"].append(difficulty_conversions["Enemy Damage"][random_sample(difficulty_dists["Enemy Damage"][Enemy_Difficulty], init_seed + seed_shift + enemy + 100)])
+			room_properties["Enemy Data"]["Enemy Recovery"].append(difficulty_conversions["Enemy Recovery"][random_sample(difficulty_dists["Enemy Recovery"][Enemy_Difficulty], init_seed + seed_shift + enemy + 120)])
+			room_properties["Enemy Data"]["Enemy Attack Radius"].append(difficulty_conversions["Enemy Attack Radius"][random_sample(difficulty_dists["Enemy Attack Radius"][Enemy_Difficulty], init_seed + seed_shift + enemy + 140)])
 			
 		
 		var number_of_items = random_sample(prob_dists["Initial Number of Enemies"], init_seed+seed_shift)
 		
 		for item in range(number_of_items):
 			room_properties["Item Data"]["Item Seeds"].append(init_seed + item + 25)  
-			room_properties["Item Data"]["Item Strength"].append(random_sample(prob_dists["Initial Item Strength"], init_seed + item + 45))
-			room_properties["Item Data"]["Item Class"].append(random_sample(prob_dists["Initial Item Class"], init_seed + item + 65))
+			room_properties["Item Data"]["Item Strength"].append(random_sample(prob_dists["Initial Item Strength"], init_seed + seed_shift + item + 45))
+			room_properties["Item Data"]["Item Class"].append(random_sample(prob_dists["Initial Item Class"], init_seed + seed_shift + item + 65))
 			
+		room_properties["Room Decoration Data"]["Room Seed"] = init_seed + seed_shift + 655
+		room_properties["Room Decoration Data"]["Room Type"] = random_sample(prob_dists["Room Design"], init_seed + seed_shift + 656)
 		
 		for i in range(len(prob_dists["Initial Number of Enemies"])):
 			prob_dists["Initial Number of Enemies"][i] += 1
@@ -113,9 +115,9 @@ func room_data_load(map, initial_seed, prob_dists, number_of_rooms):
 		seed_shift += 2000
 		map_data.append(room_properties)
 		
-	for rommm in map_data:
-		print(rommm)
-		print("")
+	#for rommm in map_data:
+	#	print(rommm)
+	#	print("")
 	#print("MAP DATA: ", map_data)
 	return(map_data)
 
@@ -130,7 +132,6 @@ func navigation_load(map, directions):
 			if room+dir in map:
 				poss_dir.append(dir)
 		map_nav.append(poss_dir)
-	#print("DOOR DIRECTIONS: ", map_nav)
 	return(map_nav)
 
 # Called when the node enters the scene tree for the first time.
@@ -154,11 +155,7 @@ func _ready():
 		new_direction = directions[room_rng.randi_range(0, 3)]
 		current_position += new_direction
 		i += 1
-	print("MAP COORDINATES: ", map)
-	print("")
 	map_navi = navigation_load(map, directions)
 	map_datas = room_data_load(map, init_seed, probabilities, num_rooms)
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass[    [[5 3 2], [10 4 1], [1 1 1 1 1 1], ... 
+	
