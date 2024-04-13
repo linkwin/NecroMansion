@@ -1,7 +1,10 @@
 extends KinematicBody2D
 
+signal on_character_collision(collider)
+
 var move_dir = Vector2.ZERO
 
+export var default_move_speed = 12000
 var move_speed = 12000
 var move_acc = 12
 var friction = 1000
@@ -32,6 +35,11 @@ func _physics_process(delta):
 	#print(velocity)
 	
 	velocity = move_and_slide(move_update_vel)
+	
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		if "Character" in collision.collider.name:
+			emit_signal("on_character_collision", collision.collider)
 	
 func _approx_equal(a,b,tol=0.0001):
 	var diff = Vector2(a.x - b.x, a.y - b.y)

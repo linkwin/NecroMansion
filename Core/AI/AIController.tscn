@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Core/Characters/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Core/AI/AIController.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 177.181
 
 [node name="BotRoot" type="Node2D"]
 script = ExtResource( 2 )
@@ -11,10 +14,18 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" parent="CharacterBody" index="1"]
 modulate = Color( 1, 0, 0, 1 )
 
+[node name="OverlapSphere" type="Area2D" parent="CharacterBody"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody/OverlapSphere"]
+shape = SubResource( 1 )
+
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
 
+[connection signal="on_character_collision" from="CharacterBody" to="." method="_on_CharacterBody_on_character_collision"]
+[connection signal="death" from="CharacterBody/Health" to="." method="_on_Health_death"]
+[connection signal="body_entered" from="CharacterBody/OverlapSphere" to="." method="_on_OverlapSphere_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 
 [editable path="CharacterBody"]

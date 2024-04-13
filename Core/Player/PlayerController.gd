@@ -16,3 +16,10 @@ func _process(delta):
 func _is_input_held():
 	return Input.get_action_strength("move_right") != 0 or Input.get_action_strength("move_left") != 0 \
 		or Input.get_action_strength("move_back") != 0 or Input.get_action_strength("move_forward") != 0
+
+
+func _on_CharacterBody_on_character_collision(collider):
+	collider.get_node("Health").try_damage(1)
+
+func _on_Health_death():
+	print("You Dead")

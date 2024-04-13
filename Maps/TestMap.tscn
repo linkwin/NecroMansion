@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Core/Player/PlayerController.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Core/AI/AIController.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Core/Familiar/FamiliarBot.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 112.5, 753 )
@@ -41,6 +42,7 @@ smoothing_speed = 2.0
 editor_draw_limits = true
 
 [node name="BotRoot" parent="." instance=ExtResource( 2 )]
+position = Vector2( -465, 83 )
 
 [node name="BotRoot2" parent="." instance=ExtResource( 2 )]
 position = Vector2( -366, -400 )
@@ -52,13 +54,13 @@ position = Vector2( -318, 291 )
 position = Vector2( 238, -331 )
 
 [node name="BotRoot5" parent="." instance=ExtResource( 2 )]
-position = Vector2( 235, 27 )
+position = Vector2( 429, -5 )
 
 [node name="BotRoot6" parent="." instance=ExtResource( 2 )]
 position = Vector2( -131, -373 )
 
 [node name="BotRoot7" parent="." instance=ExtResource( 2 )]
-position = Vector2( -83, 318 )
+position = Vector2( 134, 402 )
 
 [node name="BotRoot8" parent="." instance=ExtResource( 2 )]
 position = Vector2( -570, -105 )
@@ -89,4 +91,8 @@ position = Vector2( 8, 8 )
 position = Vector2( 1, -836 )
 shape = SubResource( 2 )
 
+[node name="Familiar" parent="." instance=ExtResource( 3 )]
+position = Vector2( -97, 207 )
+
 [editable path="PlayerRoot"]
+[editable path="PlayerRoot/CharacterBody"]

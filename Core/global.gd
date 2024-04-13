@@ -1,0 +1,3 @@
+extends Node
+
+enum BOT_STATE {IDLE, PATROL, WANDER, FOLLOW, ATTACK}
