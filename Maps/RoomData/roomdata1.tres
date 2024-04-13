@@ -3,6 +3,13 @@
 [ext_resource path="res://Maps/RoomData/RoomData.gd" type="Script" id=1]
 
 [resource]
+resource_name = "RoomData"
 script = ExtResource( 1 )
-properties = [ null, null, null ]
-probabilities = [ null, null, null ]
+initial_seed = 0
+probabilities = {
+"Initial Enemy Difficdulty": [ 5, 3, 2, 0, 0, 0, 0, 0, 0, 0 ],
+"Initial Enemy Difficulty": [ 5, 3, 2, 0, 0, 0, 0, 0, 0, 0 ],
+"Initial Number of Enemies": [ 6, 6, 5, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+}
+properties = {
+}

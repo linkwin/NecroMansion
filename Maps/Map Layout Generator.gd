@@ -2,9 +2,12 @@ extends Area2D
 
 
 var ARoom = preload("res://Maps/MiniMapBlocks/Rooms.tscn")
-var init_seed := hash("Carrotds")
+
+export(RoomData) var Roomdata = preload("res://Maps/RoomData/roomdata1.tres")
+
 var directions := [Vector2(1, 0), Vector2(-1, 0), Vector2(0, 1), Vector2(0, -1)]
 
+var init_seed
 
 
 
@@ -69,6 +72,7 @@ func navigation_load(map, directions):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var init_seed = Roomdata.seed_gen()
 	var room_rng = RandomNumberGenerator.new()
 	var num_rooms := 15
 	var map := []
@@ -90,6 +94,7 @@ func _ready():
 	print("")
 	map_navi = navigation_load(map, directions)
 	map_datas = room_data_load(map, init_seed, array_mult([[[1, 1], [1, 2]]], num_rooms) )
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass[    [[5 3 2], [10 4 1], [1 1 1 1 1 1], ... 
