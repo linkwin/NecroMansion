@@ -1,9 +1,20 @@
 extends Resource
 class_name RoomData
 
-export var properties := [1]
-export var probabilities = []
+export var initial_seed : int = hash("Carrotds")
 
-func _init(props, probs):
+export var probabilities := {
+	"Initial Number of Enemies": [6, 6, 5, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	"Initial Enemy Difficulty": [5, 3, 2, 0, 0, 0, 0, 0, 0, 0],
+	"Initial Enemy Difficdulty": [5, 3, 2, 0, 0, 0, 0, 0, 0, 0]
+}
+
+export var properties := {}
+
+func seed_gen():
+	return(hash("Carrotds"))
+
+func _init(props, probs, initial_seed):
+	initial_seed = hash("Carrotds")
 	properties = props
 	probabilities = probs
