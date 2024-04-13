@@ -9,6 +9,13 @@ var move_speed = 12000
 var move_acc = 12
 var friction = 1000
 
+var jump_impulse = 120
+var jump_decel = 50
+var wants_to_jump = true
+var jump_update_vel = Vector2.ZERO
+
+var grav_force = 60
+
 var velocity = Vector2.ZERO
 
 var last_move_dir = Vector2.ZERO
@@ -21,7 +28,9 @@ func _ready():
 	pass # Replace with function body.
 	
 func _physics_process(delta):
-	
+
+
+	# =====MOVE======	
 	var target_vel = move_speed * move_dir * delta
 	
 	var move_update_vel = Vector2.ZERO
@@ -33,6 +42,22 @@ func _physics_process(delta):
 	#if _abs_vec(velocity) <= _abs_vec(target_vel):
 	#	move_update_vel = velocity + move_dir * move_acc
 	#print(velocity)
+	
+	# =====JUMP======
+	if jump_update_vel != Vector2.ZERO:
+		jump_update_vel = jump_update_vel + jump_decel * Vector2.DOWN * delta
+		var d = jump_update_vel * delta
+		$CollisionShape2D.position = $CollisionShape2D.position + d
+		print(jump_update_vel)
+	if _approx_equal(_abs_vec(jump_update_vel), Vector2.ZERO, 0.001):
+		jump_update_vel = Vector2.ZERO
+	if wants_to_jump:
+		jump_update_vel = Vector2.UP * jump_impulse
+		wants_to_jump = false
+	if jump_update_vel == Vector2.ZERO and $CollisionShape2D.position != Vector2.ZERO:
+		$CollisionShape2D.position = $CollisionShape2D.position + grav_force * Vector2.DOWN * delta
+		
+		
 	
 	velocity = move_and_slide(move_update_vel)
 
