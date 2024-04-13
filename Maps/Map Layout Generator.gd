@@ -71,7 +71,7 @@ func navigation_load(map, directions):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	init_seed = Roomdata.initial_seed
+	init_seed = Roomdata.seed_gen()
 	var room_rng = RandomNumberGenerator.new()
 	var num_rooms := 15
 	var map := []

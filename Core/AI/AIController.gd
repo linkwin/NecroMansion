@@ -1,6 +1,6 @@
 extends Node2D
 
-export var bot_behavior = Global.BOT_BEHAVIOR.RANDOM_MOVE
+var bot_behavior = randi() % Global.BOT_BEHAVIOR.keys().size()
 
 var bot_state = Global.BOT_STATE.IDLE
 
@@ -12,12 +12,15 @@ func _ready():
 	match bot_behavior:
 		Global.BOT_BEHAVIOR.RANDOM_MOVE:
 			curr_move_dir = Vector2(rand_range(-1.0,1.0), rand_range(-1.0,1.0)).normalized()
-			
+		Global.BOT_BEHAVIOR.HOPPER:
+			curr_move_dir = Vector2(rand_range(-1.0,1.0), rand_range(-1.0,1.0)).normalized()
+	
 	bot_state = Global.BOT_STATE.PATROL
 
 func _process(delta):
 	character_ref.add_move_input(curr_move_dir)
-	$CharacterBody/DEBUG_state.text = Global.BOT_STATE.keys()[bot_state]
+	$CharacterBody/DEBUG_state.text = Global.BOT_STATE.keys()[bot_state] + "\n" \
+		+ Global.BOT_BEHAVIOR.keys()[bot_behavior]
 
 func _on_Timer_timeout():
 	bot_state = Global.BOT_STATE.PATROL
@@ -26,7 +29,7 @@ func _on_Timer_timeout():
 
 func _on_CharacterBody_on_character_collision(collider):
 	if "Player" in collider.get_parent().name:
-		collider.get_node("Health").try_damage(1)
+		collider.get_node("CollisionShape2D/Health").try_damage(1)
 		# move away from player
 		curr_move_dir = (character_ref.global_position - collider.global_position).normalized()
 		timer.wait_time = rand_range(2,4)
@@ -47,3 +50,8 @@ func _can_attack():
 
 func _on_Health_death():
 	queue_free()
+
+func _on_JumpTimer_timeout():
+	if character_ref.is_on_floor() and bot_behavior == Global.BOT_BEHAVIOR.HOPPER:
+		character_ref.wants_to_jump = true
+	$JumpTimer.wait_time = rand_range(1,5)

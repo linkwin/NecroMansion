@@ -11,9 +11,6 @@ script = ExtResource( 2 )
 
 [node name="CharacterBody" parent="." instance=ExtResource( 1 )]
 
-[node name="AnimatedSprite" parent="CharacterBody" index="1"]
-modulate = Color( 1, 0, 0, 1 )
-
 [node name="OverlapSphere" type="Area2D" parent="CharacterBody"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody/OverlapSphere"]
@@ -29,9 +26,13 @@ margin_bottom = 55.0
 wait_time = 2.0
 autostart = true
 
+[node name="JumpTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
 [connection signal="on_character_collision" from="CharacterBody" to="." method="_on_CharacterBody_on_character_collision"]
-[connection signal="death" from="CharacterBody/Health" to="." method="_on_Health_death"]
 [connection signal="body_entered" from="CharacterBody/OverlapSphere" to="." method="_on_OverlapSphere_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="JumpTimer" to="." method="_on_JumpTimer_timeout"]
 
 [editable path="CharacterBody"]
