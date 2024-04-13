@@ -3,8 +3,7 @@ extends Area2D
 
 var ARoom = preload("res://Maps/MiniMapBlocks/Rooms.tscn")
 
-export(RoomData) var Roomdata = preload("res://Maps/RoomData/roomdata1.tres")
-
+export(Resource) var Roomdata = preload("res://Maps/RoomData/roomdata1.tres")
 var directions := [Vector2(1, 0), Vector2(-1, 0), Vector2(0, 1), Vector2(0, -1)]
 
 var init_seed
@@ -72,7 +71,7 @@ func navigation_load(map, directions):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var init_seed = Roomdata.seed_gen()
+	init_seed = Roomdata.initial_seed
 	var room_rng = RandomNumberGenerator.new()
 	var num_rooms := 15
 	var map := []

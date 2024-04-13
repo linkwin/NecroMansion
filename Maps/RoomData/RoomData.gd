@@ -1,5 +1,5 @@
-extends Resource
-class_name RoomData
+class_name RoomData extends Resource
+
 
 export var initial_seed : int = hash("Carrotds")
 
@@ -14,7 +14,7 @@ export var properties := {}
 func seed_gen():
 	return(hash("Carrotds"))
 
-func _init(props, probs, initial_seed):
-	initial_seed = hash("Carrotds")
-	properties = props
-	probabilities = probs
+#func _init(props, probs, initial_seed):
+#	initial_seed = hash("Carrotds")
+#	properties = props
+#	probabilities = probs
