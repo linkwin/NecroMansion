@@ -23,12 +23,16 @@ var velocity = Vector2.ZERO
 
 var last_move_dir = Vector2.ZERO
 
+#===ANIM====
 var anim_dirs := {
 	Vector2(-1,0):"left", 
 	Vector2(1,0):"right", 
 	Vector2(0,1):"back",
 	Vector2(0,-1):"forward",
 }
+var anim_prefix = "player_character"
+var anim_state = "walk"
+#===========
 
 func add_move_input(new_move_dir):
 	move_dir = new_move_dir
@@ -37,10 +41,23 @@ func add_move_input(new_move_dir):
 func _ready():
 	pass # Replace with function body.
 	
+	
 func _process(delta):
+	var anim_dir = Vector2.DOWN
 	if move_dir != Vector2.ZERO:
-		if anim_dirs.has(move_dir):
-			$CollisionShape2D/Sprite/AnimationPlayer.play("player_character_walk_" + anim_dirs[move_dir])
+		var max_proj = 0
+		for dir in anim_dirs.keys():
+			#var basis = ((move_dir * dir) / move_dir.length()) * dir
+			var proj = move_dir.dot(dir)
+			if proj > max_proj:
+				max_proj = proj
+				anim_dir = dir
+	
+	if anim_dirs.has(anim_dir):
+		var anim_name = anim_prefix + \
+			"_" + anim_state + "_" + anim_dirs[anim_dir]
+		print(anim_name)
+		$CollisionShape2D/Sprite/AnimationPlayer.play(anim_name)
 	else:
 		$CollisionShape2D/Sprite/AnimationPlayer.stop()
 	

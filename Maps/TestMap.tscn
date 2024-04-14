@@ -33,7 +33,7 @@ position = Vector2( 30, -672 )
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PlayerRoot/CharacterBody" index="2"]
 remote_path = NodePath("../../../Camera2D")
 
-[node name="Camera2D" parent="PlayerRoot/CharacterBody" index="3"]
+[node name="Camera2D" parent="PlayerRoot/CharacterBody" index="4"]
 current = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -56,29 +56,11 @@ position = Vector2( -465, 83 )
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( -366, -400 )
 
-[node name="BotRoot3" parent="." instance=ExtResource( 2 )]
-modulate = Color( 1, 0, 0, 1 )
-position = Vector2( -318, 291 )
+[node name="BotRoot9" parent="." instance=ExtResource( 2 )]
+position = Vector2( 308, 178 )
 
-[node name="BotRoot4" parent="." instance=ExtResource( 2 )]
-modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 238, -331 )
-
-[node name="BotRoot5" parent="." instance=ExtResource( 2 )]
-modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 429, -5 )
-
-[node name="BotRoot6" parent="." instance=ExtResource( 2 )]
-modulate = Color( 1, 0, 0, 1 )
-position = Vector2( -133, -220 )
-
-[node name="BotRoot7" parent="." instance=ExtResource( 2 )]
-modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 134, 402 )
-
-[node name="BotRoot8" parent="." instance=ExtResource( 2 )]
-modulate = Color( 1, 0, 0, 1 )
-position = Vector2( -570, -105 )
+[node name="Sprite" parent="BotRoot9/CharacterBody/CollisionShape2D" index="1"]
+region_rect = Rect2( 600, 117, 250, 750 )
 
 [node name="Wall" type="StaticBody2D" parent="."]
 position = Vector2( -1115, 8 )
@@ -118,5 +100,10 @@ shape = SubResource( 2 )
 modulate = Color( 0.101961, 1, 0, 1 )
 position = Vector2( -117, -585 )
 
+[node name="BotRoot10" parent="." instance=ExtResource( 2 )]
+position = Vector2( -887, -72 )
+
 [editable path="PlayerRoot"]
 [editable path="PlayerRoot/CharacterBody"]
+[editable path="BotRoot9"]
+[editable path="BotRoot9/CharacterBody"]

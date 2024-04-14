@@ -57,7 +57,7 @@ func trigger_transition(dir):
 	var next_room_pos = curr_room + dir
 	var next_room = map_data.get_node("Room" + str(next_room_pos))
 	if next_room:
-		$CharacterBody.global_position = next_room.position
+		character_ref.global_position = next_room.position
 		curr_room = next_room_pos
 		#map_data.load_next_room(next_room)
 		var curr_room_index

@@ -21,6 +21,7 @@ func _ready():
 			curr_move_dir = Vector2(rand_range(-1.0,1.0), rand_range(-1.0,1.0)).normalized()
 	
 	bot_state = Global.BOT_STATE.PATROL
+	character_ref.anim_prefix = "coocoo"
 	
 func _process(delta):
 	character_ref.add_move_input(curr_move_dir)
@@ -39,6 +40,7 @@ func _on_CharacterBody_on_character_collision(collider):
 		$CharacterBody.get_node("AudioStreamPlayer2D").play()
 		collider.get_node("CollisionShape2D/Health").try_damage(1)
 		# move away from player
+		character_ref.anim_state = "walk"
 		curr_move_dir = (character_ref.global_position - collider.global_position).normalized()
 		timer.wait_time = rand_range(2,4)
 		timer.start()
@@ -49,6 +51,7 @@ func _on_OverlapSphere_body_entered(body):
 		bot_state = Global.BOT_STATE.ATTACK
 		curr_move_dir = (body.global_position - character_ref.global_position).normalized()
 		character_ref.move_speed *= 2
+		character_ref.anim_state = "run"
 		timer.wait_time = rand_range(2,4)
 		timer.start()
 
