@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=6 format=2]
+
+[ext_resource path="res://Core/Sounds/AudioSet.gd" type="Script" id=1]
+[ext_resource path="res://Core/Sounds/Mob sounds/froggie2.mp3" type="AudioStream" id=2]
+[ext_resource path="res://Core/Sounds/Mob sounds/froggie3.mp3" type="AudioStream" id=3]
+[ext_resource path="res://Core/Sounds/Mob sounds/froggie1.mp3" type="AudioStream" id=4]
+[ext_resource path="res://Core/Sounds/Mob sounds/froggie4.mp3" type="AudioStream" id=5]
+
+[resource]
+script = ExtResource( 1 )
+sounds = [ ExtResource( 4 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 5 ) ]

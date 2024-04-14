@@ -11,6 +11,8 @@ script = ExtResource( 2 )
 [node name="Camera2D" type="Camera2D" parent="CharacterBody"]
 current = true
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="death" from="CharacterBody/CollisionShape2D/Health" to="." method="_on_Health_death"]
 
 [editable path="CharacterBody"]

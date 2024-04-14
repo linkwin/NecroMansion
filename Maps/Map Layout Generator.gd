@@ -1,7 +1,7 @@
 extends Node2D
 
 
-var ARoom = preload("res://Maps/Room.tscn")
+var ARoom = preload("res://Maps/Room1.tscn")
 
 export(Resource) var Roomdata = preload("res://Maps/RoomData/roomdata1.tres")
 var directions := [Vector2(1, 0), Vector2(-1, 0), Vector2(0, 1), Vector2(0, -1)]
@@ -172,7 +172,7 @@ func _ready():
 	
 	var player = load("res://Core/Player/PlayerController.tscn").instance()
 	add_child(player)
-	player.map_set(self)	
+	player.map_set(self)
 	
 	var enemy_data = map_datas[0]["Enemy Data"]
 	var num_of_enemies_in_room = len(enemy_data["Enemy Seeds"])

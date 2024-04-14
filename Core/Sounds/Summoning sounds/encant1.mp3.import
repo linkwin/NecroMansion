@@ -11,5 +11,5 @@ dest_files=[ "res://.import/encant1.mp3-7eeefdd94f72579413cbc91598715aa8.mp3str"
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

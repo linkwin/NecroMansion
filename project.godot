@@ -10,11 +10,17 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Resource",
+"class": "AudioSet",
+"language": "GDScript",
+"path": "res://Core/Sounds/AudioSet.gd"
+}, {
+"base": "Resource",
 "class": "RoomData",
 "language": "GDScript",
 "path": "res://Maps/RoomData/RoomData.gd"
 } ]
 _global_script_class_icons={
+"AudioSet": "",
 "RoomData": ""
 }
 

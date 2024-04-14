@@ -12,11 +12,18 @@ var player_in_range = false
 
 var player_controlled = false
 
+var summoning_sounds = preload("res://Core/Sounds/AudioSets/summoning_sounds.tres")
+onready var audio_strm_player = $CharacterBody/AudioStreamPlayer2D
+
 func try_summon(player):
 	player_ref = player
 
 func _process(delta):
 	if Input.get_action_strength("summon") != 0 and player_in_range:
+		audio_strm_player.stream = summoning_sounds.get_rand_sound()
+		audio_strm_player.play()
+		audio_strm_player.volume_db = -13
+		$CharacterBody/FX.get_node("CPUParticles2D").emitting = true
 		player_controlled = true
 		bot_state = Global.BOT_STATE.FOLLOW
 	

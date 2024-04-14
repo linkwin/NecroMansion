@@ -11,5 +11,5 @@ dest_files=[ "res://.import/froggie2.mp3-a3bfa63d5fa5fb894408eec810407035.mp3str
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
