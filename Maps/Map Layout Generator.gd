@@ -14,12 +14,14 @@ var map := []
 var map_navi := []
 var map_datas := []
 
+var player_room = Vector2(0,0)
+
 func array_mult(in_array, inger):
 	var out_array := []
 	if inger == 1:
 		out_array = in_array
 	if inger > 2:
-		for i in range(inger):
+		for _i in range(inger):
 			for j in in_array:
 				out_array.append(j)
 	return(out_array)
@@ -34,7 +36,7 @@ func random_sample(distribution, my_seed):
 	sample_index = random_sample_rng.randi_range(0, len(repeated_sample_dist)-1)
 	return(repeated_sample_dist[sample_index])
 
-func spawn_room(_position, color_param=1):
+func spawn_room(_position):
 	var c = ARoom.instance()
 	c.position = _position * 2000
 	add_child(c)	
@@ -52,16 +54,11 @@ func spawn_room(_position, color_param=1):
 #                       (Room 1-  (Property 1- ((Rel Prob 1, Rel Prob 2), ...), ... )    
 # Need to be sure these arrays match in size
 
-func room_data_load(map, initial_seed, prob_dists, number_of_rooms):
-	print(Global.seed_text)
-	print(initial_seed)
+func room_data_load(initial_seed, prob_dists, number_of_rooms):
+	print("Initial Seed: ", initial_seed)
 	var map_data := []
-	var room_data_base_seed = initial_seed + 201
 	var seed_shift := 0
-	for room in range(number_of_rooms):
-		var room_data := {}
-		var enemy_data := {}
-		var item_data := {}
+	for _room in range(number_of_rooms):
 		
 		var difficulty_dists := {
 			"Enemy Speed": [[5, 4, 1, 0, 0, 0, 0], [2, 5, 3, 1, 0, 0, 0], 
@@ -120,32 +117,35 @@ func room_data_load(map, initial_seed, prob_dists, number_of_rooms):
 		
 		seed_shift += 2000
 		map_data.append(room_properties)
-		
-	#for rommm in map_data:
-	#	print(rommm)
-	#	print("")
-	print("MAP DATA: ", map_data)
 	return(map_data)
 
 
 
 
-func navigation_load(map, directions):
+func navigation_load(current_map, cardinal_directions):
 	var map_nav := []
-	for room in map:
+	for room in current_map:
 		var poss_dir := []
-		for dir in directions:
-			if room+dir in map:
+		for dir in cardinal_directions:
+			if room+dir in current_map:
 				poss_dir.append(dir)
 		map_nav.append(poss_dir)
 	return(map_nav)
 
-func enemy_load(room, enemy_number):
+func enemy_load(room, enemy_number, enemy_data):
 	var new_enemy = preload("res://Core/AI/AIController.tscn")
 	var new_enemy_node
+	var this_spec_enemy_data = {}
 	new_enemy_node = new_enemy.instance()
+	
 	new_enemy_node.enemy_number = enemy_number
 	new_enemy_node.current_room = room
+	
+	for key in enemy_data:
+		this_spec_enemy_data[key] = enemy_data[key][enemy_number]
+		
+	new_enemy_node.enemy_data = this_spec_enemy_data
+	
 	new_enemy_node.position =  2000*room +  500 * Vector2(rand_range(-1.0,1.0), rand_range(-1.0,1.0)).normalized()
 	add_child(new_enemy_node)
 
@@ -162,20 +162,25 @@ func _ready():
 	while len(map) <= num_rooms-1:
 		if not (current_position in map):
 			map.append(current_position)
-			spawn_room(current_position, i)
+			spawn_room(current_position)
 		room_rng.seed = init_seed+i
 		new_direction = directions[room_rng.randi_range(0, 3)]
 		current_position += new_direction
 		i += 1
 	map_navi = navigation_load(map, directions)
-	map_datas = room_data_load(map, init_seed, probabilities, num_rooms)
+	map_datas = room_data_load(init_seed, probabilities, num_rooms)
 	
 	var player = load("res://Core/Player/PlayerController.tscn").instance()
 	add_child(player)
 	player.map_set(self)
 	
-	var num_of_enemies_in_room = len(map_datas[0]["Enemy Data"]["Enemy Seeds"])
+	var enemy_data = map_datas[0]["Enemy Data"]
+	var num_of_enemies_in_room = len(enemy_data["Enemy Seeds"])
 	for en_num in range(num_of_enemies_in_room):
-		print("made_itMAD")
-		enemy_load(Vector2(0,0), en_num)
+		enemy_load(Vector2(0,0), en_num, enemy_data)
 	
+
+#func _process(delta):
+#	character_ref.add_move_input(curr_move_dir)
+#	$CharacterBody/DEBUG_state.text = Global.BOT_STATE.keys()[bot_state] + "\n" \
+#		+ Global.BOT_BEHAVIOR.keys()[bot_behavior]

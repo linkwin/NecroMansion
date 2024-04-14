@@ -6,28 +6,11 @@
 script = ExtResource( 1 )
 initial_seed = 0
 probabilities = {
-"Initial Enemy Class": [ 5, 3, 2, 0, 0, 0, 0, 0, 0, 0 ],
+"Initial Enemy Class": [ 5, 4, 3, 2 ],
 "Initial Enemy Difficulty": [ 6, 4, 2, 1, 0 ],
 "Initial Item Class": [ 1, 1, 1, 1, 1 ],
 "Initial Item Strength": [ 5, 3, 2, 0, 0, 0, 0, 0, 0, 0 ],
 "Initial Number of Enemies": [ 3, 4, 5, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
 "Initial Number of Items": [ 3, 2, 1 ],
 "Room Design": [ 1, 1, 1, 1, 1 ]
-}
-properties = {
-"Enemy Data": {
-"Enemy Classes": [  ],
-"Enemy Difficulty": [  ],
-"Enemy Seeds": [  ],
-"Enemy Type": [  ]
-},
-"Item Data": {
-"Item Class": [  ],
-"Item Seeds": [  ],
-"Item Strength": [  ]
-},
-"Room Decoration Data": {
-"Room Seed": 0,
-"Room Type": 0
-}
 }
