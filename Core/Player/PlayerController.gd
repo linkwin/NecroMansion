@@ -2,6 +2,9 @@ extends Node2D
 
 onready var character_ref = $CharacterBody
 
+var map_data
+var curr_room = Vector2.ZERO
+
 var input_enabled = true
 var respawn_screen_node
 
@@ -38,3 +41,16 @@ func _on_Health_death():
 func _do_respawn():
 	get_tree().reload_current_scene()
 	respawn_screen_node.queue_free()
+	
+func trigger_transition(dir):
+	var next_room_pos = curr_room + dir
+	var next_room = map_data.get_node("Room" + str(next_room_pos))
+	if next_room:
+		$CharacterBody.global_position = next_room.position
+		curr_room = next_room_pos
+	#map_data.load_next_room(next_room)
+	
+func map_set(map):
+	map_data = map
+	curr_room = Vector2.ZERO
+	
