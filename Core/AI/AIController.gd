@@ -2,6 +2,11 @@ extends Node2D
 
 var bot_behavior = randi() % Global.BOT_BEHAVIOR.keys().size()
 
+var map_data
+var enemy_number
+var current_room = Vector2.ZERO
+#var current_map = preload("res://Maps/Map Layout Generator.gd")
+
 var bot_state = Global.BOT_STATE.IDLE
 
 var curr_move_dir = Vector2.ZERO
@@ -16,7 +21,7 @@ func _ready():
 			curr_move_dir = Vector2(rand_range(-1.0,1.0), rand_range(-1.0,1.0)).normalized()
 	
 	bot_state = Global.BOT_STATE.PATROL
-
+	
 func _process(delta):
 	character_ref.add_move_input(curr_move_dir)
 	$CharacterBody/DEBUG_state.text = Global.BOT_STATE.keys()[bot_state] + "\n" \
@@ -26,7 +31,7 @@ func _on_Timer_timeout():
 	bot_state = Global.BOT_STATE.PATROL
 	character_ref.move_speed = character_ref.default_move_speed
 	curr_move_dir = Vector2(rand_range(-1.0,1.0), rand_range(-1.0,1.0)).normalized()
-
+	
 func _on_CharacterBody_on_character_collision(collider):
 	# body slam player attack
 	if "Player" in collider.get_parent().name:

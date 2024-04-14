@@ -75,7 +75,7 @@ func room_data_load(map, initial_seed, prob_dists, number_of_rooms):
 		var difficulty_conversions := {
 			"Enemy Speed": [10000, 10500, 11000, 11500, 12000, 12500, 13000],
 			"Enemy Damage": [1, 2, 3],
-			"Enemy Recovery": [0.5, 0.7, 0.9, 1.1, 1.3, 1.5],
+			"Enemy Recovery": [1.5, 1.3, 1.1, 0.9, 0.7, 0.5],
 			"Enemy Attack Radius": [150, 200, 250, 300, 350, 400, 450, 450]
 		}
 		
@@ -97,7 +97,6 @@ func room_data_load(map, initial_seed, prob_dists, number_of_rooms):
 			room_properties["Enemy Data"]["Enemy Damage"].append(difficulty_conversions["Enemy Damage"][random_sample(difficulty_dists["Enemy Damage"][Enemy_Difficulty], init_seed + seed_shift + enemy + 100)])
 			room_properties["Enemy Data"]["Enemy Recovery"].append(difficulty_conversions["Enemy Recovery"][random_sample(difficulty_dists["Enemy Recovery"][Enemy_Difficulty], init_seed + seed_shift + enemy + 120)])
 			room_properties["Enemy Data"]["Enemy Attack Radius"].append(difficulty_conversions["Enemy Attack Radius"][random_sample(difficulty_dists["Enemy Attack Radius"][Enemy_Difficulty], init_seed + seed_shift + enemy + 140)])
-			
 		
 		var number_of_items = random_sample(prob_dists["Initial Number of Enemies"], init_seed+seed_shift)
 		
@@ -124,7 +123,7 @@ func room_data_load(map, initial_seed, prob_dists, number_of_rooms):
 	#for rommm in map_data:
 	#	print(rommm)
 	#	print("")
-	#print("MAP DATA: ", map_data)
+	print("MAP DATA: ", map_data)
 	return(map_data)
 
 
@@ -139,6 +138,15 @@ func navigation_load(map, directions):
 				poss_dir.append(dir)
 		map_nav.append(poss_dir)
 	return(map_nav)
+
+func enemy_load(room, enemy_number):
+	var new_enemy = preload("res://Core/AI/AIController.tscn")
+	var new_enemy_node
+	new_enemy_node = new_enemy.instance()
+	new_enemy_node.enemy_number = enemy_number
+	new_enemy_node.current_room = room
+	new_enemy_node.position =  2000*room +  500 * Vector2(rand_range(-1.0,1.0), rand_range(-1.0,1.0)).normalized()
+	add_child(new_enemy_node)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -164,4 +172,9 @@ func _ready():
 	var player = load("res://Core/Player/PlayerController.tscn").instance()
 	add_child(player)
 	player.map_set(self)
+	
+	var num_of_enemies_in_room = len(map_datas[0]["Enemy Data"]["Enemy Seeds"])
+	for en_num in range(num_of_enemies_in_room):
+		print("made_itMAD")
+		enemy_load(Vector2(0,0), en_num)
 	
