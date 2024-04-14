@@ -1,7 +1,8 @@
-extends Resource
-class_name RoomData
 
-export var initial_seed : int = hash("Carrot") + 1
+class_name RoomData extends Resource
+
+export var initial_seed : int = hash("Carrot")
+
 
 export var probabilities := {
 	"Initial Number of Enemies": [3, 4, 5, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -18,6 +19,10 @@ export var properties := {
 	"Item Data": {"Item Seeds": [], "Item Strength": [], "Item Class": []},
 	"Room Decoration Data": {"Room Seed": 0, "Room Type": 0}
 }
+
+func seed_gen():
+	initial_seed = hash("Carrot")
+	return(initial_seed)
 
 #func _init(props, probs, initial_seed):
 #	initial_seed = hash("Carrotds")

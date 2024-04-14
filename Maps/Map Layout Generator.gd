@@ -48,6 +48,7 @@ func spawn_room(_position, color_param=1):
 # Need to be sure these arrays match in size
 
 func room_data_load(map, initial_seed, prob_dists, number_of_rooms):
+	print(initial_seed)
 	var map_data := []
 	var room_data_base_seed = initial_seed + 201
 	var seed_shift := 0
@@ -136,7 +137,7 @@ func navigation_load(map, directions):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	init_seed = Roomdata.initial_seed +1 
+	init_seed = Roomdata.seed_gen() +1 
 	probabilities = Roomdata.probabilities
 	var room_rng = RandomNumberGenerator.new()
 	var num_rooms := 15
