@@ -7,17 +7,22 @@ var curr_room = Vector2.ZERO
 
 var input_enabled = true
 var respawn_screen_node
-
+var visited_rooms = []
+var invalid_enemies = []
 
 func enemy_load(room, enemy_number, enemy_data):
 	var new_enemy = preload("res://Core/AI/AIController.tscn")
 	var new_enemy_node
 	var this_spec_enemy_data = {}
 	new_enemy_node = new_enemy.instance()
+	new_enemy_node.connect("enemy_defeated", self, "_handle_enemy_defeated", [new_enemy_node, room])
 	
 	new_enemy_node.enemy_number = enemy_number
 	new_enemy_node.current_room = room
-	
+	#if [enemy_number, room] in invalid_enemies:
+	#	new_enemy_node.queue_free()
+	#	pass
+		
 	for key in enemy_data:
 		this_spec_enemy_data[key] = enemy_data[key][enemy_number]
 		
@@ -60,12 +65,12 @@ func _do_respawn():
 	get_tree().reload_current_scene()
 	respawn_screen_node.queue_free()
 	
-func _handle_enemy_defeated(enemy_node, curr_room_index):
+func _handle_enemy_defeated(enemy_node, curr_room):
 	var enemy_number = enemy_node.enemy_number
-	for property in map_data.map_datas[curr_room_index]["Enemy Data"]:
-		map_data.map_datas[curr_room_index]["Enemy Data"][property].remove(enemy_number)
+	invalid_enemies.append([curr_room, enemy_number])
 	
 func trigger_transition(dir):
+	visited_rooms.append(curr_room)
 	var previous_room = Vector2.ZERO
 	var next_room_pos = curr_room + dir
 	var next_room = map_data.get_node("Room" + str(next_room_pos))
@@ -79,14 +84,19 @@ func trigger_transition(dir):
 			if curr_room == map_data.map[room_indx]:
 				curr_room_index = room_indx
 		
-		var new_enemy = preload("res://Core/AI/AIController.tscn")
 		
+		
+		
+		
+		#############
+		
+		#############
 		var enemy_data = map_data.map_datas[curr_room_index]["Enemy Data"]
-		new_enemy.connect("enemy_defeated", self, curr_room_index, "_handle_enemy_defeated")
+		
 		var num_of_enemies_in_room = len(enemy_data["Enemy Seeds"])
 		for en_num in range(num_of_enemies_in_room):
 			enemy_load(curr_room, en_num, enemy_data)
-
+	
 func map_set(map):
 	map_data = map
 	curr_room = Vector2.ZERO

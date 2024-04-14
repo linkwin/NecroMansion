@@ -1,9 +1,10 @@
 extends Node2D
 
-signal enemy_defeated(ref)
+signal enemy_defeated(ref, curr_room)
 
 var map_data
 var enemy_number
+
 onready var enemy_data
 
 var current_room = Vector2.ZERO
@@ -45,8 +46,6 @@ func _on_Timer_timeout():
 func _on_CharacterBody_on_character_collision(collider):
 	# body slam player attack
 	if "Player" in collider.get_parent().name:
-		emit_signal("enemy_defeated", self) #TEST
-		
 		
 		collider.get_node("CollisionShape2D/Health").try_damage(enemy_data["Enemy Damage"])
 		$CharacterBody.get_node("AudioStreamPlayer2D").stream = preload("res://Core/Sounds/Mob sounds/coocoo1.mp3")
@@ -73,7 +72,7 @@ func _can_attack():
 
 func _on_Health_death():
 	emit_signal("enemy_defeated", self)
-	#queue_free()
+	queue_free()
 
 func _on_JumpTimer_timeout():
 	if character_ref.is_on_floor() and enemy_data["Enemy Class"] == Global.BOT_BEHAVIOR.HOPPER:
