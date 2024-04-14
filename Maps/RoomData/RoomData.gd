@@ -1,18 +1,27 @@
 class_name RoomData extends Resource
 
+export var initial_seed : int = hash("Carrot")
 
-export var initial_seed : int = hash("Carrotds")
 
 export var probabilities := {
-	"Initial Number of Enemies": [6, 6, 5, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	"Initial Enemy Difficulty": [5, 3, 2, 0, 0, 0, 0, 0, 0, 0],
-	"Initial Enemy Difficdulty": [5, 3, 2, 0, 0, 0, 0, 0, 0, 0]
+	"Initial Number of Enemies": [3, 4, 5, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	"Initial Enemy Difficulty": [6, 4, 2, 1, 0],
+	"Initial Enemy Class": [5, 3, 2, 0, 0, 0, 0, 0, 0, 0],
+	"Initial Number of Items": [3, 2, 1],
+	"Initial Item Strength": [5, 3, 2, 0, 0, 0, 0, 0, 0, 0],
+	"Initial Item Class": [1, 1, 1, 1, 1],
+	"Room Design": [1, 1, 1, 1, 1]
 }
 
-export var properties := {}
+export var properties := {
+	"Enemy Data": {"Enemy Seeds": [], "Enemy Difficulty": [], "Enemy Type": [], "Enemy Classes": []},
+	"Item Data": {"Item Seeds": [], "Item Strength": [], "Item Class": []},
+	"Room Decoration Data": {"Room Seed": 0, "Room Type": 0}
+}
 
 func seed_gen():
-	return(hash("Carrotds"))
+	initial_seed = hash("Carrot")
+	return(initial_seed)
 
 #func _init(props, probs, initial_seed):
 #	initial_seed = hash("Carrotds")
