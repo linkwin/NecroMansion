@@ -107,7 +107,6 @@ position = Vector2( 1.5, -45 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 offset = Vector2( 0, -200 )
-region_rect = Rect2( 120, 117, 250, 750 )
 
 [node name="AnimationPlayer" parent="CharacterBody/CollisionShape2D/Sprite" index="0"]
 anims/coocoo_run_back = SubResource( 2 )

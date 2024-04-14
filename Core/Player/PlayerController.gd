@@ -60,6 +60,11 @@ func _do_respawn():
 	get_tree().reload_current_scene()
 	respawn_screen_node.queue_free()
 	
+func _handle_enemy_defeated(enemy_node, curr_room_index):
+	var enemy_number = enemy_node.enemy_number
+	for property in map_data.map_datas[curr_room_index]["Enemy Data"]:
+		map_data.map_datas[curr_room_index]["Enemy Data"][property].remove(enemy_number)
+	
 func trigger_transition(dir):
 	var previous_room = Vector2.ZERO
 	var next_room_pos = curr_room + dir
@@ -73,7 +78,11 @@ func trigger_transition(dir):
 		for room_indx in range(len(map_data.map)):
 			if curr_room == map_data.map[room_indx]:
 				curr_room_index = room_indx
+		
+		var new_enemy = preload("res://Core/AI/AIController.tscn")
+		
 		var enemy_data = map_data.map_datas[curr_room_index]["Enemy Data"]
+		new_enemy.connect("enemy_defeated", self, curr_room_index, "_handle_enemy_defeated")
 		var num_of_enemies_in_room = len(enemy_data["Enemy Seeds"])
 		for en_num in range(num_of_enemies_in_room):
 			enemy_load(curr_room, en_num, enemy_data)

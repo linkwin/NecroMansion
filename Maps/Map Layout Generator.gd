@@ -131,13 +131,10 @@ func navigation_load(current_map, cardinal_directions):
 				poss_dir.append(dir)
 		map_nav.append(poss_dir)
 	return(map_nav)
-	
-func _handle_enemy_defeated(enemy_node):
-	enemy_node.enemy_number
 
 func enemy_load(room, enemy_number, enemy_data):
 	var new_enemy = preload("res://Core/AI/AIController.tscn")
-	new_enemy.connect("enemy_defeated", self, "_handle_enemy_defeated")
+	
 	var new_enemy_node
 	var this_spec_enemy_data = {}
 	new_enemy_node = new_enemy.instance()

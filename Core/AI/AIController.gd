@@ -45,6 +45,9 @@ func _on_Timer_timeout():
 func _on_CharacterBody_on_character_collision(collider):
 	# body slam player attack
 	if "Player" in collider.get_parent().name:
+		emit_signal("enemy_defeated", self) #TEST
+		
+		
 		collider.get_node("CollisionShape2D/Health").try_damage(enemy_data["Enemy Damage"])
 		$CharacterBody.get_node("AudioStreamPlayer2D").stream = preload("res://Core/Sounds/Mob sounds/coocoo1.mp3")
 		$CharacterBody.get_node("AudioStreamPlayer2D").play()
