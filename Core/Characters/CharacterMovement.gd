@@ -50,7 +50,7 @@ func _physics_process(delta):
 		jump_update_vel = jump_update_vel + jump_decel * Vector2.DOWN * delta
 		var d = jump_update_vel * delta
 		$CollisionShape2D.position = $CollisionShape2D.position + d
-		print(jump_update_vel)
+		#print(jump_update_vel)
 	#check if at height of jump
 	if _approx_equal(_abs_vec(jump_update_vel), Vector2.ZERO, 0.001):
 		jump_update_vel = Vector2.ZERO
@@ -73,7 +73,7 @@ func _physics_process(delta):
 		else:
 			grav_update_vel = grav_update_vel + grav_acc * Vector2.DOWN * delta
 			$CollisionShape2D.position = $CollisionShape2D.position + grav_update_vel * delta
-			print($CollisionShape2D.position)
+			#print($CollisionShape2D.position)
 		
 	
 	velocity = move_and_slide(move_update_vel)

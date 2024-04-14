@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/froggie2.mp3-a3bfa63d5fa5fb894408eec810407035.mp3str"
+
+[deps]
+
+source_file="res://Core/Sounds/Mob sounds/froggie2.mp3"
+dest_files=[ "res://.import/froggie2.mp3-a3bfa63d5fa5fb894408eec810407035.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

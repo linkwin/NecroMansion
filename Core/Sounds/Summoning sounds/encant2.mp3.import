@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/encant2.mp3-b3252451c9d406caeb83694ef3d31459.mp3str"
+
+[deps]
+
+source_file="res://Core/Sounds/Summoning sounds/encant2.mp3"
+dest_files=[ "res://.import/encant2.mp3-b3252451c9d406caeb83694ef3d31459.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/candle_smack.mp3-8609397a416c4b6f41d111a7cc7e595f.mp3str"
+
+[deps]
+
+source_file="res://Core/Sounds/Mob sounds/candle_smack.mp3"
+dest_files=[ "res://.import/candle_smack.mp3-8609397a416c4b6f41d111a7cc7e595f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
