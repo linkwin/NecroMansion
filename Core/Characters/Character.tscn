@@ -1,8 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Core/Characters/CharacterMovement.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://Core/Health.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Sprites/Animations/player_character_walk_forward.tres" type="Animation" id=4]
+[ext_resource path="res://Sprites/Animations/player_character_walk_back.tres" type="Animation" id=5]
+[ext_resource path="res://Sprites/Animations/player_character_walk_left.tres" type="Animation" id=6]
+[ext_resource path="res://Sprites/RUNNOTRUNRUNBUTT.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Animations/player_character_walk_right.tres" type="Animation" id=8]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 31.5, 31 )
@@ -14,6 +19,21 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 } ]
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 65.474, 825, 167.368, 169.474 ) ]
+}
 
 [node name="CharacterBody" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -32,3 +52,15 @@ frames = SubResource( 2 )
 
 [node name="Health" parent="CollisionShape2D" instance=ExtResource( 3 )]
 position = Vector2( -33.5, -46 )
+
+[node name="Sprite" type="Sprite" parent="CollisionShape2D"]
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 65.474, 825, 167.368, 169.474 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CollisionShape2D/Sprite"]
+anims/RESET = SubResource( 4 )
+anims/player_character_walk_back = ExtResource( 5 )
+anims/player_character_walk_forward = ExtResource( 4 )
+anims/player_character_walk_left = ExtResource( 6 )
+anims/player_character_walk_right = ExtResource( 8 )

@@ -21,12 +21,26 @@ var velocity = Vector2.ZERO
 
 var last_move_dir = Vector2.ZERO
 
+var anim_dirs := {
+	Vector2(-1,0):"left", 
+	Vector2(1,0):"right", 
+	Vector2(0,1):"back",
+	Vector2(0,-1):"forward",
+}
+
 func add_move_input(new_move_dir):
 	move_dir = new_move_dir
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
+	
+func _process(delta):
+	if move_dir != Vector2.ZERO:
+		if anim_dirs.has(move_dir):
+			$CollisionShape2D/Sprite/AnimationPlayer.play("player_character_walk_" + anim_dirs[move_dir])
+	else:
+		$CollisionShape2D/Sprite/AnimationPlayer.stop()
 	
 func _physics_process(delta):
 
