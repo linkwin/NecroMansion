@@ -4,18 +4,25 @@ onready var character_ref = $CharacterBody
 
 var map_data
 var curr_room = Vector2.ZERO
-var current_map = preload("res://Maps/Map Layout Generator.gd")
 
 var input_enabled = true
 var respawn_screen_node
-	
 
-func enemy_load(room, enemy_number):
+
+func enemy_load(room, enemy_number, enemy_data):
 	var new_enemy = preload("res://Core/AI/AIController.tscn")
 	var new_enemy_node
+	var this_spec_enemy_data = {}
 	new_enemy_node = new_enemy.instance()
+	
 	new_enemy_node.enemy_number = enemy_number
 	new_enemy_node.current_room = room
+	
+	for key in enemy_data:
+		this_spec_enemy_data[key] = enemy_data[key][enemy_number]
+		
+	new_enemy_node.enemy_data = this_spec_enemy_data
+	
 	new_enemy_node.position =  2000*room +  500 * Vector2(rand_range(-1.0,1.0), rand_range(-1.0,1.0)).normalized()
 	get_tree().root.add_child(new_enemy_node)
 
@@ -47,26 +54,29 @@ func _on_Health_death():
 		respawn_screen_node = respawn_screen.instance()
 		respawn_screen_node.get_node("Button").connect("pressed", self, "_do_respawn")
 		get_tree().root.add_child(respawn_screen_node)
-		
+
 
 func _do_respawn():
 	get_tree().reload_current_scene()
 	respawn_screen_node.queue_free()
 	
 func trigger_transition(dir):
+	var previous_room = Vector2.ZERO
 	var next_room_pos = curr_room + dir
 	var next_room = map_data.get_node("Room" + str(next_room_pos))
 	if next_room:
 		$CharacterBody.global_position = next_room.position
+		previous_room = curr_room
 		curr_room = next_room_pos
 		#map_data.load_next_room(next_room)
 		var curr_room_index
 		for room_indx in range(len(map_data.map)):
 			if curr_room == map_data.map[room_indx]:
 				curr_room_index = room_indx
-		var num_of_enemies_in_room = len(map_data.map_datas[curr_room_index]["Enemy Data"]["Enemy Seeds"])
+		var enemy_data = map_data.map_datas[curr_room_index]["Enemy Data"]
+		var num_of_enemies_in_room = len(enemy_data["Enemy Seeds"])
 		for en_num in range(num_of_enemies_in_room):
-			enemy_load(curr_room, en_num)
+			enemy_load(curr_room, en_num, enemy_data)
 
 func map_set(map):
 	map_data = map
