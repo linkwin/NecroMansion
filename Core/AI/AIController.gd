@@ -1,5 +1,6 @@
 extends Node2D
 
+signal enemy_defeated(ref)
 
 var map_data
 var enemy_number
@@ -68,7 +69,8 @@ func _can_attack():
 		or bot_state == Global.BOT_STATE.WANDER
 
 func _on_Health_death():
-	queue_free()
+	emit_signal("enemy_defeated", self)
+	#queue_free()
 
 func _on_JumpTimer_timeout():
 	if character_ref.is_on_floor() and enemy_data["Enemy Class"] == Global.BOT_BEHAVIOR.HOPPER:
