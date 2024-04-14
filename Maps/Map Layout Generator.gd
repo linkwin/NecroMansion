@@ -53,6 +53,7 @@ func spawn_room(_position, color_param=1):
 # Need to be sure these arrays match in size
 
 func room_data_load(map, initial_seed, prob_dists, number_of_rooms):
+	print(Global.seed_text)
 	print(initial_seed)
 	var map_data := []
 	var room_data_base_seed = initial_seed + 201

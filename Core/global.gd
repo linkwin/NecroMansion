@@ -3,3 +3,5 @@ extends Node
 enum BOT_STATE {IDLE, PATROL, WANDER, FOLLOW, ATTACK}
 
 enum BOT_BEHAVIOR {SOLDIER, HOPPER, SCARED, RANDOM_MOVE}
+
+var seed_text = "bananas"
