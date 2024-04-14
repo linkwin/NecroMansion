@@ -65,7 +65,7 @@ func _on_CharacterBody_on_character_collision(collider):
 	# collided with other bot, check for attack
 	if "Bot" in collider.get_parent().name:
 		if bot_state == Global.BOT_STATE.ATTACK:
-			collider.get_node("Health").try_damage(1)
+			collider.get_node("CollisionShape2D/Health").try_damage(1)
 			bot_state = Global.BOT_STATE.FOLLOW
 			character_ref.move_speed = character_ref.default_move_speed
 

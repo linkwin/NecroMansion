@@ -1,7 +1,6 @@
-
 class_name RoomData extends Resource
 
-export var initial_seed : int = hash("Carrot")
+export var initial_seed : int = hash("Kazawat")
 
 
 export var probabilities := {
@@ -21,7 +20,7 @@ export var properties := {
 }
 
 func seed_gen():
-	initial_seed = hash("Carrot")
+	initial_seed = hash("Dimple")
 	return(initial_seed)
 
 #func _init(props, probs, initial_seed):

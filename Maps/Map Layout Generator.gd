@@ -1,17 +1,18 @@
-extends Area2D
+extends Node2D
 
 
-var ARoom = preload("res://Maps/MiniMapBlocks/Rooms.tscn")
+var ARoom = preload("res://Maps/Room.tscn")
 
 export(Resource) var Roomdata = preload("res://Maps/RoomData/roomdata1.tres")
-
 var directions := [Vector2(1, 0), Vector2(-1, 0), Vector2(0, 1), Vector2(0, -1)]
 
 var init_seed
 var probabilities
 
-
-
+var num_rooms := 15
+var map := []
+var map_navi := []
+var map_datas := []
 
 func array_mult(in_array, inger):
 	var out_array := []
@@ -35,8 +36,12 @@ func random_sample(distribution, my_seed):
 
 func spawn_room(_position, color_param=1):
 	var c = ARoom.instance()
-	add_child(c)
-	c.init(_position, color_param)
+	c.position = _position * 2000
+	add_child(c)	
+	c.name = "Room"+str(_position)
+
+
+	#c.init(_position, color_param)
 
 
 
@@ -140,10 +145,7 @@ func _ready():
 	init_seed = Roomdata.seed_gen() +1 
 	probabilities = Roomdata.probabilities
 	var room_rng = RandomNumberGenerator.new()
-	var num_rooms := 15
-	var map := []
-	var map_navi := []
-	var map_datas := []
+
 	room_rng.seed = init_seed
 	var current_position = Vector2(0,0)
 	var new_direction = Vector2()
@@ -159,4 +161,7 @@ func _ready():
 	map_navi = navigation_load(map, directions)
 	map_datas = room_data_load(map, init_seed, probabilities, num_rooms)
 	
+	var player = load("res://Core/Player/PlayerController.tscn").instance()
+	add_child(player)
+	player.map_set(self)	
 	

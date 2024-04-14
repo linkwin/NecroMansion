@@ -30,5 +30,5 @@ shape = SubResource( 3 )
 position = Vector2( 0.5, 0 )
 frames = SubResource( 2 )
 
-[node name="Health" parent="." instance=ExtResource( 3 )]
-position = Vector2( -34, -46 )
+[node name="Health" parent="CollisionShape2D" instance=ExtResource( 3 )]
+position = Vector2( -33.5, -46 )

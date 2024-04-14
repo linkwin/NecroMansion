@@ -12,6 +12,8 @@ extents = Vector2( 1016, 71.5 )
 
 [node name="MapRoot" type="Node2D"]
 
+[node name="YSort" type="YSort" parent="."]
+
 [node name="Line2D" type="Line2D" parent="."]
 position = Vector2( -985.385, -741.818 )
 scale = Vector2( 3.96154, 7.51818 )
@@ -30,6 +32,9 @@ position = Vector2( 30, -672 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PlayerRoot/CharacterBody" index="2"]
 remote_path = NodePath("../../../Camera2D")
+
+[node name="Camera2D" parent="PlayerRoot" index="1"]
+current = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 30, -672 )
@@ -77,18 +82,24 @@ position = Vector2( -570, -105 )
 
 [node name="Wall" type="StaticBody2D" parent="."]
 position = Vector2( -1115, 8 )
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
 shape = SubResource( 1 )
 
 [node name="Wall2" type="StaticBody2D" parent="."]
 position = Vector2( 1115, 1 )
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
 shape = SubResource( 1 )
 
 [node name="Wall3" type="StaticBody2D" parent="."]
 position = Vector2( 8, 8 )
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall3"]
 position = Vector2( -9, 816 )
@@ -96,6 +107,8 @@ shape = SubResource( 2 )
 
 [node name="Wall4" type="StaticBody2D" parent="."]
 position = Vector2( 8, 8 )
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall4"]
 position = Vector2( 1, -836 )
