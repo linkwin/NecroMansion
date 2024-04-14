@@ -28,7 +28,10 @@ func _on_Timer_timeout():
 	curr_move_dir = Vector2(rand_range(-1.0,1.0), rand_range(-1.0,1.0)).normalized()
 
 func _on_CharacterBody_on_character_collision(collider):
+	# body slam player attack
 	if "Player" in collider.get_parent().name:
+		$CharacterBody.get_node("AudioStreamPlayer2D").stream = preload("res://Core/Sounds/Mob sounds/coocoo1.mp3")
+		$CharacterBody.get_node("AudioStreamPlayer2D").play()
 		collider.get_node("CollisionShape2D/Health").try_damage(1)
 		# move away from player
 		curr_move_dir = (character_ref.global_position - collider.global_position).normalized()

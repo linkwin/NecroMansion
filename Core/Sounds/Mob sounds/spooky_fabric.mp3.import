@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/spooky_fabric.mp3-240a12b0623da39e0a7d41613fafed68.mp3str"
+
+[deps]
+
+source_file="res://Core/Sounds/Mob sounds/spooky_fabric.mp3"
+dest_files=[ "res://.import/spooky_fabric.mp3-240a12b0623da39e0a7d41613fafed68.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

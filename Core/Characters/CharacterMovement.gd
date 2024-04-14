@@ -14,6 +14,8 @@ var jump_decel = 600
 var wants_to_jump = false
 var jump_update_vel = Vector2.ZERO
 
+var jump_sounds = preload("res://Core/Sounds/AudioSets/jump_sounds.tres")
+
 var grav_acc = 300
 var grav_update_vel = Vector2.ZERO
 
@@ -71,6 +73,8 @@ func _physics_process(delta):
 	#trigger jump
 	if wants_to_jump:
 		jump_update_vel = Vector2.UP * jump_impulse
+		$AudioStreamPlayer2D.stream = jump_sounds.get_rand_sound()
+		$AudioStreamPlayer2D.play()
 		wants_to_jump = false
 		collision_layer = 2
 		collision_mask = 2

@@ -1,7 +1,7 @@
 extends Node2D
 
 
-var ARoom = preload("res://Maps/Room.tscn")
+var ARoom = preload("res://Maps/Room1.tscn")
 
 export(Resource) var Roomdata = preload("res://Maps/RoomData/roomdata1.tres")
 var directions := [Vector2(1, 0), Vector2(-1, 0), Vector2(0, 1), Vector2(0, -1)]

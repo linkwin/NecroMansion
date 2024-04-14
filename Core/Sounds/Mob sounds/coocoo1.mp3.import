@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/coocoo1.mp3-4960f766b61be24a3ad6ed2ed0c52600.mp3str"
+
+[deps]
+
+source_file="res://Core/Sounds/Mob sounds/coocoo1.mp3"
+dest_files=[ "res://.import/coocoo1.mp3-4960f766b61be24a3ad6ed2ed0c52600.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

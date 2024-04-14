@@ -1,0 +1,19 @@
+[gd_scene format=2]
+
+[node name="FX" type="Node2D"]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 60
+lifetime = 0.5
+one_shot = true
+emission_shape = 1
+emission_sphere_radius = 91.59
+initial_velocity = 158.72
+initial_velocity_random = 0.44
+angular_velocity = -12.41
+angular_velocity_random = 0.28
+orbit_velocity = 2.5
+orbit_velocity_random = 0.71
+radial_accel = 100.0
+scale_amount = 3.0

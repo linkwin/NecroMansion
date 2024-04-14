@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/walking_gravel_loop.mp3-356d247375906a65914bfc3bc736f0a6.mp3str"
+
+[deps]
+
+source_file="res://Core/Sounds/Player sounds/walking_gravel_loop.mp3"
+dest_files=[ "res://.import/walking_gravel_loop.mp3-356d247375906a65914bfc3bc736f0a6.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

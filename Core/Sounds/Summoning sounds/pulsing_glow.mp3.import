@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/pulsing_glow.mp3-d66e7e751e31113b05e123e20aeb764d.mp3str"
+
+[deps]
+
+source_file="res://Core/Sounds/Summoning sounds/pulsing_glow.mp3"
+dest_files=[ "res://.import/pulsing_glow.mp3-d66e7e751e31113b05e123e20aeb764d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/squeak2.mp3-c314e44caa3ead142fbf18e176570f1c.mp3str"
+
+[deps]
+
+source_file="res://Core/Sounds/Mob sounds/squeak2.mp3"
+dest_files=[ "res://.import/squeak2.mp3-c314e44caa3ead142fbf18e176570f1c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
