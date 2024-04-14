@@ -163,5 +163,5 @@ func _ready():
 	
 	var player = load("res://Core/Player/PlayerController.tscn").instance()
 	add_child(player)
-	player.map_set(self)	
+	player.map_set(self)
 	

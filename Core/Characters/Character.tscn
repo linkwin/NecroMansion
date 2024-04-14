@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Core/Characters/CharacterMovement.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -8,6 +8,10 @@
 [ext_resource path="res://Sprites/Animations/player_character_walk_left.tres" type="Animation" id=6]
 [ext_resource path="res://Sprites/RUNNOTRUNRUNBUTT.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/Animations/player_character_walk_right.tres" type="Animation" id=8]
+[ext_resource path="res://Sprites/Animations/player_character_run_left.tres" type="Animation" id=9]
+[ext_resource path="res://Sprites/Animations/player_character_run_back.tres" type="Animation" id=10]
+[ext_resource path="res://Sprites/Animations/Charactersplayer_character_run_right.tres" type="Animation" id=11]
+[ext_resource path="res://Sprites/Animations/player_character_run_forward.tres" type="Animation" id=12]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 31.5, 31 )
@@ -60,6 +64,10 @@ region_rect = Rect2( 65.474, 825, 167.368, 169.474 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CollisionShape2D/Sprite"]
 anims/RESET = SubResource( 4 )
+anims/player_character_run_back = ExtResource( 10 )
+anims/player_character_run_forward = ExtResource( 12 )
+anims/player_character_run_left = ExtResource( 9 )
+anims/player_character_run_right = ExtResource( 11 )
 anims/player_character_walk_back = ExtResource( 5 )
 anims/player_character_walk_forward = ExtResource( 4 )
 anims/player_character_walk_left = ExtResource( 6 )
