@@ -40,7 +40,7 @@ func _ready():
 func _process(delta):
 	if move_dir != Vector2.ZERO:
 		if anim_dirs.has(move_dir):
-			$CollisionShape2D/Sprite/AnimationPlayer.play("player_character_run_" + anim_dirs[move_dir])
+			$CollisionShape2D/Sprite/AnimationPlayer.play("player_character_walk_" + anim_dirs[move_dir])
 	else:
 		$CollisionShape2D/Sprite/AnimationPlayer.stop()
 	
