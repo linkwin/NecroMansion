@@ -93,8 +93,7 @@ func enemy_group_load(room):
 		
 		
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
+
 	#get_tree().create_timer(0.1).connect("timeout", self, "_enemy_load_timer")
 
 func _double_click_timeout():
