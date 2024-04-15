@@ -50,15 +50,14 @@ editor_draw_limits = true
 
 [node name="BotRoot" parent="." instance=ExtResource( 2 )]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 281, 0 )
+position = Vector2( -465, 83 )
 
 [node name="BotRoot2" parent="." instance=ExtResource( 2 )]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( -366, -400 )
 
 [node name="BotRoot9" parent="." instance=ExtResource( 2 )]
-position = Vector2( 278, 52 )
-z_index = 1
+position = Vector2( 308, 178 )
 
 [node name="Wall" type="StaticBody2D" parent="."]
 position = Vector2( -1115, 8 )
@@ -103,3 +102,5 @@ position = Vector2( -887, -72 )
 
 [editable path="PlayerRoot"]
 [editable path="PlayerRoot/CharacterBody"]
+[editable path="BotRoot9"]
+[editable path="BotRoot9/CharacterBody"]

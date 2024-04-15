@@ -46,6 +46,15 @@ func spawn_room(_position):
 	#c.init(_position, color_param)
 
 
+func initial_enemy_spawn(player):
+	player.enemy_group_load(Vector2(0, 0))
+	var initial_enemy_data = map_datas[0]["Enemy Data"]
+	var en_grp = player.enemy_groups["EnemyGroup"+str(Vector2(0, 0))]
+	var num_of_enemies_in_room = len(initial_enemy_data["Enemy Seeds"])
+	for en_num in range(num_of_enemies_in_room):
+		player.enemy_load(en_grp, Vector2(0, 0), en_num, initial_enemy_data)
+	player.visited_rooms.append(Vector2(0, 0))
+	
 
 
 # prob_dist will have the relative prob. of each occurence 
@@ -131,27 +140,7 @@ func navigation_load(current_map, cardinal_directions):
 				poss_dir.append(dir)
 		map_nav.append(poss_dir)
 	return(map_nav)
-	
-func _handle_enemy_defeated(enemy_node):
-	enemy_node.enemy_number
 
-func enemy_load(room, enemy_number, enemy_data):
-	var new_enemy = preload("res://Core/AI/AIController.tscn")
-	new_enemy.connect("enemy_defeated", self, "_handle_enemy_defeated")
-	var new_enemy_node
-	var this_spec_enemy_data = {}
-	new_enemy_node = new_enemy.instance()
-	
-	new_enemy_node.enemy_number = enemy_number
-	new_enemy_node.current_room = room
-	
-	for key in enemy_data:
-		this_spec_enemy_data[key] = enemy_data[key][enemy_number]
-		
-	new_enemy_node.enemy_data = this_spec_enemy_data
-	
-	new_enemy_node.position =  2000*room +  500 * Vector2(rand_range(-1.0,1.0), rand_range(-1.0,1.0)).normalized()
-	add_child(new_enemy_node)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -174,14 +163,19 @@ func _ready():
 	map_navi = navigation_load(map, directions)
 	map_datas = room_data_load(init_seed, probabilities, num_rooms)
 	
-	var player = load("res://Core/Player/PlayerController.tscn").instance()
-	add_child(player)
-	player.map_set(self)
+	#print(map)
+	#yield(get_tree().create_timer(0.1), "timeout")
 	
-	var enemy_data = map_datas[0]["Enemy Data"]
-	var num_of_enemies_in_room = len(enemy_data["Enemy Seeds"])
-	for en_num in range(num_of_enemies_in_room):
-		enemy_load(Vector2(0,0), en_num, enemy_data)
+	var player = load("res://Core/Player/PlayerController.tscn").instance()
+	
+	player.map_set(self, map_datas)
+	add_child(player)
+	
+	initial_enemy_spawn(player)
+	#var enemy_data = map_datas[0]["Enemy Data"]
+	#var num_of_enemies_in_room = len(enemy_data["Enemy Seeds"])
+	#for en_num in range(num_of_enemies_in_room):
+#		enemy_load(Vector2(0,0), en_num, enemy_data)
 	
 
 #func _process(delta):

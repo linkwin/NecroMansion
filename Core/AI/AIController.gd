@@ -1,9 +1,10 @@
 extends Node2D
 
-signal enemy_defeated(ref)
+signal enemy_defeated(ref, curr_room)
 
 var map_data
 var enemy_number
+
 onready var enemy_data
 
 var current_room = Vector2.ZERO
@@ -22,7 +23,7 @@ var hit_sounds = {Global.BOT_BEHAVIOR.RANDOM_MOVE:preload("res://Core/Sounds/Mob
 var target_player
 
 func _ready():
-	print("Enemy Class:  ", enemy_data["Enemy Class"])
+	#print("Enemy Class:  ", enemy_data["Enemy Class"])
 #	"Enemy Data": {"Enemy Seeds": [], "Enemy Difficulty": [], "Enemy Class":    [],
 #				   "Enemy Speed": [], "Enemy Damage":     [], "Enemy Recovery": [], 
 #				   "Enemy Attack Radius": []},
@@ -68,6 +69,7 @@ func _on_Timer_timeout():
 func _on_CharacterBody_on_character_collision(collider):
 	# body slam player attack
 	if "Player" in collider.get_parent().name:
+		
 		collider.get_node("CollisionShape2D/Health").try_damage(enemy_data["Enemy Damage"])
 		#$CharacterBody.get_node("AudioStreamPlayer2D").stream = hit_sounds[bot_behavior]
 		$CharacterBody/AttackSound.stream = hit_sounds[bot_behavior]
@@ -102,7 +104,7 @@ func _can_attack():
 
 func _on_Health_death():
 	emit_signal("enemy_defeated", self)
-	#queue_free()
+	queue_free()
 
 func _on_JumpTimer_timeout():
 	if character_ref.is_on_floor() and enemy_data["Enemy Class"] == Global.BOT_BEHAVIOR.HOPPER:
