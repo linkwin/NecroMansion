@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Maps/RoomSpawn/RoomTransition.gd" type="Script" id=1]
 [ext_resource path="res://Maps/CastleTileSet/build_atlas.png" type="Texture" id=2]
+[ext_resource path="res://Maps/Room.gd" type="Script" id=3]
+[ext_resource path="res://Core/Familiar/FamiliarBot.tscn" type="PackedScene" id=4]
 
 [sub_resource type="TileSet" id=5]
 0/name = "build_atlas.png 0"
@@ -1320,6 +1322,7 @@ extents = Vector2( 51, 114.5 )
 extents = Vector2( 137, 48.25 )
 
 [node name="Room" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="YSort" type="YSort" parent="."]
 
@@ -1340,19 +1343,6 @@ tile_data = PoolIntArray( -458760, 60, 0, -524281, 536870972, 0, -393224, 60, 0,
 __meta__ = {
 "_editor_description_": ""
 }
-
-[node name="Line2D" type="Line2D" parent="."]
-position = Vector2( -983.058, -933.773 )
-scale = Vector2( 3.89423, 9.42273 )
-points = PoolVector2Array( 500, 0, 0, 200 )
-default_color = Color( 0.517647, 0, 0.0470588, 1 )
-
-[node name="Line2D2" type="Line2D" parent="."]
-position = Vector2( 968.87, -966.081 )
-rotation = 1.57416
-scale = Vector2( 3.91206, 9.65811 )
-points = PoolVector2Array( 500, 0, 0, 200 )
-default_color = Color( 0.517647, 0, 0.0470588, 1 )
 
 [node name="Wall" type="StaticBody2D" parent="."]
 position = Vector2( -1115, 8 )
@@ -1421,3 +1411,6 @@ transition_dir = Vector2( 1, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightRoomTransition"]
 shape = SubResource( 3 )
+
+[node name="Familiar" parent="." instance=ExtResource( 4 )]
+position = Vector2( 552, 571 )

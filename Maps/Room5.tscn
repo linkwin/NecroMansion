@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Maps/RoomSpawn/RoomTransition.gd" type="Script" id=1]
+[ext_resource path="res://Maps/Room.gd" type="Script" id=2]
+[ext_resource path="res://Core/Familiar/FamiliarBot.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 21.9375, 996 )
@@ -15,6 +17,7 @@ extents = Vector2( 51, 114.5 )
 extents = Vector2( 137, 48.25 )
 
 [node name="Room" type="Node2D"]
+script = ExtResource( 2 )
 
 [node name="YSort" type="YSort" parent="."]
 
@@ -98,3 +101,5 @@ transition_dir = Vector2( 1, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightRoomTransition"]
 shape = SubResource( 3 )
+
+[node name="Familiar" parent="." instance=ExtResource( 3 )]
