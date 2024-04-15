@@ -1903,10 +1903,7 @@ extents = Vector2( 51, 114.5 )
 extents = Vector2( 137, 48.25 )
 
 [sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 76, 93.5 )
-
-[sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 33, 13 )
+extents = Vector2( 76, 33 )
 
 [sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 33, 22.5 )
@@ -1914,8 +1911,11 @@ extents = Vector2( 33, 22.5 )
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 33, 22.5 )
 
-[sub_resource type="RectangleShape2D" id=15]
-extents = Vector2( 144.5, 61.5 )
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 33, 13 )
+
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 232.5, 53.5 )
 
 [node name="Room" type="Node2D"]
 script = ExtResource( 6 )
@@ -2039,68 +2039,33 @@ transition_dir = Vector2( 1, 0 )
 shape = SubResource( 3 )
 
 [node name="Sprite" parent="." instance=ExtResource( 5 )]
-position = Vector2( -724, -409 )
+position = Vector2( -862, 598 )
 z_index = -409
 z_as_relative = false
 
 [node name="Sprite2" parent="." instance=ExtResource( 5 )]
-position = Vector2( -414, -402 )
+position = Vector2( -865, 832 )
 z_index = -402
 z_as_relative = false
 
-[node name="Sprite3" parent="." instance=ExtResource( 5 )]
-position = Vector2( -724, -644 )
-z_index = -644
-z_as_relative = false
-
 [node name="Sprite4" parent="." instance=ExtResource( 5 )]
-position = Vector2( -412, -644 )
+position = Vector2( -864, 369 )
 z_index = -644
 z_as_relative = false
 
 [node name="Sprite5" parent="." instance=ExtResource( 5 )]
-position = Vector2( 286, -415 )
+position = Vector2( 631, -523 )
 z_index = -415
 
 [node name="Sprite" parent="Sprite5" index="0"]
-region_rect = Rect2( 451, 941, 59, 83 )
+region_rect = Rect2( 576, 395, 64, 48 )
 
 [node name="CollisionShape2D" parent="Sprite5/StaticBody2D" index="0"]
-position = Vector2( 2, -61.5 )
+position = Vector2( 2, -52 )
 shape = SubResource( 11 )
 
-[node name="Chair" parent="." instance=ExtResource( 5 )]
-position = Vector2( 165, -489 )
-z_index = -479
-
-[node name="Sprite" parent="Chair" index="0"]
-position = Vector2( 5, -50 )
-region_rect = Rect2( 513, 926, 32, 38 )
-
-[node name="StaticBody2D" parent="Chair" index="1"]
-position = Vector2( 1, 19 )
-
-[node name="CollisionShape2D" parent="Chair/StaticBody2D" index="0"]
-position = Vector2( 3, -56 )
-shape = SubResource( 12 )
-
-[node name="Chair2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 166, -393 )
-z_index = -479
-
-[node name="Sprite" parent="Chair2" index="0"]
-position = Vector2( 5, -50 )
-region_rect = Rect2( 513, 926, 32, 38 )
-
-[node name="StaticBody2D" parent="Chair2" index="1"]
-position = Vector2( 1, 19 )
-
-[node name="CollisionShape2D" parent="Chair2/StaticBody2D" index="0"]
-position = Vector2( 3, -56 )
-shape = SubResource( 12 )
-
 [node name="Chair5" parent="." instance=ExtResource( 5 )]
-position = Vector2( 282, -263 )
+position = Vector2( -609, 968 )
 z_index = -479
 
 [node name="Sprite" parent="Chair5" index="0"]
@@ -2115,7 +2080,7 @@ position = Vector2( 3, -69.5 )
 shape = SubResource( 13 )
 
 [node name="Chair6" parent="." instance=ExtResource( 5 )]
-position = Vector2( 281, -623 )
+position = Vector2( 626, -623 )
 z_index = -479
 
 [node name="Sprite" parent="Chair6" index="0"]
@@ -2130,7 +2095,7 @@ position = Vector2( 5, -58 )
 shape = SubResource( 14 )
 
 [node name="Chair3" parent="." instance=ExtResource( 5 )]
-position = Vector2( 402, -392 )
+position = Vector2( 896, -578 )
 z_index = -479
 
 [node name="Sprite" parent="Chair3" index="0"]
@@ -2146,7 +2111,7 @@ position = Vector2( 3, -56 )
 shape = SubResource( 12 )
 
 [node name="Chair4" parent="." instance=ExtResource( 5 )]
-position = Vector2( 398, -493 )
+position = Vector2( 899, -410 )
 z_index = -479
 
 [node name="Sprite" parent="Chair4" index="0"]
@@ -2161,28 +2126,22 @@ position = Vector2( 1, 19 )
 position = Vector2( 3, -56 )
 shape = SubResource( 12 )
 
-[node name="Prop" parent="." instance=ExtResource( 5 )]
-position = Vector2( 410, 656 )
-
-[node name="Sprite" parent="Prop" index="0"]
-position = Vector2( -3.5, -92.5 )
-region_rect = Rect2( 735, 160, 97, 91 )
-
-[node name="StaticBody2D" parent="Prop" index="1"]
-position = Vector2( -7.5, -23.5 )
-
-[node name="CollisionShape2D" parent="Prop/StaticBody2D" index="0"]
-position = Vector2( 6.5, -14.5 )
-shape = SubResource( 15 )
-
 [node name="Familiar" parent="." instance=ExtResource( 4 )]
-position = Vector2( -575, -785 )
+position = Vector2( 593, -369 )
+
+[node name="Prop2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 510, -808 )
+
+[node name="Sprite" parent="Prop2" index="0"]
+region_rect = Rect2( 480, 224, 160, 80 )
+
+[node name="CollisionShape2D" parent="Prop2/StaticBody2D" index="0"]
+position = Vector2( 2.5, -21.5 )
+shape = SubResource( 16 )
 
 [editable path="Sprite5"]
-[editable path="Chair"]
-[editable path="Chair2"]
 [editable path="Chair5"]
 [editable path="Chair6"]
 [editable path="Chair3"]
 [editable path="Chair4"]
-[editable path="Prop"]
+[editable path="Prop2"]

@@ -1,10 +1,9 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Maps/RoomSpawn/RoomTransition.gd" type="Script" id=1]
 [ext_resource path="res://Maps/CastleTileSet/build_atlas.png" type="Texture" id=2]
 [ext_resource path="res://Maps/CastleTileSet/obj_misk_atlas.png" type="Texture" id=3]
 [ext_resource path="res://Core/Familiar/FamiliarBot.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Maps/CastleTileSet/MapProp.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Maps/Room.gd" type="Script" id=6]
 
 [sub_resource type="TileSet" id=5]
@@ -247,10 +246,10 @@
 11/texture = ExtResource( 2 )
 11/tex_offset = Vector2( 0, 0 )
 11/modulate = Color( 1, 1, 1, 1 )
-11/region = Rect2( 96, 160, 96, 32 )
+11/region = Rect2( 128, 160, 32, 32 )
 11/tile_mode = 1
-11/autotile/bitmask_mode = 0
-11/autotile/bitmask_flags = [ Vector2( 0, 0 ), 260, Vector2( 1, 0 ), 325, Vector2( 2, 0 ), 65 ]
+11/autotile/bitmask_mode = 1
+11/autotile/bitmask_flags = [ Vector2( 0, 1 ), 432, Vector2( 0, 2 ), 54, Vector2( 0, 3 ), 438, Vector2( 1, 0 ), 56, Vector2( 1, 1 ), 504, Vector2( 1, 2 ), 63, Vector2( 1, 3 ), 511, Vector2( 2, 1 ), 216, Vector2( 2, 2 ), 27, Vector2( 2, 3 ), 219 ]
 11/autotile/icon_coordinate = Vector2( 0, 0 )
 11/autotile/tile_size = Vector2( 32, 32 )
 11/autotile/spacing = 0
@@ -270,10 +269,10 @@
 12/texture = ExtResource( 2 )
 12/tex_offset = Vector2( 0, 0 )
 12/modulate = Color( 1, 1, 1, 1 )
-12/region = Rect2( 96, 192, 96, 64 )
+12/region = Rect2( 96, 160, 96, 128 )
 12/tile_mode = 1
-12/autotile/bitmask_mode = 0
-12/autotile/bitmask_flags = [ Vector2( 0, 0 ), 256, Vector2( 0, 1 ), 4, Vector2( 1, 0 ), 320, Vector2( 1, 1 ), 5, Vector2( 2, 0 ), 64, Vector2( 2, 1 ), 1 ]
+12/autotile/bitmask_mode = 1
+12/autotile/bitmask_flags = [ Vector2( 0, 0 ), 48, Vector2( 0, 1 ), 432, Vector2( 0, 2 ), 54, Vector2( 0, 3 ), 438, Vector2( 1, 0 ), 56, Vector2( 1, 1 ), 504, Vector2( 1, 2 ), 63, Vector2( 1, 3 ), 511, Vector2( 2, 0 ), 24, Vector2( 2, 1 ), 216, Vector2( 2, 2 ), 27, Vector2( 2, 3 ), 219 ]
 12/autotile/icon_coordinate = Vector2( 0, 0 )
 12/autotile/tile_size = Vector2( 32, 32 )
 12/autotile/spacing = 0
@@ -293,7 +292,7 @@
 13/texture = ExtResource( 2 )
 13/tex_offset = Vector2( 0, 0 )
 13/modulate = Color( 1, 1, 1, 1 )
-13/region = Rect2( 192, 192, 32, 64 )
+13/region = Rect2( 192, 256, 32, 32 )
 13/tile_mode = 1
 13/autotile/bitmask_mode = 0
 13/autotile/bitmask_flags = [ Vector2( 0, 0 ), 320, Vector2( 0, 1 ), 5 ]
@@ -312,29 +311,6 @@
 13/shape_one_way_margin = 0.0
 13/shapes = [  ]
 13/z_index = 0
-14/name = "build_atlas.png 14"
-14/texture = ExtResource( 2 )
-14/tex_offset = Vector2( 0, 0 )
-14/modulate = Color( 1, 1, 1, 1 )
-14/region = Rect2( 96, 256, 96, 32 )
-14/tile_mode = 1
-14/autotile/bitmask_mode = 0
-14/autotile/bitmask_flags = [ Vector2( 0, 0 ), 260, Vector2( 1, 0 ), 325, Vector2( 2, 0 ), 65 ]
-14/autotile/icon_coordinate = Vector2( 0, 0 )
-14/autotile/tile_size = Vector2( 32, 32 )
-14/autotile/spacing = 0
-14/autotile/occluder_map = [  ]
-14/autotile/navpoly_map = [  ]
-14/autotile/priority_map = [  ]
-14/autotile/z_index_map = [  ]
-14/occluder_offset = Vector2( 0, 0 )
-14/navigation_offset = Vector2( 0, 0 )
-14/shape_offset = Vector2( 0, 0 )
-14/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-14/shape_one_way = false
-14/shape_one_way_margin = 0.0
-14/shapes = [  ]
-14/z_index = 0
 15/name = "build_atlas.png 15"
 15/texture = ExtResource( 2 )
 15/tex_offset = Vector2( 0, 0 )
@@ -1902,21 +1878,6 @@ extents = Vector2( 51, 114.5 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 137, 48.25 )
 
-[sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 76, 93.5 )
-
-[sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 33, 13 )
-
-[sub_resource type="RectangleShape2D" id=13]
-extents = Vector2( 33, 22.5 )
-
-[sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 33, 22.5 )
-
-[sub_resource type="RectangleShape2D" id=15]
-extents = Vector2( 144.5, 61.5 )
-
 [node name="Room" type="Node2D"]
 script = ExtResource( 6 )
 
@@ -1928,7 +1889,7 @@ z_index = -4096
 tile_set = SubResource( 5 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( -458760, 46, 0, -458759, 46, 0, -458758, 46, 0, -458757, 46, 0, -458756, 46, 0, -458755, 46, 0, -458754, 46, 0, -458753, 46, 0, -524288, 46, 0, -524287, 46, 0, -524286, 46, 0, -524285, 46, 0, -524284, 46, 0, -524283, 46, 0, -524282, 46, 0, -524281, 46, 1, -393224, 46, 0, -393223, 46, 0, -393222, 46, 0, -393221, 46, 0, -393220, 46, 0, -393219, 46, 0, -393218, 46, 0, -393217, 46, 0, -458752, 46, 0, -458751, 46, 0, -458750, 46, 0, -458749, 46, 0, -458748, 46, 0, -458747, 46, 0, -458746, 46, 0, -458745, 46, 0, -327688, 46, 0, -327687, 46, 0, -327686, 46, 0, -327685, 46, 0, -327684, 46, 0, -327683, 46, 0, -327682, 46, 0, -327681, 46, 0, -393216, 46, 0, -393215, 46, 0, -393214, 46, 0, -393213, 46, 0, -393212, 46, 0, -393211, 46, 0, -393210, 46, 0, -393209, 46, 0, -262152, 46, 0, -262151, 46, 0, -262150, 46, 0, -262149, 46, 0, -262148, 46, 0, -262147, 46, 0, -262146, 46, 0, -262145, 46, 0, -327680, 46, 0, -327679, 46, 0, -327678, 46, 0, -327677, 46, 0, -327676, 46, 0, -327675, 46, 0, -327674, 46, 0, -327673, 46, 0, -196616, 46, 0, -196615, 46, 0, -196614, 46, 0, -196613, 46, 0, -196612, 46, 0, -196611, 46, 0, -196610, 46, 0, -196609, 46, 0, -262144, 46, 0, -262143, 46, 0, -262142, 46, 0, -262141, 46, 0, -262140, 46, 0, -262139, 46, 0, -262138, 46, 0, -262137, 46, 0, -131080, 46, 0, -131079, 46, 0, -131078, 46, 0, -131077, 46, 0, -131076, 46, 0, -131075, 46, 0, -131074, 46, 0, -131073, 46, 0, -196608, 46, 0, -196607, 46, 0, -196606, 46, 0, -196605, 46, 0, -196604, 46, 0, -196603, 46, 0, -196602, 46, 0, -196601, 46, 0, -65544, 46, 0, -65543, 46, 0, -65542, 46, 0, -65541, 46, 0, -65540, 46, 0, -65539, 46, 0, -65538, 46, 0, -65537, 46, 0, -131072, 46, 0, -131071, 46, 0, -131070, 46, 0, -131069, 46, 0, -131068, 46, 0, -131067, 46, 0, -131066, 46, 0, -131065, 46, 0, -8, 46, 0, -7, 46, 0, -6, 46, 0, -5, 46, 0, -4, 46, 0, -3, 46, 0, -2, 46, 0, -1, 46, 0, -65536, 46, 0, -65535, 46, 0, -65534, 46, 0, -65533, 46, 0, -65532, 46, 0, -65531, 46, 0, -65530, 46, 0, -65529, 46, 0, 65528, 46, 0, 65529, 46, 0, 65530, 46, 0, 65531, 46, 0, 65532, 46, 0, 65533, 46, 0, 65534, 46, 0, 65535, 46, 0, 0, 46, 0, 1, 46, 0, 2, 46, 0, 3, 46, 0, 4, 46, 0, 5, 46, 0, 6, 46, 0, 7, 46, 0, 131064, 46, 0, 131065, 46, 0, 131066, 46, 0, 131067, 46, 0, 131068, 46, 0, 131069, 46, 0, 131070, 46, 0, 131071, 46, 0, 65536, 46, 0, 65537, 46, 0, 65538, 46, 0, 65539, 46, 0, 65540, 46, 0, 65541, 46, 0, 65542, 46, 0, 65543, 46, 0, 196600, 46, 0, 196601, 46, 0, 196602, 46, 0, 196603, 46, 0, 196604, 46, 0, 196605, 46, 0, 196606, 46, 0, 196607, 46, 0, 131072, 46, 0, 131073, 46, 0, 131074, 46, 0, 131075, 46, 0, 131076, 46, 0, 131077, 46, 0, 131078, 46, 0, 131079, 46, 0, 262136, 46, 0, 262137, 46, 0, 262138, 46, 0, 262139, 46, 0, 262140, 46, 0, 262141, 46, 0, 262142, 46, 0, 262143, 46, 0, 196608, 46, 0, 196609, 46, 0, 196610, 46, 0, 196611, 46, 0, 196612, 46, 0, 196613, 46, 0, 196614, 46, 0, 196615, 46, 0, 327672, 46, 0, 327673, 46, 0, 327674, 46, 0, 327675, 46, 0, 327676, 46, 0, 327677, 46, 0, 327678, 46, 0, 327679, 46, 0, 262144, 46, 0, 262145, 46, 0, 262146, 46, 0, 262147, 46, 0, 262148, 46, 0, 262149, 46, 0, 262150, 46, 0, 262151, 46, 0, 393208, 46, 0, 393209, 46, 0, 393210, 46, 0, 393211, 46, 0, 393212, 46, 0, 393213, 46, 0, 393214, 46, 0, 393215, 46, 0, 327680, 46, 0, 327681, 46, 0, 327682, 46, 0, 327683, 46, 0, 327684, 46, 0, 327685, 46, 0, 327686, 46, 0, 327687, 46, 0, 458744, 46, 0, 458745, 46, 0, 458746, 46, 0, 458747, 46, 0, 458748, 46, 0, 458749, 46, 0, 458750, 46, 0, 458751, 46, 0, 393216, 46, 0, 393217, 46, 0, 393218, 46, 0, 393219, 46, 0, 393220, 46, 0, 393221, 46, 0, 393222, 46, 0, 393223, 46, 0, 524280, 46, 65536, 524281, 46, 0, 524282, 46, 0, 524283, 46, 0, 524284, 46, 0, 524285, 46, 0, 524286, 46, 0, 524287, 46, 0, 458752, 46, 0, 458753, 46, 0, 458754, 46, 0, 458755, 46, 0, 458756, 46, 0, 458757, 46, 0, 458758, 46, 0, 458759, 46, 65537 )
+tile_data = PoolIntArray( -458753, 12, 65536, -524288, 12, 65538, -393217, 12, 196608, -458752, 12, 196610, -327681, 12, 196608, -393216, 12, 196610, -262145, 12, 196608, -327680, 12, 196610, -196610, 12, 65536, -196609, 12, 0, -262144, 12, 0, -262143, 12, 65538, -131076, 12, 65536, -131075, 12, 65537, -131074, 12, 0, -131073, 12, 196609, -196608, 12, 196609, -196607, 12, 0, -196606, 12, 65537, -196605, 12, 65538, -65541, 12, 65536, -65540, 12, 0, -65539, 12, 196609, -65538, 12, 196609, -65537, 12, 196609, -131072, 12, 196609, -131071, 12, 196609, -131070, 12, 196609, -131069, 12, 0, -131068, 12, 65538, -8, 12, 65536, -7, 12, 65537, -6, 12, 65537, -5, 12, 0, -4, 12, 196609, -3, 12, 196609, -2, 12, 196609, -1, 12, 196609, -65536, 12, 196609, -65535, 12, 196609, -65534, 12, 196609, -65533, 12, 196609, -65532, 12, 0, -65531, 12, 65537, -65530, 12, 65537, -65529, 12, 65538, 65528, 12, 131072, 65529, 12, 131073, 65530, 12, 131073, 65531, 12, 0, 65532, 12, 196609, 65533, 12, 196609, 65534, 12, 196609, 65535, 12, 196609, 0, 12, 196609, 1, 12, 196609, 2, 12, 196609, 3, 12, 196609, 4, 12, 0, 5, 12, 131073, 6, 12, 131073, 7, 12, 131074, 131067, 12, 131072, 131068, 12, 0, 131069, 12, 196609, 131070, 12, 196609, 131071, 12, 196609, 65536, 12, 196609, 65537, 12, 196609, 65538, 12, 196609, 65539, 12, 0, 65540, 12, 131074, 196604, 12, 196608, 196605, 12, 196609, 196606, 12, 196609, 196607, 12, 196609, 131072, 12, 196609, 131073, 12, 196609, 131074, 12, 196609, 131075, 12, 196610, 262140, 12, 131072, 262141, 12, 131073, 262142, 12, 0, 262143, 12, 196609, 196608, 12, 196609, 196609, 12, 0, 196610, 12, 131073, 196611, 12, 131074, 327678, 12, 131072, 327679, 12, 0, 262144, 12, 0, 262145, 12, 131074, 393215, 12, 196608, 327680, 12, 196610, 458751, 12, 196608, 393216, 12, 196610, 524287, 12, 131072, 458752, 12, 131074 )
 
 [node name="TileMap_walls" type="TileMap" parent="YSort"]
 scale = Vector2( 4, 4 )
@@ -2038,151 +1999,5 @@ transition_dir = Vector2( 1, 0 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightRoomTransition"]
 shape = SubResource( 3 )
 
-[node name="Sprite" parent="." instance=ExtResource( 5 )]
-position = Vector2( -724, -409 )
-z_index = -409
-z_as_relative = false
-
-[node name="Sprite2" parent="." instance=ExtResource( 5 )]
-position = Vector2( -414, -402 )
-z_index = -402
-z_as_relative = false
-
-[node name="Sprite3" parent="." instance=ExtResource( 5 )]
-position = Vector2( -724, -644 )
-z_index = -644
-z_as_relative = false
-
-[node name="Sprite4" parent="." instance=ExtResource( 5 )]
-position = Vector2( -412, -644 )
-z_index = -644
-z_as_relative = false
-
-[node name="Sprite5" parent="." instance=ExtResource( 5 )]
-position = Vector2( 286, -415 )
-z_index = -415
-
-[node name="Sprite" parent="Sprite5" index="0"]
-region_rect = Rect2( 451, 941, 59, 83 )
-
-[node name="CollisionShape2D" parent="Sprite5/StaticBody2D" index="0"]
-position = Vector2( 2, -61.5 )
-shape = SubResource( 11 )
-
-[node name="Chair" parent="." instance=ExtResource( 5 )]
-position = Vector2( 165, -489 )
-z_index = -479
-
-[node name="Sprite" parent="Chair" index="0"]
-position = Vector2( 5, -50 )
-region_rect = Rect2( 513, 926, 32, 38 )
-
-[node name="StaticBody2D" parent="Chair" index="1"]
-position = Vector2( 1, 19 )
-
-[node name="CollisionShape2D" parent="Chair/StaticBody2D" index="0"]
-position = Vector2( 3, -56 )
-shape = SubResource( 12 )
-
-[node name="Chair2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 166, -393 )
-z_index = -479
-
-[node name="Sprite" parent="Chair2" index="0"]
-position = Vector2( 5, -50 )
-region_rect = Rect2( 513, 926, 32, 38 )
-
-[node name="StaticBody2D" parent="Chair2" index="1"]
-position = Vector2( 1, 19 )
-
-[node name="CollisionShape2D" parent="Chair2/StaticBody2D" index="0"]
-position = Vector2( 3, -56 )
-shape = SubResource( 12 )
-
-[node name="Chair5" parent="." instance=ExtResource( 5 )]
-position = Vector2( 282, -263 )
-z_index = -479
-
-[node name="Sprite" parent="Chair5" index="0"]
-position = Vector2( 5, -50 )
-region_rect = Rect2( 544, 963, 32, 31 )
-
-[node name="StaticBody2D" parent="Chair5" index="1"]
-position = Vector2( 1, 19 )
-
-[node name="CollisionShape2D" parent="Chair5/StaticBody2D" index="0"]
-position = Vector2( 3, -69.5 )
-shape = SubResource( 13 )
-
-[node name="Chair6" parent="." instance=ExtResource( 5 )]
-position = Vector2( 281, -623 )
-z_index = -479
-
-[node name="Sprite" parent="Chair6" index="0"]
-position = Vector2( 5, -50 )
-region_rect = Rect2( 511, 970, 33, 41 )
-
-[node name="StaticBody2D" parent="Chair6" index="1"]
-position = Vector2( 1, 19 )
-
-[node name="CollisionShape2D" parent="Chair6/StaticBody2D" index="0"]
-position = Vector2( 5, -58 )
-shape = SubResource( 14 )
-
-[node name="Chair3" parent="." instance=ExtResource( 5 )]
-position = Vector2( 402, -392 )
-z_index = -479
-
-[node name="Sprite" parent="Chair3" index="0"]
-position = Vector2( 5, -50 )
-flip_h = true
-region_rect = Rect2( 513, 926, 32, 38 )
-
-[node name="StaticBody2D" parent="Chair3" index="1"]
-position = Vector2( 1, 19 )
-
-[node name="CollisionShape2D" parent="Chair3/StaticBody2D" index="0"]
-position = Vector2( 3, -56 )
-shape = SubResource( 12 )
-
-[node name="Chair4" parent="." instance=ExtResource( 5 )]
-position = Vector2( 398, -493 )
-z_index = -479
-
-[node name="Sprite" parent="Chair4" index="0"]
-position = Vector2( 5, -50 )
-flip_h = true
-region_rect = Rect2( 513, 926, 32, 38 )
-
-[node name="StaticBody2D" parent="Chair4" index="1"]
-position = Vector2( 1, 19 )
-
-[node name="CollisionShape2D" parent="Chair4/StaticBody2D" index="0"]
-position = Vector2( 3, -56 )
-shape = SubResource( 12 )
-
-[node name="Prop" parent="." instance=ExtResource( 5 )]
-position = Vector2( 410, 656 )
-
-[node name="Sprite" parent="Prop" index="0"]
-position = Vector2( -3.5, -92.5 )
-region_rect = Rect2( 735, 160, 97, 91 )
-
-[node name="StaticBody2D" parent="Prop" index="1"]
-position = Vector2( -7.5, -23.5 )
-
-[node name="CollisionShape2D" parent="Prop/StaticBody2D" index="0"]
-position = Vector2( 6.5, -14.5 )
-shape = SubResource( 15 )
-
 [node name="Familiar" parent="." instance=ExtResource( 4 )]
 position = Vector2( -575, -785 )
-
-[editable path="Sprite5"]
-[editable path="Chair"]
-[editable path="Chair2"]
-[editable path="Chair5"]
-[editable path="Chair6"]
-[editable path="Chair3"]
-[editable path="Chair4"]
-[editable path="Prop"]

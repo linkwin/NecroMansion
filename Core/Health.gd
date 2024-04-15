@@ -30,3 +30,4 @@ func try_damage(damage_amm):
 
 func regen():
 	curr_health = max_health
+	update_health_bar()

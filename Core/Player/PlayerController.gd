@@ -149,6 +149,7 @@ func _do_respawn():
 	#$CharacterBody.global_position = Vector2.ZERO
 	respawn_screen_node.queue_free()
 	trigger_transition(-curr_room, self)
+	
 	#get_tree().reload_current_scene()
 	
 func _handle_enemy_defeated(enemy_node, curr_room):
