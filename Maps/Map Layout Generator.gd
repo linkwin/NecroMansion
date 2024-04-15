@@ -1,7 +1,13 @@
 extends Node2D
 
 
-var ARoom = preload("res://Maps/Room1.tscn")
+var ARoom = [preload("res://Maps/Room1.tscn"), 
+			 preload("res://Maps/Room2.tscn"),
+			 preload("res://Maps/Room3.tscn"),
+			 preload("res://Maps/Room4.tscn"),
+			 preload("res://Maps/Room5.tscn")]
+
+
 var Goal = preload("res://Maps/Goal.tscn")
 
 export(Resource) var Roomdata = preload("res://Maps/RoomData/roomdata1.tres")
@@ -37,8 +43,8 @@ func random_sample(distribution, my_seed):
 	sample_index = random_sample_rng.randi_range(0, len(repeated_sample_dist)-1)
 	return(repeated_sample_dist[sample_index])
 
-func spawn_room(_position):
-	var c = ARoom.instance()
+func spawn_room(_position, room_index, current_map_dat):
+	var c = ARoom[current_map_dat[room_index]["Room Decoration Data"]["Room Type"]].instance()
 	c.position = _position * 2000
 	add_child(c)
 	c.name = "Room"+str(_position)
@@ -157,19 +163,20 @@ func _ready():
 	while len(map) <= num_rooms-1:
 		if not (current_position in map):
 			map.append(current_position)
-			spawn_room(current_position)
 		room_rng.seed = init_seed+i
 		new_direction = directions[room_rng.randi_range(0, 3)]
 		current_position += new_direction
-		if len(map) == num_rooms - 1:
+		if len(map) == num_rooms:
 			var the_goal_post = Goal.instance()
 			the_goal_post.position = current_position * 2000
 			add_child(the_goal_post)
 			the_goal_post.name = "Goal"+str(current_position)
 		i += 1
+	
 	map_navi = navigation_load(map, directions)
 	map_datas = room_data_load(init_seed, probabilities, num_rooms)
-	
+	for room_index in range(len(map)):
+		spawn_room(map[room_index], room_index, map_datas)
 	#print(map)
 	#yield(get_tree().create_timer(0.1), "timeout")
 	
