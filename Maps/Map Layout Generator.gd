@@ -2,6 +2,7 @@ extends Node2D
 
 
 var ARoom = preload("res://Maps/Room1.tscn")
+var Goal = preload("res://Maps/Goal.tscn")
 
 export(Resource) var Roomdata = preload("res://Maps/RoomData/roomdata1.tres")
 var directions := [Vector2(1, 0), Vector2(-1, 0), Vector2(0, 1), Vector2(0, -1)]
@@ -152,6 +153,7 @@ func _ready():
 	var current_position = Vector2(0,0)
 	var new_direction = Vector2()
 	var i = 0
+	
 	while len(map) <= num_rooms-1:
 		if not (current_position in map):
 			map.append(current_position)
@@ -159,6 +161,11 @@ func _ready():
 		room_rng.seed = init_seed+i
 		new_direction = directions[room_rng.randi_range(0, 3)]
 		current_position += new_direction
+		if len(map) == num_rooms - 1:
+			var the_goal_post = Goal.instance()
+			the_goal_post.position = current_position * 2000
+			add_child(the_goal_post)
+			the_goal_post.name = "Goal"+str(current_position)
 		i += 1
 	map_navi = navigation_load(map, directions)
 	map_datas = room_data_load(init_seed, probabilities, num_rooms)
