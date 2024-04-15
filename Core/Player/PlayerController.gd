@@ -8,6 +8,12 @@ var curr_room = Vector2.ZERO
 var input_enabled = true
 var respawn_screen_node
 
+var familiars = []
+
+var move_actions = ["move_left", "move_right", "move_forward", "move_back"]
+
+var click_flag = false
+var last_button = ""
 
 func enemy_load(room, enemy_number, enemy_data):
 	var new_enemy = preload("res://Core/AI/AIController.tscn")
@@ -26,18 +32,42 @@ func enemy_load(room, enemy_number, enemy_data):
 	new_enemy_node.position =  2000*room +  500 * Vector2(rand_range(-1.0,1.0), rand_range(-1.0,1.0)).normalized()
 	get_tree().root.add_child(new_enemy_node)
 
+func add_familiar(node_ref):
+	if !familiars.has(node_ref):
+		familiars.append(node_ref)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
+func _check_double_click_sprint():
+	for action in move_actions:
+		if Input.is_action_just_pressed(action):
+			if click_flag and action == last_button:
+				print("double click")
+				$CharacterBody.set_sprint(true)
+				click_flag = false
+			else:
+				click_flag = true
+				last_button = action
+				get_tree().create_timer(0.2).connect("timeout", self, "_double_click_timeout")
 
+func _double_click_timeout():
+	click_flag = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if !input_enabled:
 		return
 	
+	_check_double_click_sprint()
+	
 	var move_h_input = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	var move_v_input = Input.get_action_strength("move_back") - Input.get_action_strength("move_forward")
 	
+	if _is_input_held():
+		if not $CharacterBody/FootstepSound.playing:
+			$CharacterBody/FootstepSound.play()
+	else:
+		$CharacterBody/FootstepSound.stop()
 	character_ref.add_move_input(Vector2(move_h_input, move_v_input).normalized())
 
 func _is_input_held():
@@ -65,7 +95,10 @@ func trigger_transition(dir):
 	var next_room_pos = curr_room + dir
 	var next_room = map_data.get_node("Room" + str(next_room_pos))
 	if next_room:
-		$CharacterBody.global_position = next_room.position
+		var spawn_point = next_room.position - dir * 750
+		$CharacterBody.global_position = spawn_point
+		for fam in familiars:
+			fam.get_node("CharacterBody").global_position = spawn_point
 		previous_room = curr_room
 		curr_room = next_room_pos
 		#map_data.load_next_room(next_room)
@@ -82,5 +115,5 @@ func map_set(map):
 	map_data = map
 	curr_room = Vector2.ZERO
 
-
-
+func _on_Health_damaged():
+	$CharacterBody/HitSound.play()

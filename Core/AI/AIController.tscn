@@ -1,11 +1,120 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Core/Characters/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Core/AI/AIController.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/ticktock.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/candelabra.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Animations/coocoo/coocoo_walk_back.tres" type="Animation" id=4]
 [ext_resource path="res://Sprites/Animations/coocoo/coocoo_walk_forward.tres" type="Animation" id=5]
 [ext_resource path="res://Sprites/Animations/coocoo/coocoo_run_forward.tres" type="Animation" id=6]
+[ext_resource path="res://Core/Sounds/Mob sounds/candle_smack.mp3" type="AudioStream" id=7]
+
+[sub_resource type="Animation" id=5]
+resource_name = "candelabra_walk_back"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 320, 780, 1000, 1600 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.2, 0.2 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "candelabra_walk_forward"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 320, 780, 1000, 1600 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.2, 0.2 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "candelabra_walk_left"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 320, 780, 1000, 1600 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.2, 0.2 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "candelabra_walk_right"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 320, 780, 1000, 1600 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.2, 0.2 ) ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "coocoo_run_back"
@@ -34,6 +143,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ -10.0, 10.0, -10.0, 10.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -64,6 +185,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ -5.0, 5.0, -5.0, 5.0 ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ) ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "coocoo_walk_right"
@@ -93,6 +226,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ -5.0, 5.0, -5.0, 5.0 ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ) ]
+}
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 177.181
@@ -104,12 +249,17 @@ script = ExtResource( 2 )
 
 [node name="Sprite" parent="CharacterBody/CollisionShape2D" index="1"]
 position = Vector2( 1.5, -45 )
-scale = Vector2( 0.5, 0.5 )
+rotation = -0.0872665
+scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 3 )
 offset = Vector2( 0, -200 )
-region_rect = Rect2( 120, 117, 250, 750 )
+region_rect = Rect2( 320, 780, 1000, 1600 )
 
 [node name="AnimationPlayer" parent="CharacterBody/CollisionShape2D/Sprite" index="0"]
+anims/candelabra_walk_back = SubResource( 5 )
+anims/candelabra_walk_forward = SubResource( 6 )
+anims/candelabra_walk_left = SubResource( 7 )
+anims/candelabra_walk_right = SubResource( 8 )
 anims/coocoo_run_back = SubResource( 2 )
 anims/coocoo_run_forward = ExtResource( 6 )
 anims/coocoo_walk_back = ExtResource( 4 )
@@ -128,6 +278,9 @@ margin_top = 33.0
 margin_right = 29.0
 margin_bottom = 55.0
 
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="CharacterBody"]
+stream = ExtResource( 7 )
+
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
@@ -136,9 +289,15 @@ autostart = true
 wait_time = 2.0
 autostart = true
 
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.125
+one_shot = true
+autostart = true
+
 [connection signal="on_character_collision" from="CharacterBody" to="." method="_on_CharacterBody_on_character_collision"]
 [connection signal="body_entered" from="CharacterBody/OverlapSphere" to="." method="_on_OverlapSphere_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="JumpTimer" to="." method="_on_JumpTimer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
 
 [editable path="CharacterBody"]

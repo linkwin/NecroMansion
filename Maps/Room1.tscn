@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Maps/RoomSpawn/RoomTransition.gd" type="Script" id=1]
 [ext_resource path="res://Maps/CastleTileSet/build_atlas.png" type="Texture" id=2]
+[ext_resource path="res://Core/Familiar/FamiliarBot.tscn" type="PackedScene" id=3]
 
 [sub_resource type="TileSet" id=5]
 0/name = "build_atlas.png 0"
@@ -97,6 +98,7 @@ format = 1
 [node name="Line2D" type="Line2D" parent="."]
 position = Vector2( -983.058, -933.773 )
 scale = Vector2( 3.89423, 9.42273 )
+z_index = -4096
 points = PoolVector2Array( 500, 0, 0, 200 )
 default_color = Color( 0.517647, 0, 0.0470588, 1 )
 
@@ -104,6 +106,7 @@ default_color = Color( 0.517647, 0, 0.0470588, 1 )
 position = Vector2( 968.87, -966.081 )
 rotation = 1.57416
 scale = Vector2( 3.91206, 9.65811 )
+z_index = -4096
 points = PoolVector2Array( 500, 0, 0, 200 )
 default_color = Color( 0.517647, 0, 0.0470588, 1 )
 
@@ -160,7 +163,7 @@ transition_dir = Vector2( 0, -1 )
 shape = SubResource( 4 )
 
 [node name="BottomRoomTransition" type="Area2D" parent="."]
-position = Vector2( 3, 880 )
+position = Vector2( 3, 883 )
 script = ExtResource( 1 )
 transition_dir = Vector2( 0, 1 )
 
@@ -174,3 +177,6 @@ transition_dir = Vector2( 1, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightRoomTransition"]
 shape = SubResource( 3 )
+
+[node name="Familiar" parent="." instance=ExtResource( 3 )]
+position = Vector2( -535, 301 )
