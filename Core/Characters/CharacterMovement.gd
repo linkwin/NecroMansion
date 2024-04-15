@@ -24,6 +24,7 @@ var grav_update_vel = Vector2.ZERO
 var velocity = Vector2.ZERO
 
 var last_move_dir = Vector2.ZERO
+var avoid_obstacle = false
 
 var stats = {"curr_stamina":50,
 			"max_stamina":50}
@@ -38,21 +39,24 @@ var anim_dirs := {
 var anim_prefix = "player_character"
 var anim_state = "walk"
 #===========
-var character_behavior
+var character_behavior = -1
 func set_character_sprite(behavior):
 	character_behavior = behavior
 	match behavior:
 		Global.BOT_BEHAVIOR.HOPPER:
 			anim_prefix = "candelabra"
 			$CollisionShape2D/Sprite.texture = preload("res://Sprites/candelabra.png")
+			$CollisionShape2D/Sprite.offset = Vector2(0,-50)
 		Global.BOT_BEHAVIOR.RANDOM_MOVE:
 			anim_prefix = "coocoo"
 			$CollisionShape2D/Sprite.texture = preload("res://Sprites/ticktock.png")
+			$CollisionShape2D/Sprite.offset = Vector2(0,-200)
 		Global.BOT_BEHAVIOR.SOLDIER:
 			anim_prefix = "whisp"
 			$CollisionShape2D/Sprite.texture = preload("res://Sprites/whisp.png")
 			$CollisionShape2D/Sprite.scale = Vector2(0.5,0.5)
 			$CollisionShape2D/Sprite.offset = Vector2(0,0)
+			$CollisionShape2D/Sprite.region_rect = Rect2(Vector2(200,50),Vector2(500,200))
 
 func set_sprite_direct(sprite_str):
 	anim_prefix = sprite_str
@@ -142,13 +146,24 @@ func _physics_process(delta):
 			$CollisionShape2D.position = $CollisionShape2D.position + grav_update_vel * delta
 			#print($CollisionShape2D.position)
 		
+	var avoid = Vector2.ZERO
+	if character_behavior == 10 and avoid_obstacle:
+		avoid = Vector2(move_dir.y,-move_dir.x)*move_speed *delta
 	
-	velocity = move_and_slide(move_update_vel)
+	velocity = move_and_slide(move_update_vel + avoid)
 
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		if "Character" in collision.collider.name:
 			emit_signal("on_character_collision", collision.collider)
+#	$ObjectDetection.cast_to = move_dir * 100
+#	if $ObjectDetection.is_colliding() and not "Player" in $ObjectDetection.get_collider().get_parent().name:
+#		avoid_obstacle = true
+#	else:
+#		$AvoidTimer.start()
+		
+func _avoid_timeout():		
+	avoid_obstacle = false
 			
 func set_sprint(new_sprint):
 	if new_sprint and $SprintTimer.time_left <= 0 and $SprintCoolDown.time_left <= 0:

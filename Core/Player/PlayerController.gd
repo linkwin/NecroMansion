@@ -21,7 +21,7 @@ var move_actions = ["move_left", "move_right", "move_forward", "move_back"]
 
 var click_flag = false
 var last_button = ""
-
+onready var cam = $Camera2D
 func enemy_load(en_grp, room, enemy_number, enemy_data):
 	var new_enemy = preload("res://Core/AI/AIController.tscn")
 	var new_enemy_node
@@ -49,9 +49,18 @@ func add_familiar(node_ref):
 	if !familiars.has(node_ref):
 		familiars.append(node_ref)
 
+func _setup_cam():
+	var scale_v = curr_room * 2000
+	cam.limit_left = int(scale_v.x - 1000)
+	cam.limit_right = int(scale_v.x + 1000)
+	cam.limit_top = int(scale_v.y - 1000)
+	cam.limit_bottom = int(scale_v.y + 1000)
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	_setup_cam()
+
+
 func _check_double_click_sprint():
 	for action in move_actions:
 		if Input.is_action_just_pressed(action):
@@ -133,7 +142,8 @@ func _on_Health_death():
 
 func _do_respawn():
 	for node in familiars:
-		node.queue_free()
+		node.on_player_death()
+	familiars.clear()
 	input_enabled = true
 	$CharacterBody.get_node("CollisionShape2D/Health").regen()
 	#$CharacterBody.global_position = Vector2.ZERO
@@ -187,6 +197,7 @@ func trigger_transition(dir, node):
 		print("")
 		print("")
 		print("----------------------------------")
+		_setup_cam()
 	
 func map_set(map, datas):
 	map_data = map

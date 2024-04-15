@@ -23,6 +23,8 @@ var hit_sounds = {Global.BOT_BEHAVIOR.RANDOM_MOVE:preload("res://Core/Sounds/Mob
 var target_player
 
 func _ready():
+	$StartDelay.wait_time = rand_range(0,3)
+	$StartDelay.start()
 	$CharacterBody.room_origin = current_room * 2000
 	#print("Enemy Class:  ", enemy_data["Enemy Class"])
 #	"Enemy Data": {"Enemy Seeds": [], "Enemy Difficulty": [], "Enemy Class":    [],
@@ -43,6 +45,8 @@ func _ready():
 	character_ref.set_character_sprite(bot_behavior)
 	
 func _process(delta):
+	if $StartDelay.time_left > 0:
+		return
 	if bot_behavior == Global.BOT_BEHAVIOR.HOPPER:
 		if character_ref.is_on_floor():
 			_check_for_player()

@@ -177,6 +177,25 @@ func _ready():
 	#for en_num in range(num_of_enemies_in_room):
 #		enemy_load(Vector2(0,0), en_num, enemy_data)
 	
+#	for node in get_children():
+#		if "Room" in node.name():
+#			for dir in directions:
+#				node.name()
+				
+	for room_coord in map:
+		print("Spawning doors in Room", room_coord)
+		for dir in directions:
+			var check_adj = room_coord + dir
+			if check_adj in map and dir != Vector2.DOWN:
+				_spawn_door(room_coord, dir)
+				
+func _spawn_door(room_coord, spawn_dir):
+	var room_node = get_node("Room"+str(room_coord))
+	var door_scn = preload("res://Maps/Door.tscn")
+	var door_node = door_scn.instance()
+	door_node.global_position = spawn_dir * 850
+	print("Door spawned: ", room_coord * 2000 + spawn_dir * 850)
+	room_node.add_child(door_node)
 
 #func _process(delta):
 #	character_ref.add_move_input(curr_move_dir)

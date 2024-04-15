@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Core/Characters/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Core/AI/AIController.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/whisp.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/candelabra.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Animations/coocoo/coocoo_walk_back.tres" type="Animation" id=4]
 [ext_resource path="res://Sprites/Animations/coocoo/coocoo_walk_forward.tres" type="Animation" id=5]
 [ext_resource path="res://Sprites/Animations/coocoo/coocoo_run_forward.tres" type="Animation" id=6]
@@ -465,12 +465,11 @@ script = ExtResource( 2 )
 
 [node name="Sprite" parent="CharacterBody/CollisionShape2D" index="1"]
 position = Vector2( 1.5, -45 )
-rotation = -0.10472
+rotation = -0.0872665
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 3 )
-offset = Vector2( 0, -215 )
-flip_h = true
-region_rect = Rect2( 200, 50, 500, 200 )
+offset = Vector2( 0, -200 )
+region_rect = Rect2( 320, 780, 1000, 1600 )
 
 [node name="AnimationPlayer" parent="CharacterBody/CollisionShape2D/Sprite" index="0"]
 anims/candelabra_walk_back = SubResource( 5 )
@@ -498,6 +497,7 @@ anims/whisp_walk_right = SubResource( 16 )
 shape = SubResource( 1 )
 
 [node name="DEBUG_state" type="Label" parent="CharacterBody"]
+visible = false
 margin_left = -31.0
 margin_top = 33.0
 margin_right = 29.0
@@ -519,7 +519,11 @@ wait_time = 0.125
 one_shot = true
 autostart = true
 
+[node name="StartDelay" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="on_character_collision" from="CharacterBody" to="." method="_on_CharacterBody_on_character_collision"]
+[connection signal="death" from="CharacterBody/CollisionShape2D/Health" to="." method="_on_Health_death"]
 [connection signal="body_entered" from="CharacterBody/OverlapSphere" to="." method="_on_OverlapSphere_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="JumpTimer" to="." method="_on_JumpTimer_timeout"]
