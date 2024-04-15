@@ -166,17 +166,17 @@ func _ready():
 		room_rng.seed = init_seed+i
 		new_direction = directions[room_rng.randi_range(0, 3)]
 		current_position += new_direction
-		if len(map) == num_rooms:
-			var the_goal_post = Goal.instance()
-			the_goal_post.position = current_position * 2000
-			add_child(the_goal_post)
-			the_goal_post.name = "Goal"+str(current_position)
 		i += 1
 	
 	map_navi = navigation_load(map, directions)
 	map_datas = room_data_load(init_seed, probabilities, num_rooms)
 	for room_index in range(len(map)):
 		spawn_room(map[room_index], room_index, map_datas)
+	
+	var the_goal_post = Goal.instance()
+	the_goal_post.position = map[-1] * 2000
+	add_child(the_goal_post)
+	the_goal_post.name = "Goal"+str(map[-1])
 	#print(map)
 	#yield(get_tree().create_timer(0.1), "timeout")
 	
