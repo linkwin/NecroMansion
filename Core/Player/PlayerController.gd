@@ -2,15 +2,20 @@ extends Node2D
 
 onready var character_ref = $CharacterBody
 
+var Enemy_group = preload("res://Core/AI/EnemyGroup0.tscn")
+
 var map_data
+var map_datas
 var curr_room = Vector2.ZERO
+var previous_room = Vector2.ZERO
 
 var input_enabled = true
 var respawn_screen_node
 var visited_rooms = []
-var invalid_enemies = []
+var enemy_groups = {}
+var dead_enemies = []
 
-func enemy_load(room, enemy_number, enemy_data):
+func enemy_load(en_grp, room, enemy_number, enemy_data):
 	var new_enemy = preload("res://Core/AI/AIController.tscn")
 	var new_enemy_node
 	var this_spec_enemy_data = {}
@@ -29,17 +34,49 @@ func enemy_load(room, enemy_number, enemy_data):
 	new_enemy_node.enemy_data = this_spec_enemy_data
 	
 	new_enemy_node.position =  2000*room +  500 * Vector2(rand_range(-1.0,1.0), rand_range(-1.0,1.0)).normalized()
-	get_tree().root.add_child(new_enemy_node)
+	if not ([room, enemy_number] in dead_enemies):
+		en_grp.call_deferred("add_child", new_enemy_node)
+	#en_grp.add_child(new_enemy_node)
 
+
+func enemy_group_unload(room):
+	enemy_groups["EnemyGroup"+str(room)].queue_free()
+	
+
+func enemy_group_load(room):
+	print(visited_rooms)
+	if room in visited_rooms:
+		print("Discovered Room")
+		#enemy_groups["EnemyGroup"+str(room)].set_process(true)
+		get_tree().root.add_child(enemy_groups["EnemyGroup"+str(room)])
+	if not (room in visited_rooms):
+		print("New Room")
+		var en_grp = Enemy_group.instance()
+		
+		get_tree().root.call_deferred("add_child", en_grp)
+		#get_tree().root.add_child(en_grp)
+		en_grp.name = "EnemyGroup"+str(room)
+		enemy_groups["EnemyGroup"+str(room)] = en_grp
+		
+		
+#func _enemy_load_timer():
+#	enemy_room_load(Vector2(0, 0))
+#	var en_grp = enemy_groups["EnemyGroup"+str(Vector2(0, 0))]
+#	var num_of_enemies_in_room = len(enemy_data["Enemy Seeds"])
+#	for en_num in range(num_of_enemies_in_room):
+#		enemy_load(en_grp, curr_room, en_num, enemy_data)
+		
+		
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
+	#get_tree().create_timer(0.1).connect("timeout", self, "_enemy_load_timer")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if !input_enabled:
 		return
-	
+	#print(curr_room)
 	var move_h_input = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	var move_v_input = Input.get_action_strength("move_back") - Input.get_action_strength("move_forward")
 	
@@ -60,18 +97,17 @@ func _on_Health_death():
 		respawn_screen_node.get_node("Button").connect("pressed", self, "_do_respawn")
 		get_tree().root.add_child(respawn_screen_node)
 
-
 func _do_respawn():
 	get_tree().reload_current_scene()
 	respawn_screen_node.queue_free()
 	
 func _handle_enemy_defeated(enemy_node, curr_room):
 	var enemy_number = enemy_node.enemy_number
-	invalid_enemies.append([curr_room, enemy_number])
+	dead_enemies.append([curr_room, enemy_number])
 	
-func trigger_transition(dir):
-	visited_rooms.append(curr_room)
-	var previous_room = Vector2.ZERO
+func trigger_transition(dir, node):
+	print("Current Room: ", curr_room)
+	print("Current Visited Room List: ", visited_rooms)
 	var next_room_pos = curr_room + dir
 	var next_room = map_data.get_node("Room" + str(next_room_pos))
 	if next_room:
@@ -85,21 +121,31 @@ func trigger_transition(dir):
 				curr_room_index = room_indx
 		
 		
+		enemy_group_unload(previous_room)
+		enemy_group_load(curr_room)
 		
 		
-		
-		#############
-		
-		#############
 		var enemy_data = map_data.map_datas[curr_room_index]["Enemy Data"]
-		
+		var en_grp = enemy_groups["EnemyGroup"+str(curr_room)]
 		var num_of_enemies_in_room = len(enemy_data["Enemy Seeds"])
+		
+		if not (previous_room in visited_rooms):
+			visited_rooms.append(previous_room)
+		if not (curr_room in visited_rooms):
+			visited_rooms.append(curr_room)
+		
 		for en_num in range(num_of_enemies_in_room):
-			enemy_load(curr_room, en_num, enemy_data)
+			enemy_load(en_grp, curr_room, en_num, enemy_data)
+		print("Next Room: ", next_room_pos)
+		print("Next Visited Room List: ", visited_rooms)
+		print("")
+		print("")
+		print("----------------------------------")
 	
-func map_set(map):
+func map_set(map, datas):
 	map_data = map
+	map_datas = datas
 	curr_room = Vector2.ZERO
-
+	
 
 

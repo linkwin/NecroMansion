@@ -17,7 +17,7 @@ onready var character_ref = $CharacterBody
 onready var timer = $Timer
 
 func _ready():
-	print("Enemy Class:  ", enemy_data["Enemy Class"])
+	#print("Enemy Class:  ", enemy_data["Enemy Class"])
 #	"Enemy Data": {"Enemy Seeds": [], "Enemy Difficulty": [], "Enemy Class":    [],
 #				   "Enemy Speed": [], "Enemy Damage":     [], "Enemy Recovery": [], 
 #				   "Enemy Attack Radius": []},
@@ -41,7 +41,7 @@ func _process(delta):
 func _on_Timer_timeout():
 	bot_state = Global.BOT_STATE.PATROL
 	character_ref.move_speed = character_ref.default_move_speed
-	curr_move_dir = Vector2(rand_range(-1.0,1.0), rand_range(-1.0,1.0)).normalized()
+	curr_move_dir = Vector2(rand_range(-1.0, 1.0), rand_range(-1.0, 1.0)).normalized()
 	
 func _on_CharacterBody_on_character_collision(collider):
 	# body slam player attack

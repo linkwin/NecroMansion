@@ -56,7 +56,7 @@ func _process(delta):
 	if anim_dirs.has(anim_dir):
 		var anim_name = anim_prefix + \
 			"_" + anim_state + "_" + anim_dirs[anim_dir]
-		print(anim_name)
+		#print(anim_name)
 		$CollisionShape2D/Sprite/AnimationPlayer.play(anim_name)
 	else:
 		$CollisionShape2D/Sprite/AnimationPlayer.stop()
