@@ -1,8 +1,8 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Core/Characters/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Core/AI/AIController.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/candelabra.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/whisp.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Animations/coocoo/coocoo_walk_back.tres" type="Animation" id=4]
 [ext_resource path="res://Sprites/Animations/coocoo/coocoo_walk_forward.tres" type="Animation" id=5]
 [ext_resource path="res://Sprites/Animations/coocoo/coocoo_run_forward.tres" type="Animation" id=6]
@@ -239,6 +239,222 @@ tracks/2/keys = {
 "values": [ Vector2( 0.5, 0.5 ) ]
 }
 
+[sub_resource type="Animation" id=9]
+resource_name = "whisp_run_back"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 200, 50, 500, 200 ), Rect2( 200, 290, 500, 200 ), Rect2( 200, 500, 500, 200 ), Rect2( 200, 770, 500, 200 ), Rect2( 200, 970, 500, 200 ), Rect2( 200, 1170, 500, 200 ), Rect2( 200, 1390, 500, 200 ), Rect2( 200, 1590, 500, 200 ), Rect2( 200, 1770, 500, 200 ), Rect2( 200, 1950, 500, 200 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "whisp_run_forward"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 200, 50, 500, 200 ), Rect2( 200, 290, 500, 200 ), Rect2( 200, 500, 500, 200 ), Rect2( 200, 770, 500, 200 ), Rect2( 200, 970, 500, 200 ), Rect2( 200, 1170, 500, 200 ), Rect2( 200, 1390, 500, 200 ), Rect2( 200, 1590, 500, 200 ), Rect2( 200, 1770, 500, 200 ), Rect2( 200, 1950, 500, 200 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "whisp_run_left"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 200, 50, 500, 200 ), Rect2( 200, 290, 500, 200 ), Rect2( 200, 500, 500, 200 ), Rect2( 200, 770, 500, 200 ), Rect2( 200, 970, 500, 200 ), Rect2( 200, 1170, 500, 200 ), Rect2( 200, 1390, 500, 200 ), Rect2( 200, 1590, 500, 200 ), Rect2( 200, 1770, 500, 200 ), Rect2( 200, 1950, 500, 200 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "whisp_run_right"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 200, 50, 500, 200 ), Rect2( 200, 290, 500, 200 ), Rect2( 200, 500, 500, 200 ), Rect2( 200, 770, 500, 200 ), Rect2( 200, 970, 500, 200 ), Rect2( 200, 1170, 500, 200 ), Rect2( 200, 1390, 500, 200 ), Rect2( 200, 1590, 500, 200 ), Rect2( 200, 1770, 500, 200 ), Rect2( 200, 1950, 500, 200 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "whisp_walk_back"
+length = 0.9
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 200, 50, 500, 200 ), Rect2( 200, 290, 500, 200 ), Rect2( 200, 500, 500, 200 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 15 ), Vector2( 0, -15 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "whisp_walk_forward"
+length = 0.9
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 200, 50, 500, 200 ), Rect2( 200, 290, 500, 200 ), Rect2( 200, 500, 500, 200 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 15 ), Vector2( 0, -15 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "whisp_walk_left"
+length = 0.9
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 200, 50, 500, 200 ), Rect2( 200, 290, 500, 200 ), Rect2( 200, 500, 500, 200 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "whisp_walk_right"
+length = 0.9
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 200, 50, 500, 200 ), Rect2( 200, 290, 500, 200 ), Rect2( 200, 500, 500, 200 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
 [sub_resource type="CircleShape2D" id=1]
 radius = 177.181
 
@@ -249,11 +465,12 @@ script = ExtResource( 2 )
 
 [node name="Sprite" parent="CharacterBody/CollisionShape2D" index="1"]
 position = Vector2( 1.5, -45 )
-rotation = -0.0872665
+rotation = -0.10472
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 3 )
-offset = Vector2( 0, -200 )
-region_rect = Rect2( 320, 780, 1000, 1600 )
+offset = Vector2( 0, -215 )
+flip_h = true
+region_rect = Rect2( 200, 50, 500, 200 )
 
 [node name="AnimationPlayer" parent="CharacterBody/CollisionShape2D/Sprite" index="0"]
 anims/candelabra_walk_back = SubResource( 5 )
@@ -266,6 +483,14 @@ anims/coocoo_walk_back = ExtResource( 4 )
 anims/coocoo_walk_forward = ExtResource( 5 )
 anims/coocoo_walk_left = SubResource( 3 )
 anims/coocoo_walk_right = SubResource( 4 )
+anims/whisp_run_back = SubResource( 9 )
+anims/whisp_run_forward = SubResource( 11 )
+anims/whisp_run_left = SubResource( 12 )
+anims/whisp_run_right = SubResource( 13 )
+anims/whisp_walk_back = SubResource( 10 )
+anims/whisp_walk_forward = SubResource( 14 )
+anims/whisp_walk_left = SubResource( 15 )
+anims/whisp_walk_right = SubResource( 16 )
 
 [node name="OverlapSphere" type="Area2D" parent="CharacterBody"]
 

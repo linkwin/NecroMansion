@@ -65,7 +65,8 @@ func _check_double_click_sprint():
 				get_tree().create_timer(0.2).connect("timeout", self, "_double_click_timeout")
 
 func enemy_group_unload(room):
-	enemy_groups["EnemyGroup"+str(room)].queue_free()
+	get_tree().root.remove_child(enemy_groups["EnemyGroup"+str(room)])
+	#enemy_groups["EnemyGroup"+str(room)].set_process(false)
 	
 
 func enemy_group_load(room):
@@ -176,8 +177,9 @@ func trigger_transition(dir, node):
 		if not (curr_room in visited_rooms):
 			visited_rooms.append(curr_room)
 		
-		for en_num in range(num_of_enemies_in_room):
-			enemy_load(en_grp, curr_room, en_num, enemy_data)
+			for en_num in range(num_of_enemies_in_room):
+				enemy_load(en_grp, curr_room, en_num, enemy_data)
+				
 		print("Next Room: ", next_room_pos)
 		print("Next Visited Room List: ", visited_rooms)
 		print("")

@@ -36,7 +36,9 @@ var anim_dirs := {
 var anim_prefix = "player_character"
 var anim_state = "walk"
 #===========
+var character_behavior
 func set_character_sprite(behavior):
+	character_behavior = behavior
 	match behavior:
 		Global.BOT_BEHAVIOR.HOPPER:
 			anim_prefix = "candelabra"
@@ -44,6 +46,11 @@ func set_character_sprite(behavior):
 		Global.BOT_BEHAVIOR.RANDOM_MOVE:
 			anim_prefix = "coocoo"
 			$CollisionShape2D/Sprite.texture = preload("res://Sprites/ticktock.png")
+		Global.BOT_BEHAVIOR.SOLDIER:
+			anim_prefix = "whisp"
+			$CollisionShape2D/Sprite.texture = preload("res://Sprites/whisp.png")
+			$CollisionShape2D/Sprite.scale = Vector2(0.5,0.5)
+			$CollisionShape2D/Sprite.offset = Vector2(0,0)
 
 func set_sprite_direct(sprite_str):
 	anim_prefix = sprite_str
@@ -55,17 +62,29 @@ func add_move_input(new_move_dir):
 func _ready():
 	pass # Replace with function body.
 	
-func _process(delta):
-	z_index = floor(global_position.y)
-	var anim_dir = Vector2.ZERO
+func _get_anim_dir(_anim_dirs):
+	var ret = Vector2.ZERO
 	if move_dir != Vector2.ZERO:
 		var max_proj = 0
-		for dir in anim_dirs.keys():
+		for dir in _anim_dirs.keys():
 			#var basis = ((move_dir * dir) / move_dir.length()) * dir
 			var proj = move_dir.dot(dir)
 			if proj > max_proj:
 				max_proj = proj
-				anim_dir = dir
+				ret = dir
+	return ret
+	
+func _process(delta):
+	z_index = floor(global_position.y)
+	var anim_dir = Vector2.ZERO
+	if character_behavior == Global.BOT_BEHAVIOR.SOLDIER:
+		anim_dir = _get_anim_dir({	Vector2(-1,0):"left",
+	Vector2(1,0):"right", })
+	else:
+		anim_dir = _get_anim_dir(anim_dirs)
+
+	
+	
 	
 	if anim_dirs.has(anim_dir):
 		var anim_name = anim_prefix + \

@@ -54,7 +54,14 @@ func _process(delta):
 			if diff.length() <= 25:
 				target_player = null
 				$AttackTimer.start()
-		
+				
+#	if bot_behavior == Global.BOT_BEHAVIOR.SOLDIER:
+#		var sprite = $CharacterBody.global_position
+#		$CharacterBody.get_node("CollisionShape2D/Sprite").look_at(sprite + curr_move_dir*100)
+#		var div = sqrt(pow(curr_move_dir.x, 2) + pow(curr_move_dir.y, 2))
+#		if div != 0:
+#			$CharacterBody.get_node("CollisionShape2D/Sprite").rotation_degrees = \
+#				acos(curr_move_dir.x/div)
 	character_ref.add_move_input(curr_move_dir)
 	$CharacterBody/DEBUG_state.text = Global.BOT_STATE.keys()[bot_state] + "\n" \
 		+ Global.BOT_BEHAVIOR.keys()[enemy_data["Enemy Class"]]
