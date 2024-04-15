@@ -27,3 +27,6 @@ func try_damage(damage_amm):
 	get_parent().modulate = Color.black
 	yield(get_tree().create_timer(0.5), "timeout")
 	get_parent().modulate = Color.white
+
+func regen():
+	curr_health = max_health

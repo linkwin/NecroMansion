@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Maps/RoomSpawn/RoomTransition.gd" type="Script" id=1]
 [ext_resource path="res://Maps/CastleTileSet/build_atlas.png" type="Texture" id=2]
 [ext_resource path="res://Maps/CastleTileSet/obj_misk_atlas.png" type="Texture" id=3]
+[ext_resource path="res://Core/Familiar/FamiliarBot.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 10.625, 8.25 )
@@ -1978,6 +1979,7 @@ one_way_collision_margin = 0.0
 
 [node name="TileMap_floor" type="TileMap" parent="YSort"]
 scale = Vector2( 4, 4 )
+z_index = -4096
 tile_set = SubResource( 5 )
 cell_size = Vector2( 32, 32 )
 format = 1
@@ -2026,6 +2028,9 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/StaticBody2D3"]
 position = Vector2( 449, 497 )
 shape = SubResource( 10 )
+
+[node name="Familiar" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( -521, -718 )
 
 [node name="Wall" type="StaticBody2D" parent="."]
 position = Vector2( -1115, 8 )

@@ -131,8 +131,14 @@ func _on_Health_death():
 		get_tree().root.add_child(respawn_screen_node)
 
 func _do_respawn():
-	get_tree().reload_current_scene()
+	for node in familiars:
+		node.queue_free()
+	input_enabled = true
+	$CharacterBody.get_node("CollisionShape2D/Health").regen()
+	#$CharacterBody.global_position = Vector2.ZERO
 	respawn_screen_node.queue_free()
+	trigger_transition(-curr_room, self)
+	#get_tree().reload_current_scene()
 	
 func _handle_enemy_defeated(enemy_node, curr_room):
 	var enemy_number = enemy_node.enemy_number
@@ -144,7 +150,7 @@ func trigger_transition(dir, node):
 	var next_room_pos = curr_room + dir
 	var next_room = map_data.get_node("Room" + str(next_room_pos))
 	if next_room:
-		var spawn_point = next_room.position - dir * 750
+		var spawn_point = next_room.position - dir.normalized() * 750
 		$CharacterBody.global_position = spawn_point
 		for fam in familiars:
 			fam.get_node("CharacterBody").global_position = spawn_point

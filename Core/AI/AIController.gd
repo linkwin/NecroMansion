@@ -90,6 +90,7 @@ func _on_OverlapSphere_body_entered(body):
 		timer.start()
 		
 func _do_basic_attack(target):
+	if target:
 		bot_state = Global.BOT_STATE.ATTACK
 		target_player = target
 		curr_move_dir = (target.global_position - character_ref.global_position).normalized()

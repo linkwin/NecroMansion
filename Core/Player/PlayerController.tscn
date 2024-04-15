@@ -22,6 +22,7 @@ position = Vector2( -4.5, -53 )
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody"]
 current = true
+zoom = Vector2( 1.5, 1.5 )
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="CharacterBody"]
 stream = SubResource( 1 )

@@ -14,7 +14,7 @@ export var probabilities := {
 }
 
 func seed_gen():
-	initial_seed = hash("Dimple")
+	initial_seed = hash(Global.seed_text)
 	return(initial_seed)
 
 #func _init(props, probs, initial_seed):
