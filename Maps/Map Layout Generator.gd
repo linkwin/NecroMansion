@@ -39,7 +39,7 @@ func random_sample(distribution, my_seed):
 func spawn_room(_position):
 	var c = ARoom.instance()
 	c.position = _position * 2000
-	add_child(c)	
+	add_child(c)
 	c.name = "Room"+str(_position)
 
 
