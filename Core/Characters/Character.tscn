@@ -23,12 +23,24 @@ tracks/0/path = NodePath(".:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Rect2( 65.474, 825, 167.368, 169.474 ) ]
+"values": [ Rect2( 280, 70.713, 167.368, 169.474 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.3, 0.3 ) ]
 }
 
 [node name="CharacterBody" type="KinematicBody2D"]
@@ -43,7 +55,7 @@ position = Vector2( -0.5, 0 )
 shape = SubResource( 3 )
 
 [node name="Health" parent="CollisionShape2D" instance=ExtResource( 3 )]
-position = Vector2( -33.5, -46 )
+position = Vector2( -33.443, -100 )
 
 [node name="Sprite" type="Sprite" parent="CollisionShape2D"]
 texture = ExtResource( 7 )
@@ -62,3 +74,12 @@ anims/player_character_walk_left = ExtResource( 6 )
 anims/player_character_walk_right = ExtResource( 8 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+attenuation = 3.36359
+
+[node name="SprintTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SprintCoolDown" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="SprintTimer" to="." method="_disable_sprint"]

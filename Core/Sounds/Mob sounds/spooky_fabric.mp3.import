@@ -11,5 +11,5 @@ dest_files=[ "res://.import/spooky_fabric.mp3-240a12b0623da39e0a7d41613fafed68.m
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

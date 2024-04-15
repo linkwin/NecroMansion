@@ -1,3 +1,4 @@
+
 [gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Maps/RoomSpawn/RoomTransition.gd" type="Script" id=1]
@@ -2080,7 +2081,7 @@ transition_dir = Vector2( 0, -1 )
 shape = SubResource( 4 )
 
 [node name="BottomRoomTransition" type="Area2D" parent="."]
-position = Vector2( 3, 880 )
+position = Vector2( 3, 883 )
 script = ExtResource( 1 )
 transition_dir = Vector2( 0, 1 )
 
@@ -2094,3 +2095,6 @@ transition_dir = Vector2( 1, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightRoomTransition"]
 shape = SubResource( 3 )
+
+[node name="Familiar" parent="." instance=ExtResource( 3 )]
+position = Vector2( -535, 301 )
