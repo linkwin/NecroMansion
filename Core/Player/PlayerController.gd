@@ -152,6 +152,8 @@ func trigger_transition(dir, node):
 	var next_room = map_data.get_node("Room" + str(next_room_pos))
 	if next_room:
 		var spawn_point = next_room.position - dir.normalized() * 750
+		$CharacterBody.room_origin = next_room.position
+		Global.emit_signal("room_updated", next_room.position)
 		$CharacterBody.global_position = spawn_point
 		for fam in familiars:
 			fam.get_node("CharacterBody").global_position = spawn_point

@@ -4,6 +4,8 @@ signal on_character_collision(collider)
 
 var move_dir = Vector2.ZERO
 
+var room_origin = Vector2.ZERO
+
 export var default_move_speed = 12000
 var move_speed = 12000
 var move_acc = 12
@@ -75,16 +77,13 @@ func _get_anim_dir(_anim_dirs):
 	return ret
 	
 func _process(delta):
-	z_index = floor(global_position.y)
+	z_index = floor(global_position.y - room_origin.y)
 	var anim_dir = Vector2.ZERO
 	if character_behavior == Global.BOT_BEHAVIOR.SOLDIER:
 		anim_dir = _get_anim_dir({	Vector2(-1,0):"left",
-	Vector2(1,0):"right", })
+									Vector2(1,0):"right", })
 	else:
 		anim_dir = _get_anim_dir(anim_dirs)
-
-	
-	
 	
 	if anim_dirs.has(anim_dir):
 		var anim_name = anim_prefix + \

@@ -23,6 +23,7 @@ var hit_sounds = {Global.BOT_BEHAVIOR.RANDOM_MOVE:preload("res://Core/Sounds/Mob
 var target_player
 
 func _ready():
+	$CharacterBody.room_origin = current_room * 2000
 	#print("Enemy Class:  ", enemy_data["Enemy Class"])
 #	"Enemy Data": {"Enemy Seeds": [], "Enemy Difficulty": [], "Enemy Class":    [],
 #				   "Enemy Speed": [], "Enemy Damage":     [], "Enemy Recovery": [], 
