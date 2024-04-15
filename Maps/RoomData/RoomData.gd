@@ -4,7 +4,7 @@ export var initial_seed : int = hash("Kazawat")
 
 
 export var probabilities := {
-	"Initial Number of Enemies": [3, 4, 5, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	"Initial Number of Enemies": [3, 4, 5, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	"Initial Enemy Difficulty": [6, 4, 2, 1, 0],
 	"Initial Enemy Class": [5, 4, 3, 2],
 	"Initial Number of Items": [3, 2, 1],
