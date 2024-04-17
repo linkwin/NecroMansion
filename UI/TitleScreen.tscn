@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://UI/necro_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Sprites/LDscreen.png" type="Texture" id=2]
 [ext_resource path="res://UI/TextButton.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Animation" id=1]
@@ -10,15 +11,26 @@ resource_name = "Title_intro"
 anchor_right = 1.0
 anchor_bottom = 1.0
 
+[node name="LDscreen" type="Sprite" parent="."]
+position = Vector2( 510, 293 )
+texture = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 87.0
+margin_top = 101.0
+margin_right = 1000.0
+margin_bottom = 147.0
+color = Color( 0, 0, 0, 0.427451 )
+
 [node name="Title" type="Label" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -847.0
-margin_top = -231.0
+margin_top = -223.0
 margin_right = 844.0
-margin_bottom = -108.0
+margin_bottom = -100.0
 theme = ExtResource( 1 )
 text = "Soul Bound"
 align = 1
@@ -27,6 +39,7 @@ align = 1
 anims/Title_intro = SubResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

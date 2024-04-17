@@ -51,6 +51,7 @@ func set_character_sprite(behavior):
 			anim_prefix = "coocoo"
 			$CollisionShape2D/Sprite.texture = preload("res://Sprites/ticktock.png")
 			$CollisionShape2D/Sprite.offset = Vector2(0,-200)
+			$CollisionShape2D/Sprite.region_rect = Rect2(Vector2(120,117),Vector2(250,750))
 		Global.BOT_BEHAVIOR.SOLDIER:
 			anim_prefix = "whisp"
 			$CollisionShape2D/Sprite.texture = preload("res://Sprites/whisp.png")

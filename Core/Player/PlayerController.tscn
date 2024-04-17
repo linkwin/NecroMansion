@@ -19,7 +19,7 @@ scale = Vector2( 0.025, 0.031 )
 
 [node name="Health" parent="CharacterBody/CollisionShape2D" index="0"]
 position = Vector2( -33.443, -150 )
-max_health = 20
+max_health = 15
 
 [node name="Sprite" parent="CharacterBody/CollisionShape2D" index="1"]
 position = Vector2( -4.5, -53 )

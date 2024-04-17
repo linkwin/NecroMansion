@@ -2,10 +2,10 @@ extends Node2D
 
 
 var ARoom = [preload("res://Maps/Room1.tscn"), 
-			 preload("res://Maps/Room2.tscn"),
-			 preload("res://Maps/Room3.tscn"),
-			 preload("res://Maps/Room4.tscn"),
-			 preload("res://Maps/Room5.tscn")]
+			 preload("res://Maps/Room1-2.tscn"),
+			 preload("res://Maps/Room1-3.tscn"),
+			 preload("res://Maps/Room1.tscn"),
+			 preload("res://Maps/Room1.tscn")]
 
 
 var Goal = preload("res://Maps/Goal.tscn")

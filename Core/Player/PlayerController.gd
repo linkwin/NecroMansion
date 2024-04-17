@@ -60,6 +60,11 @@ func _setup_cam():
 func _ready():
 	_setup_cam()
 
+func upgrade():
+	var health = $CharacterBody.get_node("CollisionShape2D/Health")
+	health.max_health = health.max_health * 1.2
+	health.regen()
+	
 
 func _check_double_click_sprint():
 	for action in move_actions:

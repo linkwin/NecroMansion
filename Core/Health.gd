@@ -18,9 +18,11 @@ func update_health_bar():
 	health_bar.value = curr_health
 
 func try_damage(damage_amm):
+	print(curr_health, "Damage amm", damage_amm)
 	curr_health -= damage_amm
 	update_health_bar()
 	emit_signal("damaged")
+	print("new health", curr_health)
 
 	if curr_health <= 0:
 		emit_signal("death")

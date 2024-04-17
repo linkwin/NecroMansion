@@ -77,8 +77,9 @@ func _process(delta):
 #		if collider and not "Bot"  in collider.get_parent().name:
 			
 		
-	if Input.get_action_strength("summon") != 0 and player_in_range:
+	if Input.get_action_strength("summon") != 0 and player_in_range and not player_controlled:
 		$CharacterBody/ProximitySound.stop()
+		player_ref.get_parent().upgrade()
 		player_ref.get_parent().add_familiar(self)
 		audio_strm_player.stream = preload("res://Core/Sounds/Summoning sounds/encant3.mp3")
 		audio_strm_player.play()
