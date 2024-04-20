@@ -28,8 +28,9 @@ func on_player_death():
 	$CharacterBody/ProximitySound.play()
 	
 func _ready():
-	$CharacterBody.set_sprite_direct("cat")
-	$CharacterBody.character_behavior = 10
+	$CharacterBody.set_character_data(preload("res://Characters/Cat.tres"))
+	#$CharacterBody.set_sprite_direct("cat")
+	#$CharacterBody.character_behavior = 10
 
 func _get_bias_dir(check_dir, _dirs):
 	var ret = Vector2.ZERO

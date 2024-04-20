@@ -22,6 +22,10 @@ var hit_sounds = {Global.BOT_BEHAVIOR.RANDOM_MOVE:preload("res://Core/Sounds/Mob
 
 var target_player
 
+var bot_characters = {Global.BOT_BEHAVIOR.RANDOM_MOVE:preload("res://Characters/Clock.tres"),
+						Global.BOT_BEHAVIOR.HOPPER:preload("res://Characters/Candelabra.tres"),
+						Global.BOT_BEHAVIOR.SOLDIER:preload("res://Characters/Whisp.tres")}
+
 func _ready():
 	$StartDelay.wait_time = rand_range(0,3)
 	$StartDelay.start()
@@ -31,7 +35,9 @@ func _ready():
 #				   "Enemy Speed": [], "Enemy Damage":     [], "Enemy Recovery": [], 
 #				   "Enemy Attack Radius": []},
 	bot_behavior = enemy_data["Enemy Class"]
-	character_ref.move_speed = enemy_data["Enemy Speed"] 
+	character_ref.move_speed = enemy_data["Enemy Speed"]
+	character_ref.default_move_speed = enemy_data["Enemy Speed"]
+	
 	$CharacterBody/OverlapSphere/CollisionShape2D.shape.radius = enemy_data["Enemy Attack Radius"]
 	$AttackTimer.wait_time = enemy_data["Enemy Recovery"]
 	match bot_behavior:
@@ -42,7 +48,7 @@ func _ready():
 	
 	bot_state = Global.BOT_STATE.PATROL
 	#character_ref.anim_prefix = "coocoo"
-	character_ref.set_character_sprite(bot_behavior)
+	character_ref.set_character_data(bot_characters[bot_behavior])
 	
 func _process(delta):
 	if $StartDelay.time_left > 0:

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Characters/CharacterData.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/whisp.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+sprite_sheet = ExtResource( 2 )
+sprite_offset = Vector2( 0, 0 )
+sprite_scale = Vector2( 0.5, 0.5 )
+init_region_rect = Rect2( 200, 50, 500, 200 )
+anim_prefix = "whisp"
+anim_dirs = {
+Vector2( -1, 0 ): "left",
+Vector2( 1, 0 ): "right"
+}

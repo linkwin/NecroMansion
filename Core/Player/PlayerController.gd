@@ -122,7 +122,8 @@ func _process(delta):
 	
 	var move_h_input = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	var move_v_input = Input.get_action_strength("move_back") - Input.get_action_strength("move_forward")
-	
+	if Input.get_action_strength("jump") != 0:
+		character_ref.jump(400)
 	if _is_input_held():
 		if not $CharacterBody/FootstepSound.playing:
 			$CharacterBody/FootstepSound.play()

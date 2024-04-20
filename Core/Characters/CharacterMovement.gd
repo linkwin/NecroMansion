@@ -1,15 +1,25 @@
 extends KinematicBody2D
+#
+# 2D top down character movement script. 
+# Move : add_move_input(dir)
+# Jump : set wants_to_jump = true
+# Sprint : set_sprint(true) to start sprinting, set_sprint(false) to stop
+#
 
 signal on_character_collision(collider)
-
+#==== MOVE =====
 var move_dir = Vector2.ZERO
-
-var room_origin = Vector2.ZERO
+var last_move_dir = Vector2.ZERO
 
 export var default_move_speed = 12000
 var move_speed = 12000
 var move_acc = 12
 var friction = 1000
+
+onready var sprint_timer = $SprintTimer
+onready var sprint_cooldown_timer = $SprintCoolDown
+
+#==== END MOVE ====
 
 var jump_impulse = 500
 var jump_decel = 1000
@@ -22,12 +32,11 @@ var grav_acc = 600
 var grav_update_vel = Vector2.ZERO
 
 var velocity = Vector2.ZERO
+var room_origin = Vector2.ZERO
 
-var last_move_dir = Vector2.ZERO
 var avoid_obstacle = false
 
-var stats = {"curr_stamina":50,
-			"max_stamina":50}
+var character_data : CharacterData
 
 #===ANIM====
 var anim_dirs := {
@@ -39,35 +48,38 @@ var anim_dirs := {
 var anim_prefix = "player_character"
 var anim_state = "walk"
 #===========
-var character_behavior = -1
-func set_character_sprite(behavior):
-	character_behavior = behavior
-	match behavior:
-		Global.BOT_BEHAVIOR.HOPPER:
-			anim_prefix = "candelabra"
-			$CollisionShape2D/Sprite.texture = preload("res://Sprites/candelabra.png")
-			$CollisionShape2D/Sprite.offset = Vector2(0,-50)
-		Global.BOT_BEHAVIOR.RANDOM_MOVE:
-			anim_prefix = "coocoo"
-			$CollisionShape2D/Sprite.texture = preload("res://Sprites/ticktock.png")
-			$CollisionShape2D/Sprite.offset = Vector2(0,-200)
-			$CollisionShape2D/Sprite.region_rect = Rect2(Vector2(120,117),Vector2(250,750))
-		Global.BOT_BEHAVIOR.SOLDIER:
-			anim_prefix = "whisp"
-			$CollisionShape2D/Sprite.texture = preload("res://Sprites/whisp.png")
-			$CollisionShape2D/Sprite.scale = Vector2(0.5,0.5)
-			$CollisionShape2D/Sprite.offset = Vector2(0,0)
-			$CollisionShape2D/Sprite.region_rect = Rect2(Vector2(200,50),Vector2(500,200))
 
-func set_sprite_direct(sprite_str):
-	anim_prefix = sprite_str
+onready var sprite = $CollisionShape2D/Sprite
 
+# Setup character sprite offset, scale, rect and anim prefix
+func set_character_data(_character_data):
+	character_data = _character_data
+	anim_prefix = character_data.anim_prefix
+	sprite.texture = character_data.sprite_sheet
+	sprite.region_rect = character_data.init_region_rect
+	sprite.offset = character_data.sprite_offset
+	sprite.scale = character_data.sprite_scale
+	anim_dirs = character_data.anim_dirs	
+
+# Call to move character in given direction
 func add_move_input(new_move_dir):
 	move_dir = new_move_dir
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+	
+func jump(initial_impulse : float = 500):
+	if is_on_floor():
+		jump_impulse = initial_impulse
+		jump_decel = jump_impulse * 2
+		wants_to_jump = true
+	
+func set_sprint(new_sprint, speed_multiplier : float = 2, sprint_time : float = 1.0, sprint_cooldown : float = 1.0):
+	if new_sprint and $SprintTimer.time_left <= 0 and $SprintCoolDown.time_left <= 0:
+		anim_state = "run"
+		move_speed *= speed_multiplier
+		sprint_timer.wait_time = sprint_time
+		sprint_cooldown_timer.wait_time = sprint_cooldown		
+		$SprintTimer.start()
+	else:
+		_disable_sprint()
 	
 func _get_anim_dir(_anim_dirs):
 	var ret = Vector2.ZERO
@@ -84,11 +96,8 @@ func _get_anim_dir(_anim_dirs):
 func _process(delta):
 	z_index = floor(global_position.y - room_origin.y)
 	var anim_dir = Vector2.ZERO
-	if character_behavior == Global.BOT_BEHAVIOR.SOLDIER:
-		anim_dir = _get_anim_dir({	Vector2(-1,0):"left",
-									Vector2(1,0):"right", })
-	else:
-		anim_dir = _get_anim_dir(anim_dirs)
+
+	anim_dir = _get_anim_dir(anim_dirs)
 	
 	if anim_dirs.has(anim_dir):
 		var anim_name = anim_prefix + \
@@ -146,13 +155,16 @@ func _physics_process(delta):
 			grav_update_vel = grav_update_vel + grav_acc * Vector2.DOWN * delta
 			$CollisionShape2D.position = $CollisionShape2D.position + grav_update_vel * delta
 			#print($CollisionShape2D.position)
+	#======END JUMP=======
 		
-	var avoid = Vector2.ZERO
-	if character_behavior == 10 and avoid_obstacle:
-		avoid = Vector2(move_dir.y,-move_dir.x)*move_speed *delta
+#	var avoid = Vector2.ZERO
+#	if character_behavior == 10 and avoid_obstacle:
+#		avoid = Vector2(move_dir.y,-move_dir.x)*move_speed *delta
 	
-	velocity = move_and_slide(move_update_vel + avoid)
+	# velocity update
+	velocity = move_and_slide(move_update_vel)
 
+	# check for collision during 
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		if "Character" in collision.collider.name:
@@ -166,14 +178,6 @@ func _physics_process(delta):
 func _avoid_timeout():		
 	avoid_obstacle = false
 			
-func set_sprint(new_sprint):
-	if new_sprint and $SprintTimer.time_left <= 0 and $SprintCoolDown.time_left <= 0:
-		anim_state = "run"
-		move_speed *= 2
-		$SprintTimer.start()
-	else:
-		_disable_sprint()
-	
 func _disable_sprint():
 	anim_state = "walk"
 	move_speed = default_move_speed

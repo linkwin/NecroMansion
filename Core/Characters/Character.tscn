@@ -89,7 +89,6 @@ scale = Vector2( 0.02, 0.02 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.5, 0 )
 shape = SubResource( 3 )
 
 [node name="Health" parent="CollisionShape2D" instance=ExtResource( 3 )]
@@ -98,7 +97,7 @@ position = Vector2( -33.443, -100 )
 [node name="Sprite" type="Sprite" parent="CollisionShape2D"]
 texture = ExtResource( 7 )
 region_enabled = true
-region_rect = Rect2( 65.474, 825, 167.368, 169.474 )
+region_rect = Rect2( 80.785, 57.9274, 137.47, 193.476 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CollisionShape2D/Sprite"]
 anims/RESET = SubResource( 4 )

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Characters/CharacterData.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/candelabra.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+sprite_sheet = ExtResource( 2 )
+sprite_offset = Vector2( 0, -50 )
+sprite_scale = Vector2( 0.2, 0.2 )
+init_region_rect = Rect2( 320, 780, 1000, 1600 )
+anim_prefix = "candelabra"
+anim_dirs = {
+Vector2( -1, 0 ): "left",
+Vector2( 0, -1 ): "forward",
+Vector2( 0, 1 ): "back",
+Vector2( 1, 0 ): "right"
+}

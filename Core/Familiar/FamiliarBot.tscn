@@ -116,7 +116,7 @@ position = Vector2( -33.5, -104 )
 position = Vector2( -0.5, -27 )
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 4 )
-region_rect = Rect2( 405, 741, 250, 200 )
+region_rect = Rect2( 820, 425, 250, 250 )
 
 [node name="AnimationPlayer" parent="CharacterBody/CollisionShape2D/Sprite" index="0"]
 anims/cat_walk_back = SubResource( 3 )
