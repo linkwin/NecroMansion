@@ -56,6 +56,7 @@ margin_right = 544.0
 margin_bottom = 231.0
 rect_min_size = Vector2( 250, 0 )
 flat = false
+hovered_color = Color( 0.258824, 0.65098, 0.45098, 1 )
 
-[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="load_game"]
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="load_game"]
