@@ -1,6 +1,8 @@
 extends Resource
 class_name CharacterData
 
+export var behavior_script : Script
+
 export var sprite_sheet : Texture
 export var sprite_offset := Vector2(0,0)
 export var sprite_scale := Vector2(1,1)
@@ -12,3 +14,5 @@ export var anim_dirs := {
 	Vector2(0,1):"back",
 	Vector2(0,-1):"forward",
 }
+
+export var attack_sound : AudioStream

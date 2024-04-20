@@ -1,10 +1,13 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=5 format=2]
 
 [ext_resource path="res://Characters/CharacterData.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/ticktock.png" type="Texture" id=2]
+[ext_resource path="res://Core/AI/Behaviors/ClockBehavior.gd" type="Script" id=3]
+[ext_resource path="res://Core/Sounds/Mob sounds/coocoo1.mp3" type="AudioStream" id=4]
 
 [resource]
 script = ExtResource( 1 )
+behavior_script = ExtResource( 3 )
 sprite_sheet = ExtResource( 2 )
 sprite_offset = Vector2( 0, -200 )
 sprite_scale = Vector2( 0.2, 0.2 )
@@ -16,3 +19,4 @@ Vector2( 0, -1 ): "forward",
 Vector2( 0, 1 ): "back",
 Vector2( 1, 0 ): "right"
 }
+attack_sound = ExtResource( 4 )

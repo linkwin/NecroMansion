@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "AIBehavior",
+"language": "GDScript",
+"path": "res://Core/AI/Behaviors/AIBehavior.gd"
+}, {
 "base": "Resource",
 "class": "AudioSet",
 "language": "GDScript",
@@ -25,6 +30,7 @@ _global_script_classes=[ {
 "path": "res://Maps/RoomData/RoomData.gd"
 } ]
 _global_script_class_icons={
+"AIBehavior": "",
 "AudioSet": "",
 "CharacterData": "",
 "RoomData": ""
@@ -39,6 +45,10 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://Core/global.gd"
+
+[global]
+
+template=false
 
 [gui]
 

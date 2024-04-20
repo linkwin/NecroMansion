@@ -1,10 +1,13 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=5 format=2]
 
 [ext_resource path="res://Characters/CharacterData.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/whisp.png" type="Texture" id=2]
+[ext_resource path="res://Core/AI/Behaviors/WhispBehavior.gd" type="Script" id=3]
+[ext_resource path="res://Core/Sounds/Mob sounds/spooky_fabric.mp3" type="AudioStream" id=4]
 
 [resource]
 script = ExtResource( 1 )
+behavior_script = ExtResource( 3 )
 sprite_sheet = ExtResource( 2 )
 sprite_offset = Vector2( 0, 0 )
 sprite_scale = Vector2( 0.5, 0.5 )
@@ -14,3 +17,4 @@ anim_dirs = {
 Vector2( -1, 0 ): "left",
 Vector2( 1, 0 ): "right"
 }
+attack_sound = ExtResource( 4 )
