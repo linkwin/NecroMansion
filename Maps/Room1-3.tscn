@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Maps/RoomSpawn/RoomTransition.gd" type="Script" id=1]
 [ext_resource path="res://Maps/CastleTileSet/build_atlas.png" type="Texture" id=2]
@@ -1894,9 +1894,6 @@ extents = Vector2( 51, 114.5 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 137, 48.25 )
 
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 512.5, 124.5 )
-
 [node name="Room" type="Node2D"]
 script = ExtResource( 6 )
 
@@ -2025,10 +2022,6 @@ position = Vector2( -765, -772 )
 position = Vector2( 12, 371 )
 script = ExtResource( 7 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FallArea"]
-position = Vector2( -9.5, 9.5 )
-shape = SubResource( 7 )
-
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FallArea"]
 position = Vector2( 650, -875 )
 polygon = PoolVector2Array( -33, -19, -135, -20, -134, -156, -257, -157, -256, -282, -518, -282, -517, -416, -30, -417 )
@@ -2046,5 +2039,9 @@ polygon = PoolVector2Array( -13, -15, -146, -14, -147, -145, -175, -144, -177, -
 position = Vector2( -804, -749 )
 scale = Vector2( -1, 1 )
 polygon = PoolVector2Array( -13, -15, -146, -14, -147, -145, -175, -144, -177, -252, 161, -253, 166, 236, 119, 235, 118, 103, -11, 106 )
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="FallArea"]
+position = Vector2( 145, 139 )
+polygon = PoolVector2Array( 0, -26, -316, -21, -312, 226, -965, 229, -966, 413, -323, 416, -321, 449, -1116, 451, -1124, -361, -1078, -360, -1081, -226, -957, -222, -960, 48, -618, 47, -620, -222, 313, -228, 315, 41, 633, 45, 633, -222, 763, -224, 761, -361, 811, -361, 815, 455, -14, 456, -12, 409, 634, 405, 629, 225, 3, 229 )
 
 [connection signal="body_entered" from="FallArea" to="FallArea" method="_on_FallArea_body_entered"]

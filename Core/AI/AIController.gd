@@ -2,6 +2,10 @@ extends Node2D
 
 signal enemy_defeated(ref, curr_room)
 
+#=====
+signal init_behavior
+#=====
+
 var map_data
 var enemy_number
 
@@ -37,10 +41,11 @@ func _ready():
 	$AttackTimer.wait_time = enemy_data["Enemy Recovery"]
 	
 	behavior_script = character_data.behavior_script
-
+	behavior_script.init_behavior(self)
+	
 	# Random initial direction
-	curr_move_dir = Vector2(rand_range(-1.0,1.0), rand_range(-1.0,1.0)).normalized()
-	bot_state = Global.BOT_STATE.PATROL
+#	curr_move_dir = Vector2(rand_range(-1.0,1.0), rand_range(-1.0,1.0)).normalized()
+#	bot_state = Global.BOT_STATE.PATROL
 
 	character_ref.set_character_data(character_data)
 	
@@ -51,14 +56,32 @@ func _ready():
 #	"Enemy Data": {"Enemy Seeds": [], "Enemy Difficulty": [], "Enemy Class":    [],
 #				   "Enemy Speed": [], "Enemy Damage":     [], "Enemy Recovery": [], 
 #				   "Enemy Attack Radius": []},
-	
+onready var ray_caster : RayCast2D = $CharacterBody.get_node("ObjectDetection")
 func _process(delta):
+	ray_caster.cast_to = curr_move_dir*50
+	var dir_clear = false
+	var cast_dir = curr_move_dir
+	var rand_sign = [1, -1][randi() % 2]
+	var count = 0
+	while not dir_clear:
+		count += 1
+		ray_caster.cast_to = cast_dir * 100
+		ray_caster.force_raycast_update()
+		if not ray_caster.get_collider() is StaticBody2D and not ray_caster.get_collider() is Area2D :
+			dir_clear = true
+			curr_move_dir = cast_dir
+		cast_dir = cast_dir.rotated(PI / 4)
+		if count >= 8:
+			curr_move_dir = Vector2(rand_range(-1.0,1.0), rand_range(-1.0,1.0)).normalized()
+			global_position = current_room * Global.room_size
+			break
+			
 	
 	# Run character behavior
 	behavior_script.tick(self, character_ref)
 
 	# Update character move dir
-	character_ref.add_move_input(curr_move_dir)
+	character_ref.add_move_input(curr_move_dir.normalized())
 	
 	# ===== DEBUG =====
 #	$CharacterBody/DEBUG_state.text = Global.BOT_STATE.keys()[bot_state] + "\n" \
@@ -66,11 +89,14 @@ func _process(delta):
 
 # Random move direction timer timeout
 func _on_Timer_timeout():
-	bot_state = Global.BOT_STATE.PATROL
-	character_ref.anim_state = "walk"
-	character_ref.move_speed = character_ref.default_move_speed
-	curr_move_dir = Vector2(rand_range(-1.0,1.0), rand_range(-1.0,1.0)).normalized()
-	target_player = null
+	behavior_script.on_timer_timeout(self)
+#	var rand_sign = [1, -1][randi() % 2]
+#	curr_move_dir = curr_move_dir.rotated(rand_sign * PI / 4)
+#	bot_state = Global.BOT_STATE.PATROL
+#	character_ref.anim_state = "walk"
+#	character_ref.move_speed = character_ref.default_move_speed
+#	curr_move_dir = Vector2(rand_range(-1.0,1.0), rand_range(-1.0,1.0)).normalized()
+#	target_player = null
 
 func _on_CharacterBody_on_character_collision(collider):
 	# body slam player attack
@@ -94,12 +120,12 @@ func _on_OverlapSphere_body_entered(body):
 	if "Player" in body.get_parent().name and behavior_script:
 		behavior_script.on_player_enter_attack_radius(self, body)
 		
-func do_basic_attack(target = target_player):
+func do_basic_attack(target = target_player, move_speed_mult := 2):
 	if target:
 		bot_state = Global.BOT_STATE.ATTACK
 		target_player = target
 		curr_move_dir = (target.global_position - character_ref.global_position).normalized()
-		character_ref.move_speed = character_ref.default_move_speed * 2
+		character_ref.move_speed = character_ref.default_move_speed * move_speed_mult
 		character_ref.anim_state = "run"
 		$AttackTimer.start()
 

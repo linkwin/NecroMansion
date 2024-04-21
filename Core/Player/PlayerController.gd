@@ -217,6 +217,5 @@ func _on_Health_damaged():
 
 func _on_CharacterBody_on_end_fall():
 	character_ref.global_position = curr_room * 2000
+	get_node("CharacterBody/CollisionShape2D/Health").try_damage(1)
 
-func _on_CharacterBody_on_start_fall():
-	$CharacterBody/HitSound.play()

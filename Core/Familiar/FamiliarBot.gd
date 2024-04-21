@@ -96,11 +96,12 @@ func _process(delta):
 				if (player_ref.global_position - character_ref.global_position).length() > max_follow_dist:
 					curr_move_dir = (player_ref.global_position - character_ref.global_position).normalized()
 					curr_move_dir = (Vector2(curr_move_dir.y,-curr_move_dir.x) + curr_move_dir).normalized()
-
-	$CharacterBody/DEBUG_state.text = Global.BOT_STATE.keys()[bot_state]
 	if bias_dir == -curr_move_dir:
 		curr_move_dir = bias_dir
-	character_ref.add_move_input(curr_move_dir + bias_dir)
+	
+	character_ref.add_move_input(curr_move_dir)
+	
+	$CharacterBody/DEBUG_state.text = Global.BOT_STATE.keys()[bot_state]
 
 func _on_Health_death():
 	player_ref = null

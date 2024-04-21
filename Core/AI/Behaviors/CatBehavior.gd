@@ -1,5 +1,4 @@
-extends Node
-class_name AIBehavior
+extends AIBehavior
 
 static func init_behavior(controller):
 	pass
@@ -15,7 +14,6 @@ static func on_attack_timer_timeout(controller):
 	
 static func on_player_enter_attack_radius(controller, player_character):
 	pass
-
+	
 static func on_timer_timeout(controller):
-	var rand_sign = [1, -1][randi() % 2]
-	controller.curr_move_dir = controller.curr_move_dir.rotated(rand_sign * PI / 4)
+	pass

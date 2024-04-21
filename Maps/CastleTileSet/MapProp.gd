@@ -7,7 +7,7 @@ func _ready():
 	Global.connect("room_updated", self, "_update_z_index")
 	
 func _update_z_index(origin):
-	z_index = global_position.y - origin.y
+	z_index = clamp(global_position.y - origin.y,VisualServer.CANVAS_ITEM_Z_MIN,VisualServer.CANVAS_ITEM_Z_MAX)
 
 
 func _on_Area2D_body_entered(body):

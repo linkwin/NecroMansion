@@ -43,7 +43,6 @@ limit_smoothed = true
 smoothing_enabled = true
 
 [connection signal="on_end_fall" from="CharacterBody" to="." method="_on_CharacterBody_on_end_fall"]
-[connection signal="on_start_fall" from="CharacterBody" to="." method="_on_CharacterBody_on_start_fall"]
 [connection signal="damaged" from="CharacterBody/CollisionShape2D/Health" to="." method="_on_Health_damaged"]
 [connection signal="death" from="CharacterBody/CollisionShape2D/Health" to="." method="_on_Health_death"]
 

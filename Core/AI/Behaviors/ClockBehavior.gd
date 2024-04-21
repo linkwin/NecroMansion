@@ -1,5 +1,9 @@
 extends AIBehavior
 
+static func init_behavior(controller):
+	controller.curr_move_dir = Vector2(rand_range(-1.0,1.0), rand_range(-1.0,1.0)).normalized()
+	controller.bot_state = Global.BOT_STATE.PATROL
+
 static func tick(controller, character_ref):
 	pass
 
@@ -16,3 +20,5 @@ static func on_player_enter_attack_radius(controller, player_character):
 		timer.wait_time = rand_range(2,4)
 		timer.start()
 		
+static func on_timer_timeout(controller):
+	pass

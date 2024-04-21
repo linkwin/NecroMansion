@@ -61,7 +61,7 @@ var anim_state = "walk"
 
 onready var sprite = $CollisionShape2D/Sprite
 
-# Setup character sprite offset, scale, rect and anim prefix
+# Setup character data
 func set_character_data(_character_data):
 	character_data = _character_data
 	anim_prefix = character_data.anim_prefix
@@ -76,12 +76,17 @@ func add_move_input(new_move_dir):
 	if move_input_enabled:
 		move_dir = new_move_dir
 	
+# Call to make character jump, pass in optional jump "force". 
+# stable range? : 200 - 1000
 func jump(initial_impulse : float = 500):
 	if is_on_floor():
 		jump_impulse = initial_impulse
 		jump_decel = jump_impulse * 2
 		wants_to_jump = true
 	
+# Call to start and stop sprinting
+# sprinting increases move speed by speed_multiplier for sprint_time seconds.
+# sprint cannot be actived again for sprint_cooldown seconds
 func set_sprint(new_sprint, speed_multiplier : float = 2, sprint_time : float = 1.0, sprint_cooldown : float = 1.0):
 	if new_sprint and $SprintTimer.time_left <= 0 and $SprintCoolDown.time_left <= 0:
 		anim_state = "run"
@@ -194,6 +199,7 @@ func _physics_process(delta):
 	# check for collision during 
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
+		print(collision.collider)
 		if "Character" in collision.collider.name:
 			emit_signal("on_character_collision", collision.collider)
 #	$ObjectDetection.cast_to = move_dir * 100
