@@ -6,8 +6,13 @@ extends KinematicBody2D
 # Sprint : set_sprint(true) to start sprinting, set_sprint(false) to stop
 #
 
+signal on_end_fall
+signal on_start_fall
+
 signal on_character_collision(collider)
 #==== MOVE =====
+var move_input_enabled := true
+
 var move_dir = Vector2.ZERO
 var last_move_dir = Vector2.ZERO
 
@@ -21,6 +26,7 @@ onready var sprint_cooldown_timer = $SprintCoolDown
 
 #==== END MOVE ====
 
+#==== JUMP =====
 var jump_impulse = 500
 var jump_decel = 1000
 var wants_to_jump = false
@@ -30,6 +36,10 @@ var jump_sounds = preload("res://Core/Sounds/AudioSets/jump_sounds.tres")
 
 var grav_acc = 600
 var grav_update_vel = Vector2.ZERO
+
+var falling := false
+var falling_t := 0.0
+# =====
 
 var velocity = Vector2.ZERO
 var room_origin = Vector2.ZERO
@@ -63,7 +73,8 @@ func set_character_data(_character_data):
 
 # Call to move character in given direction
 func add_move_input(new_move_dir):
-	move_dir = new_move_dir
+	if move_input_enabled:
+		move_dir = new_move_dir
 	
 func jump(initial_impulse : float = 500):
 	if is_on_floor():
@@ -94,7 +105,7 @@ func _get_anim_dir(_anim_dirs):
 	return ret
 	
 func _process(delta):
-	z_index = floor(global_position.y - room_origin.y)
+	z_index = clamp(floor(global_position.y - room_origin.y),VisualServer.CANVAS_ITEM_Z_MIN,VisualServer.CANVAS_ITEM_Z_MAX)
 	var anim_dir = Vector2.ZERO
 
 	anim_dir = _get_anim_dir(anim_dirs)
@@ -156,12 +167,28 @@ func _physics_process(delta):
 			$CollisionShape2D.position = $CollisionShape2D.position + grav_update_vel * delta
 			#print($CollisionShape2D.position)
 	#======END JUMP=======
+	
+	if falling:
+		if falling_t < 1:
+			print(falling_t)
+			scale = Vector2(1,1).linear_interpolate(Vector2.ZERO, falling_t)
+			rotate(PI / 8)
+			falling_t += delta*3
+		else: 
+			emit_signal("on_end_fall")
+			falling_t = 0
+			scale = Vector2(1,1)
+			set_rotation(0)
+			move_input_enabled = true
+			falling = false
+		
 		
 #	var avoid = Vector2.ZERO
 #	if character_behavior == 10 and avoid_obstacle:
 #		avoid = Vector2(move_dir.y,-move_dir.x)*move_speed *delta
 	
 	# velocity update
+	#velocity = move_and_slide(move_update_vel)
 	velocity = move_and_slide(move_update_vel)
 
 	# check for collision during 
@@ -192,3 +219,9 @@ func is_on_floor():
 
 func _abs_vec(v):
 	return Vector2(abs(v.x), abs(v.y))
+
+func fall():
+	emit_signal("on_start_fall")
+	move_dir = Vector2.ZERO
+	move_input_enabled = false
+	falling = true

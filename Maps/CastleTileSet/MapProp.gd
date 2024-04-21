@@ -3,7 +3,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	z_index = global_position.y
+	z_index = clamp(global_position.y,VisualServer.CANVAS_ITEM_Z_MIN,VisualServer.CANVAS_ITEM_Z_MAX)
 	Global.connect("room_updated", self, "_update_z_index")
 	
 func _update_z_index(origin):

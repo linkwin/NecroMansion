@@ -6,5 +6,3 @@ extends Node2D
 func _ready():
 	if randf() < 0.2:
 		$Familiar.queue_free()
-
-

@@ -213,3 +213,10 @@ func map_set(map, datas):
 
 func _on_Health_damaged():
 	$CharacterBody/HitSound.play()
+
+
+func _on_CharacterBody_on_end_fall():
+	character_ref.global_position = curr_room * 2000
+
+func _on_CharacterBody_on_start_fall():
+	$CharacterBody/HitSound.play()
