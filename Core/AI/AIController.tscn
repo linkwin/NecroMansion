@@ -492,6 +492,7 @@ anims/whisp_walk_left = SubResource( 15 )
 anims/whisp_walk_right = SubResource( 16 )
 
 [node name="ObjectDetection" parent="CharacterBody" index="5"]
+collision_mask = 16
 collide_with_areas = true
 
 [node name="OverlapSphere" type="Area2D" parent="CharacterBody"]

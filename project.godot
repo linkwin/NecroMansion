@@ -100,6 +100,7 @@ jump={
 
 2d_physics/layer_1="Floor"
 2d_physics/layer_2="Air"
+2d_physics/layer_5="Obstacle"
 
 [mono]
 

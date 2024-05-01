@@ -65,7 +65,7 @@ func _process(delta):
 	var count = 0
 	while not dir_clear:
 		count += 1
-		ray_caster.cast_to = cast_dir * 100
+		ray_caster.cast_to = cast_dir * 50
 		ray_caster.force_raycast_update()
 		if not ray_caster.get_collider() is StaticBody2D and not ray_caster.get_collider() is Area2D :
 			dir_clear = true
@@ -119,7 +119,8 @@ func _on_CharacterBody_on_character_collision(collider):
 func _on_OverlapSphere_body_entered(body):
 	if "Player" in body.get_parent().name and behavior_script:
 		behavior_script.on_player_enter_attack_radius(self, body)
-		
+
+# body slam attack
 func do_basic_attack(target = target_player, move_speed_mult := 2):
 	if target:
 		bot_state = Global.BOT_STATE.ATTACK
@@ -136,17 +137,18 @@ func can_attack():
 func _on_Health_death():
 	emit_signal("enemy_defeated", self)
 	queue_free()
-
-func _on_JumpTimer_timeout():
-	if behavior_script:
-		behavior_script.on_jump_timer_timeout(self)
-	$JumpTimer.wait_time = rand_range(1,5)
 	
+# sets target_player if player is found in attack radius
 func _check_for_player():
 	for body in $CharacterBody/OverlapSphere.get_overlapping_bodies():
 		if "Player" in body.get_parent().name and $AttackTimer.time_left <= 0:
 			target_player = body
 			break
+			
+func _on_JumpTimer_timeout():
+	if behavior_script:
+		behavior_script.on_jump_timer_timeout(self)
+	$JumpTimer.wait_time = rand_range(1,5)
 
 func _on_AttackTimer_timeout():
 	if behavior_script:

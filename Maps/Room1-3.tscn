@@ -1949,7 +1949,7 @@ __meta__ = {
 
 [node name="Wall" type="StaticBody2D" parent="."]
 position = Vector2( -1115, 8 )
-collision_layer = 3
+collision_layer = 19
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
@@ -1958,7 +1958,7 @@ shape = SubResource( 1 )
 
 [node name="Wall2" type="StaticBody2D" parent="."]
 position = Vector2( 1115, 1 )
-collision_layer = 3
+collision_layer = 19
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
@@ -1967,7 +1967,7 @@ shape = SubResource( 1 )
 
 [node name="Wall3" type="StaticBody2D" parent="."]
 position = Vector2( 8, 8 )
-collision_layer = 3
+collision_layer = 19
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall3"]
@@ -1976,7 +1976,7 @@ shape = SubResource( 2 )
 
 [node name="Wall4" type="StaticBody2D" parent="."]
 position = Vector2( 8, 8 )
-collision_layer = 3
+collision_layer = 19
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall4"]
@@ -2020,6 +2020,7 @@ position = Vector2( -765, -772 )
 
 [node name="FallArea" type="Area2D" parent="."]
 position = Vector2( 12, 371 )
+collision_layer = 17
 script = ExtResource( 7 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FallArea"]
