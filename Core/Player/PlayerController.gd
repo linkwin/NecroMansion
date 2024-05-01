@@ -22,6 +22,7 @@ var move_actions = ["move_left", "move_right", "move_forward", "move_back"]
 var click_flag = false
 var last_button = ""
 onready var cam = $Camera2D
+
 func enemy_load(en_grp, room, enemy_number, enemy_data):
 	var new_enemy = preload("res://Core/AI/AIController.tscn")
 	var new_enemy_node
@@ -86,34 +87,18 @@ func enemy_group_unload(room):
 func enemy_group_load(room):
 	print(visited_rooms)
 	if room in visited_rooms:
-		print("Discovered Room")
-		#enemy_groups["EnemyGroup"+str(room)].set_process(true)
 		get_tree().root.add_child(enemy_groups["EnemyGroup"+str(room)])
 	if not (room in visited_rooms):
-		print("New Room")
 		var en_grp = Enemy_group.instance()
-		
 		get_tree().root.call_deferred("add_child", en_grp)
-		#get_tree().root.add_child(en_grp)
 		en_grp.name = "EnemyGroup"+str(room)
 		enemy_groups["EnemyGroup"+str(room)] = en_grp
 		
 		
-#func _enemy_load_timer():
-#	enemy_room_load(Vector2(0, 0))
-#	var en_grp = enemy_groups["EnemyGroup"+str(Vector2(0, 0))]
-#	var num_of_enemies_in_room = len(enemy_data["Enemy Seeds"])
-#	for en_num in range(num_of_enemies_in_room):
-#		enemy_load(en_grp, curr_room, en_num, enemy_data)
-		
-		
-# Called when the node enters the scene tree for the first time.
-
-	#get_tree().create_timer(0.1).connect("timeout", self, "_enemy_load_timer")
 
 func _double_click_timeout():
 	click_flag = false
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	
 func _process(delta):
 	if !input_enabled:
 		return
@@ -151,11 +136,9 @@ func _do_respawn():
 	familiars.clear()
 	input_enabled = true
 	$CharacterBody.get_node("CollisionShape2D/Health").regen()
-	#$CharacterBody.global_position = Vector2.ZERO
 	respawn_screen_node.queue_free()
 	trigger_transition(-curr_room, self)
 	
-	#get_tree().reload_current_scene()
 	
 func _handle_enemy_defeated(enemy_node, curr_room):
 	var enemy_number = enemy_node.enemy_number
@@ -175,12 +158,10 @@ func trigger_transition(dir, node):
 			fam.get_node("CharacterBody").global_position = spawn_point
 		previous_room = curr_room
 		curr_room = next_room_pos
-		#map_data.load_next_room(next_room)
 		var curr_room_index
 		for room_indx in range(len(map_data.map)):
 			if curr_room == map_data.map[room_indx]:
 				curr_room_index = room_indx
-		
 		
 		enemy_group_unload(previous_room)
 		enemy_group_load(curr_room)
@@ -194,15 +175,10 @@ func trigger_transition(dir, node):
 			visited_rooms.append(previous_room)
 		if not (curr_room in visited_rooms):
 			visited_rooms.append(curr_room)
-		
+		 
 			for en_num in range(num_of_enemies_in_room):
 				enemy_load(en_grp, curr_room, en_num, enemy_data)
 				
-		print("Next Room: ", next_room_pos)
-		print("Next Visited Room List: ", visited_rooms)
-		print("")
-		print("")
-		print("----------------------------------")
 		_setup_cam()
 	
 func map_set(map, datas):

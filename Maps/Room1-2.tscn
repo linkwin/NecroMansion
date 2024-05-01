@@ -1,9 +1,8 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Maps/RoomSpawn/RoomTransition.gd" type="Script" id=1]
 [ext_resource path="res://Maps/CastleTileSet/build_atlas.png" type="Texture" id=2]
 [ext_resource path="res://Maps/CastleTileSet/obj_misk_atlas.png" type="Texture" id=3]
-[ext_resource path="res://Core/Familiar/FamiliarBot.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Maps/CastleTileSet/MapProp.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Maps/Room.gd" type="Script" id=6]
 
@@ -2125,9 +2124,6 @@ position = Vector2( 1, 19 )
 [node name="CollisionShape2D" parent="Chair4/StaticBody2D" index="0"]
 position = Vector2( 3, -56 )
 shape = SubResource( 12 )
-
-[node name="Familiar" parent="." instance=ExtResource( 4 )]
-position = Vector2( 593, -369 )
 
 [node name="Prop2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 510, -808 )
