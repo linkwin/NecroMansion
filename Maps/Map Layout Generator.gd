@@ -49,8 +49,18 @@ func spawn_room(_position, room_index, current_map_dat):
 	add_child(c)
 	c.name = "Room"+str(_position)
 
+func spawn_familiar(_position, my_seed):
+	var new_familiar = preload("res://Core/Familiar/FamiliarBot.tscn")
+	var new_familiar_node
+	var this_spec_familiar_data = {}
+	var familiar_rng = RandomNumberGenerator.new()
+	familiar_rng.seed = my_seed
+	new_familiar_node = new_familiar.instance()
+	
+	new_familiar_node.position =  2000*_position +  500 * Vector2(familiar_rng.randf_range(-1.0,1.0), familiar_rng.randf_range(-1.0,1.0)).normalized()
+	add_child(new_familiar_node)
 
-	#c.init(_position, color_param)
+
 
 
 func initial_enemy_spawn(player):
@@ -97,10 +107,13 @@ func room_data_load(initial_seed, prob_dists, number_of_rooms):
 			"Enemy Data": {"Enemy Seeds": [], "Enemy Difficulty": [], "Enemy Class": [],
 							"Enemy Speed": [], "Enemy Damage": [], "Enemy Recovery": [], "Enemy Attack Radius": []},
 			"Item Data": {"Item Seeds": [], "Item Strength": [], "Item Class": []},
-			"Room Decoration Data": {"Room Seed": 0, "Room Type": 0}
+			"Room Decoration Data": {"Room Seed": 0, "Room Type": 0},
+			"Number of Familiars": 0
 		}
 		
 		var number_of_enemies = random_sample(prob_dists["Initial Number of Enemies"], init_seed+seed_shift)
+		
+		room_properties["Number of Familiars"]  = random_sample(prob_dists["Initial Number of Familiars"], init_seed+seed_shift+811)
 		
 		for enemy in range(number_of_enemies):
 			var Enemy_Difficulty = random_sample(prob_dists["Initial Enemy Difficulty"], init_seed + seed_shift + enemy + 40)
@@ -172,13 +185,12 @@ func _ready():
 	map_datas = room_data_load(init_seed, probabilities, num_rooms)
 	for room_index in range(len(map)):
 		spawn_room(map[room_index], room_index, map_datas)
+		spawn_familiar(map[room_index], init_seed+room_index+2001)
 	
 	var the_goal_post = Goal.instance()
 	the_goal_post.position = map[-1] * 2000
 	add_child(the_goal_post)
 	the_goal_post.name = "Goal"+str(map[-1])
-	#print(map)
-	#yield(get_tree().create_timer(0.1), "timeout")
 	
 	var player = load("res://Core/Player/PlayerController.tscn").instance()
 	
@@ -186,15 +198,6 @@ func _ready():
 	add_child(player)
 	
 	initial_enemy_spawn(player)
-	#var enemy_data = map_datas[0]["Enemy Data"]
-	#var num_of_enemies_in_room = len(enemy_data["Enemy Seeds"])
-	#for en_num in range(num_of_enemies_in_room):
-#		enemy_load(Vector2(0,0), en_num, enemy_data)
-	
-#	for node in get_children():
-#		if "Room" in node.name():
-#			for dir in directions:
-#				node.name()
 				
 	for room_coord in map:
 		print("Spawning doors in Room", room_coord)
@@ -211,7 +214,3 @@ func _spawn_door(room_coord, spawn_dir):
 	print("Door spawned: ", room_coord * 2000 + spawn_dir * 850)
 	room_node.add_child(door_node)
 
-#func _process(delta):
-#	character_ref.add_move_input(curr_move_dir)
-#	$CharacterBody/DEBUG_state.text = Global.BOT_STATE.keys()[bot_state] + "\n" \
-#		+ Global.BOT_BEHAVIOR.keys()[bot_behavior]

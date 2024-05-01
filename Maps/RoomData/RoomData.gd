@@ -10,7 +10,8 @@ export var probabilities := {
 	"Initial Number of Items": [3, 2, 1],
 	"Initial Item Strength": [5, 3, 2, 0, 0, 0, 0, 0, 0, 0],
 	"Initial Item Class": [1, 1, 1, 1, 1],
-	"Room Design": [1, 1, 1, 1, 1]
+	"Room Design": [1, 1, 1, 1, 1],
+	"Initial Number of Familiars": [1, 1]
 }
 
 func seed_gen():
