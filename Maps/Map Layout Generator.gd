@@ -45,7 +45,7 @@ func random_sample(distribution, my_seed):
 
 func spawn_room(_position, room_index, current_map_dat):
 	var c = ARoom[current_map_dat[room_index]["Room Decoration Data"]["Room Type"]].instance()
-	c.position = _position * 2000
+	c.position = _position * Global.room_size
 	add_child(c)
 	c.name = "Room"+str(_position)
 
@@ -57,7 +57,7 @@ func spawn_familiar(_position, my_seed):
 	familiar_rng.seed = my_seed
 	new_familiar_node = new_familiar.instance()
 	
-	new_familiar_node.position =  2000*_position +  500 * Vector2(familiar_rng.randf_range(-1.0,1.0), familiar_rng.randf_range(-1.0,1.0)).normalized()
+	new_familiar_node.position =  Global.room_size*_position +  (Global.room_size/4) * Vector2(familiar_rng.randf_range(-1.0,1.0), familiar_rng.randf_range(-1.0,1.0)).normalized()
 	add_child(new_familiar_node)
 
 
@@ -188,7 +188,7 @@ func _ready():
 		spawn_familiar(map[room_index], init_seed+room_index+2001)
 	
 	var the_goal_post = Goal.instance()
-	the_goal_post.position = map[-1] * 2000
+	the_goal_post.position = map[-1] * Global.room_size
 	add_child(the_goal_post)
 	the_goal_post.name = "Goal"+str(map[-1])
 	
@@ -210,7 +210,7 @@ func _spawn_door(room_coord, spawn_dir):
 	var room_node = get_node("Room"+str(room_coord))
 	var door_scn = preload("res://Maps/Door.tscn")
 	var door_node = door_scn.instance()
-	door_node.global_position = spawn_dir * 850
-	print("Door spawned: ", room_coord * 2000 + spawn_dir * 850)
+	door_node.global_position = spawn_dir * 0.425*Global.room_size
+	print("Door spawned: ", room_coord * Global.room_size + spawn_dir * (0.425*Global.room_size))
 	room_node.add_child(door_node)
 

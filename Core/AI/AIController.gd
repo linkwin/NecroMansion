@@ -29,7 +29,7 @@ onready var character_data : CharacterData
 onready var behavior_script : Script
 
 func _ready():
-	character_ref.room_origin = current_room * 2000
+	character_ref.room_origin = current_room * Global.room_size
 
 	bot_behavior = enemy_data["Enemy Class"]
 	character_data = enemy_characters[enemy_data["Enemy Class"]]

@@ -41,7 +41,7 @@ func enemy_load(en_grp, room, enemy_number, enemy_data):
 		
 	new_enemy_node.enemy_data = this_spec_enemy_data
 	
-	new_enemy_node.position =  2000*room +  500 * Vector2(rand_range(-1.0,1.0), rand_range(-1.0,1.0)).normalized()
+	new_enemy_node.position =  Global.room_size*room +  500 * Vector2(rand_range(-1.0,1.0), rand_range(-1.0,1.0)).normalized()
 	if not ([room, enemy_number] in dead_enemies):
 		en_grp.call_deferred("add_child", new_enemy_node)
 	#en_grp.add_child(new_enemy_node)
@@ -51,11 +51,11 @@ func add_familiar(node_ref):
 		familiars.append(node_ref)
 
 func _setup_cam():
-	var scale_v = curr_room * 2000
-	cam.limit_left = int(scale_v.x - 1000)
-	cam.limit_right = int(scale_v.x + 1000)
-	cam.limit_top = int(scale_v.y - 1000)
-	cam.limit_bottom = int(scale_v.y + 1000)
+	var scale_v = curr_room * Global.room_size
+	cam.limit_left = int(scale_v.x - Global.room_size/2)
+	cam.limit_right = int(scale_v.x + Global.room_size/2)
+	cam.limit_top = int(scale_v.y - Global.room_size/2)
+	cam.limit_bottom = int(scale_v.y + Global.room_size/2)
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -192,6 +192,6 @@ func _on_Health_damaged():
 
 
 func _on_CharacterBody_on_end_fall():
-	character_ref.global_position = curr_room * 2000
+	character_ref.global_position = curr_room * Global.room_size
 	get_node("CharacterBody/CollisionShape2D/Health").try_damage(1)
 
