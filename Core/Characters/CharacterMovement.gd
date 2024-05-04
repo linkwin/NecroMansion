@@ -199,7 +199,7 @@ func _physics_process(delta):
 	# check for collision during 
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
-		print(collision.collider)
+		#print(collision.collider)
 		if "Character" in collision.collider.name:
 			emit_signal("on_character_collision", collision.collider)
 #	$ObjectDetection.cast_to = move_dir * 100

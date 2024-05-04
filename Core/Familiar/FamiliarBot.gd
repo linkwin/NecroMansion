@@ -58,7 +58,7 @@ func _process(delta):
 		cast_dirs = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]
 		for dir in cast_dirs:
 			$CharacterBody/RayCast2D.cast_to = dir * 100
-			print($CharacterBody/RayCast2D.get_collider().get_parent())
+			#print($CharacterBody/RayCast2D.get_collider().get_parent())
 			if not $CharacterBody/RayCast2D.is_colliding():
 				potential_dirs.append(dir)
 	if player_ref:
@@ -117,7 +117,6 @@ func _on_OverlapSphere_body_entered(body):
 		player_ref = body
 	# bot in attack radius, initiate attack
 	if "Bot" in body.get_parent().name and _can_attack():
-		print(body.get_parent().name)
 		# attack bot
 		bot_state = Global.BOT_STATE.ATTACK
 		curr_move_dir = (body.global_position - character_ref.global_position).normalized()

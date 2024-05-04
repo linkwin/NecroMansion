@@ -137,7 +137,7 @@ func can_attack():
 func _on_Health_death():
 	emit_signal("enemy_defeated", self)
 	queue_free()
-	
+
 # sets target_player if player is found in attack radius
 func _check_for_player():
 	for body in $CharacterBody/OverlapSphere.get_overlapping_bodies():

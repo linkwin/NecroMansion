@@ -13,13 +13,15 @@ var Goal = preload("res://Maps/Goal.tscn")
 export(Resource) var Roomdata = preload("res://Maps/RoomData/roomdata1.tres")
 var directions := [Vector2(1, 0), Vector2(-1, 0), Vector2(0, 1), Vector2(0, -1)]
 
+var wrld_data
 var init_seed
 var probabilities
 
-var num_rooms := 15
+var num_rooms := 4
 var map := []
 var map_navi := []
 var map_datas := []
+var current_level : int
 
 var player_room = Vector2(0,0)
 
@@ -32,6 +34,7 @@ func array_mult(in_array, inger):
 			for j in in_array:
 				out_array.append(j)
 	return(out_array)
+
 	
 func random_sample(distribution, my_seed):
 	var repeated_sample_dist = []
@@ -61,6 +64,9 @@ func spawn_familiar(_position, my_seed):
 	add_child(new_familiar_node)
 
 
+	
+func map_set(world, level):
+	current_level = level
 
 
 func initial_enemy_spawn(player):
@@ -80,10 +86,10 @@ func initial_enemy_spawn(player):
 #                       (Room 1-  (Property 1- ((Rel Prob 1, Rel Prob 2), ...), ... )    
 # Need to be sure these arrays match in size
 
-func room_data_load(initial_seed, prob_dists, number_of_rooms):
+func room_data_load(initial_seed : int, prob_dists, number_of_rooms):
 	print("Initial Seed: ", initial_seed)
 	var map_data := []
-	var seed_shift := 0
+	var seed_shift := 0 + initial_seed*current_level
 	for _room in range(number_of_rooms):
 		
 		var difficulty_dists := {
@@ -164,7 +170,8 @@ func navigation_load(current_map, cardinal_directions):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	init_seed = Roomdata.seed_gen() +1 
+	current_level = get_parent().level
+	init_seed = Roomdata.seed_gen() + 1  + Roomdata.seed_gen()*current_level
 	probabilities = Roomdata.probabilities
 	var room_rng = RandomNumberGenerator.new()
 

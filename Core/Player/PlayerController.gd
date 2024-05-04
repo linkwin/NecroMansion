@@ -80,17 +80,17 @@ func _check_double_click_sprint():
 				get_tree().create_timer(0.2).connect("timeout", self, "_double_click_timeout")
 
 func enemy_group_unload(room):
-	get_tree().root.remove_child(enemy_groups["EnemyGroup"+str(room)])
+	get_parent().remove_child(enemy_groups["EnemyGroup"+str(room)])
 	#enemy_groups["EnemyGroup"+str(room)].set_process(false)
 	
 
 func enemy_group_load(room):
 	print(visited_rooms)
 	if room in visited_rooms:
-		get_tree().root.add_child(enemy_groups["EnemyGroup"+str(room)])
+		get_parent().add_child(enemy_groups["EnemyGroup"+str(room)])
 	if not (room in visited_rooms):
 		var en_grp = Enemy_group.instance()
-		get_tree().root.call_deferred("add_child", en_grp)
+		get_parent().call_deferred("add_child", en_grp)
 		en_grp.name = "EnemyGroup"+str(room)
 		enemy_groups["EnemyGroup"+str(room)] = en_grp
 		
@@ -146,8 +146,6 @@ func _handle_enemy_defeated(enemy_node, curr_room):
 	dead_enemies.append([curr_room, enemy_number])
 	
 func trigger_transition(dir, node):
-	print("Current Room: ", curr_room)
-	print("Current Visited Room List: ", visited_rooms)
 	var next_room_pos = curr_room + dir
 	var next_room = map_data.get_node("Room" + str(next_room_pos))
 	if next_room:
@@ -194,4 +192,4 @@ func _on_Health_damaged():
 func _on_CharacterBody_on_end_fall():
 	character_ref.global_position = curr_room * Global.room_size
 	get_node("CharacterBody/CollisionShape2D/Health").try_damage(1)
-
+	
