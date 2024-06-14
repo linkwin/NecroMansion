@@ -14,10 +14,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Core/AI/Behaviors/AIBehavior.gd"
 }, {
+"base": "Node2D",
+"class": "AIController",
+"language": "GDScript",
+"path": "res://Core/AI/AIController.gd"
+}, {
+"base": "Node",
+"class": "Action",
+"language": "GDScript",
+"path": "res://Core/AI/Behaviors/Action.gd"
+}, {
 "base": "Resource",
 "class": "AudioSet",
 "language": "GDScript",
 "path": "res://Core/Sounds/AudioSet.gd"
+}, {
+"base": "Node",
+"class": "BehaviorTask",
+"language": "GDScript",
+"path": "res://Core/AI/Behaviors/BehaviorTask.gd"
 }, {
 "base": "Resource",
 "class": "CharacterData",
@@ -31,7 +46,10 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "AIBehavior": "",
+"AIController": "",
+"Action": "",
 "AudioSet": "",
+"BehaviorTask": "",
 "CharacterData": "",
 "RoomData": ""
 }

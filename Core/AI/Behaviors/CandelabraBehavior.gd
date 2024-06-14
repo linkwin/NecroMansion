@@ -32,14 +32,15 @@ static func on_attack_timer_timeout(controller):
 	pass
 	
 static func on_player_enter_attack_radius(controller, player_character):
-	var character_ref = controller.character_ref
-	var attack_timer = controller.get_node("AttackTimer")
-	if controller.can_attack():
-		if character_ref.is_on_floor() and attack_timer.time_left <= 0:
-			controller.target_player = player_character
-		controller.do_basic_attack(player_character, 1)
-		controller.timer.wait_time = rand_range(2,4)
-		controller.timer.start()
+	pass
+#	var character_ref = controller.character_ref
+#	var attack_timer = controller.get_node("AttackTimer")
+#	if controller.can_attack():
+#		if character_ref.is_on_floor() and attack_timer.time_left <= 0:
+#			controller.target_player = player_character
+#		controller.do_basic_attack(player_character, 1)
+#		controller.timer.wait_time = rand_range(2,4)
+#		controller.timer.start()
 		
 static func on_timer_timeout(controller):
 	if controller.character_ref.is_on_floor():

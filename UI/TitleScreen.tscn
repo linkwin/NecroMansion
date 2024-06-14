@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://UI/necro_theme.tres" type="Theme" id=1]
+[ext_resource path="res://UI/fonts/Heading_Text.tres" type="Theme" id=1]
 [ext_resource path="res://UI/TextButton.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Animation" id=1]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://UI/necro_theme.tres" type="Theme" id=1]
+[ext_resource path="res://UI/fonts/Heading_Text.tres" type="Theme" id=1]
 [ext_resource path="res://UI/fonts/necro_Text_dfont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://UI/LoadGame.gd" type="Script" id=3]
 [ext_resource path="res://UI/TextButton.tscn" type="PackedScene" id=4]

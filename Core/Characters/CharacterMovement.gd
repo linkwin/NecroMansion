@@ -69,6 +69,7 @@ func set_character_data(_character_data):
 	sprite.region_rect = character_data.init_region_rect
 	sprite.offset = character_data.sprite_offset
 	sprite.scale = character_data.sprite_scale
+	print(anim_prefix, sprite.scale)
 	anim_dirs = character_data.anim_dirs	
 
 # Call to move character in given direction
@@ -109,6 +110,7 @@ func _get_anim_dir(_anim_dirs):
 				ret = dir
 	return ret
 	
+onready var anim_player = $CollisionShape2D/Sprite/AnimationPlayer
 func _process(delta):
 	z_index = clamp(floor(global_position.y - room_origin.y),VisualServer.CANVAS_ITEM_Z_MIN,VisualServer.CANVAS_ITEM_Z_MAX)
 	var anim_dir = Vector2.ZERO
@@ -118,13 +120,16 @@ func _process(delta):
 	if anim_dirs.has(anim_dir):
 		var anim_name = anim_prefix + \
 			"_" + anim_state + "_" + anim_dirs[anim_dir]
-		$CollisionShape2D/Sprite/AnimationPlayer.play(anim_name)
+		#anim_player.set_speed_scale(1.1)
+		anim_player.play(anim_name)
 	if velocity == Vector2.ZERO:
-		$CollisionShape2D/Sprite/AnimationPlayer.stop()
+		#if (anim_player.current_animation_length != 0):
+		var anim_len = anim_player.current_animation_length
+		anim_player.seek(anim_len, true)
+		get_tree().create_timer( (anim_len - (anim_len * 0.25)) - anim_player.current_animation_position).connect("timeout", self, "transition_to_idle")
+			#print(anim_player.current_animation_position / anim_player.current_animation_length)
 	
 func _physics_process(delta):
-
-
 	# =====MOVE======	
 	var target_vel = move_speed * move_dir * delta
 	
@@ -207,7 +212,12 @@ func _physics_process(delta):
 #		avoid_obstacle = true
 #	else:
 #		$AvoidTimer.start()
-		
+
+func transition_to_idle():
+	anim_player.stop()
+	anim_player.seek(anim_player.current_animation_length)
+	
+
 func _avoid_timeout():		
 	avoid_obstacle = false
 			
